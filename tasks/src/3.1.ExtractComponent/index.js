@@ -7,36 +7,15 @@ import './styles.css';
 /**
     1. Переделай renderPost в функциональный компонент Post
    
-    Подсказки:
-    - {renderMyComponent({a: 1, b: 'some'})} → <MyComponent a={1}, b="some">
-    - Первый аргумент функции компонента обычно называется props
-   
     2. ESLint настроен так, чтобы проверять переданные атрибуты. Поэтому задай propTypes.
        У нас везде атрибуты — это строки. Сделай свойства author и time обязательными.
-   
-    Подсказки:
-    - В начале файла нужно импортировать PropTypes
-    - MyComponent.propTypes = {
-        a: PropTypes.number.isRequired,
-        b: PropTypes.string
-      }
    
     3. Сделай так, чтобы в author подставлялось значение <Неизвестный автор>,
        если атрибут не передали.
        Используй для этого defaultProps.
        Проверь что работает, убрав имя автора.
    
-    Подсказки:
-    - MyComponent.defaultProps = {
-        b: 'default value'
-      }
-   
     4. Переделай компонент так, чтобы message передавался через props.children.
-   
-    Подсказки:
-    - <MyComponent>Значение</MyComponent>
-    - const value = props.children;
-    - children: PropTypes.string,
  */
 
 
@@ -69,3 +48,27 @@ ReactDom.render(
     </div>
   </div>,
   document.getElementById('app'));
+
+
+/**
+    Подсказки к 1:
+    - {renderMyComponent({a: 1, b: 'some'})} → <MyComponent a={1}, b="some">
+    - Первый аргумент функции компонента обычно называется props
+   
+    Подсказки к 2:
+    - В начале файла нужно импортировать PropTypes
+    - MyComponent.propTypes = {
+        a: PropTypes.number.isRequired,
+        b: PropTypes.string
+      }
+   
+    Подсказки к 3:
+    - MyComponent.defaultProps = {
+        b: 'default value'
+      }
+   
+    Подсказки к 4:
+    - <MyComponent>Значение</MyComponent>
+    - const value = props.children;
+    - children: PropTypes.string,
+ */

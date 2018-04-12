@@ -18,14 +18,6 @@ import CreditCardNumber from './CreditCardNumber';
     значение в поле ввода должно быть перетерто полученным из api значением
     (наш «сервер» всегда отвечает 1234 5678 9012 3456).
     Иначе значение с сервера нужно проигнорировать.
-
-    Подсказка:
-    - static getDerivedStateFromProps(nextProps, prevState) вызывается сразу после вызова конструктора,
-      а также при получении компонентом измененных props. Он тебе поможет. Из него нужно вернуть новый state,
-      полученный умным объединением старого состояния и новых свойств.
-    - componentWillReceiveProps(nextProps) вызывается при получении компонентом измененных props,
-      но React 16 — последняя версия, где он будет доступен — останется только UNSAFE_componentWillReceiveProps.
-    - Даже при задании getDerivedStateFromProps состояние должно инициализироваться в конструкторе.
  */
 
 
@@ -104,3 +96,14 @@ CreditCardInput.propTypes = {
 
 
 ReactDom.render(<CreditCardInputWithRestore />, document.getElementById('app'));
+
+
+/**
+    Подсказки:
+    - static getDerivedStateFromProps(nextProps, prevState) вызывается сразу после вызова конструктора,
+      а также при получении компонентом измененных props. Он тебе поможет. Из него нужно вернуть новый state,
+      полученный умным объединением старого состояния и новых свойств.
+    - componentWillReceiveProps(nextProps) вызывается при получении компонентом измененных props,
+      но React 16 — последняя версия, где он будет доступен — останется только UNSAFE_componentWillReceiveProps.
+    - Даже при задании getDerivedStateFromProps состояние должно инициализироваться в конструкторе.
+ */

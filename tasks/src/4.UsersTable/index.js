@@ -35,27 +35,6 @@ import defaultUsers from './defaultUsers';
     - «Деконструкция»
       Создает локальные переменные const a = this.state.a и const b = this.state.b.
         const { a, b } = this.state;
-
-    Подсказки:
-
-    - Установи расширение React Developer Tools для Chrome и в Developer Tools появится вкладка React.
-      Установи флажок Highlight Updates, чтобы видеть что React обновляет.
-
-    - React перерисовывает узлы по порядку.
-      Если он увидит, что на месте div стоит span, то div будет полностью удален (unmount),
-      даже если нужный div идет следом за этим span.
-      Чтобы сохранить порядок узлов, оставляй «дырки» из null-узлов, undefined-узлов, false-узлов вот так:
-        {showSpan && <span>A little hint</span>}
-        <div>Main text</div>
-      Если span не нужен, то вместо него встанет невидимый false-узел, а div останется на своем месте.
-
-    - Изменение setState в компоненте приводит к его перерисовке. Часто вместе с детьми.
-      Но если дочерний компонент наследует PureComponent, то он не будет перерисован 
-      если его props не поменялись. Это можно использовать для оптимизации рендеринга
-
-    - Ключ к производительности — в правильном задании key.
-
-    - В конце тебе пригодится shouldComponentUpdate(nextProps, nextState).
  */
 
 
@@ -211,3 +190,27 @@ UserTableRow.propTypes = {
 
 
 ReactDom.render(<Users />, document.getElementById('app'));
+
+
+/**
+    Подсказки:
+
+    - Установи расширение React Developer Tools для Chrome и в Developer Tools появится вкладка React.
+      Установи флажок Highlight Updates, чтобы видеть что React обновляет.
+
+    - React перерисовывает узлы по порядку.
+      Если он увидит, что на месте div стоит span, то div будет полностью удален (unmount),
+      даже если нужный div идет следом за этим span.
+      Чтобы сохранить порядок узлов, оставляй «дырки» из null-узлов, undefined-узлов, false-узлов вот так:
+        {showSpan && <span>A little hint</span>}
+        <div>Main text</div>
+      Если span не нужен, то вместо него встанет невидимый false-узел, а div останется на своем месте.
+
+    - Изменение setState в компоненте приводит к его перерисовке. Часто вместе с детьми.
+      Но если дочерний компонент наследует PureComponent, то он не будет перерисован 
+      если его props не поменялись. Это можно использовать для оптимизации рендеринга
+
+    - Ключ к производительности — в правильном задании key.
+
+    - В конце тебе пригодится shouldComponentUpdate(nextProps, nextState).
+ */

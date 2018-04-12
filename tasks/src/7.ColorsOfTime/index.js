@@ -20,18 +20,6 @@ import Timer from './Timer';
     4. Поставь Лондон сразу после Пекина, а локальное время поставь на место Лондона. Так логичнее!
        Обрати внимание сколько props тебе пришлось прокинуть для этого действия!
     5. Посмотри, что перерисовывается каждую секунду. Оптимизируй. Можно ли было сделать без использования context?
-
-    Подсказки:
-    - Создание контекста:
-      const CakeContext = React.createContext();
-    - Поставка значения:
-      <CakeContext.Provider value={cheeseCake}>
-        ...
-      </CakeContext.Provider>
-    - Потребление значения:
-      <CakeContext.Consumer>
-        {cake => <Hungry food={cake} />}
-      </CakeContext.Consumer>
  */
 
 
@@ -156,3 +144,18 @@ Card.propTypes = {
 
 const timer = new Timer();
 ReactDom.render(<ColorsOfTime timer={timer} />, document.getElementById('app'));
+
+
+/**
+    Подсказки:
+    - Создание контекста:
+      const CakeContext = React.createContext();
+    - Поставка значения:
+      <CakeContext.Provider value={cheeseCake}>
+        ...
+      </CakeContext.Provider>
+    - Потребление значения:
+      <CakeContext.Consumer>
+        {cake => <Hungry food={cake} />}
+      </CakeContext.Consumer>
+ */

@@ -7,17 +7,6 @@ import './styles.css';
      1. Разбери ручные переборы массивов в верстке.
         Для постов используй map без циклов, для авторов цикл for без map.
     
-     Подсказки:
-     - Отображение массива в другой массив записывается так:
-       const values = items.map(item => item.field);
-     - В конец массивов можно добавлять значения методом push:
-       const numbers = [];
-       numbers.push(1);
-     - Выбери подходящий цикл for:
-       - for (let i = 0; i < items.length; i++) {}
-       - for (let key in items) {}
-       - for (const item of items) {}
-    
      2. Добавь в post поле id и присвой каждому полю уникальный строковый идентификатор.
         Используй id в качестве значения key в основном тэге поста и основном тэге автора.
  */
@@ -74,3 +63,17 @@ ReactDom.render(
     {renderAuthors(posts)}
   </div>,
   document.getElementById('app'));
+
+
+/**
+     Подсказки:
+     - Отображение массива в другой массив записывается так:
+       const values = items.map(item => item.field);
+     - В конец массивов можно добавлять значения методом push:
+       const numbers = [];
+       numbers.push(1);
+     - Выбери подходящий цикл for:
+       - for (let i = 0; i < items.length; i++) {}
+       - for (let key in items) {}
+       - for (const item of items) {}
+ */

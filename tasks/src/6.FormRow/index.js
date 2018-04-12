@@ -19,11 +19,9 @@ import Toggle from './Toggle';
     поэтому он уже был обернут в компонент Input.
 
     1. Напиши HOC createFormRow, который можно будет использовать так:
-        const InputFormRow = createFormRow(Input);
-      - const ToggleFormRow = createFormRow(Toggle);
-
-    Подсказки:
-    - Посмотри пример HOC в enchance.js
+          const InputFormRow = createFormRow(Input);
+          const ToggleFormRow = createFormRow(Toggle);
+       В качестве примера используй HOC из enchance.js.
     
     2. Используй createFormRow, удалив старые реализации InputFormRow, ToggleFormRow.
 
@@ -36,24 +34,6 @@ import Toggle from './Toggle';
        - при открытии формы вызывается this.firstRowRef.current.focus();
        Но this.firstRowRef.current не указывает на input или Toggle, у которых определен метод focus.
        HOC должен пересылать ref на WrappedComponent.
-
-    Подсказки:
-    - Нельзя пробросить переменную для ref из внешнего компонента во внутренний через атрибут ref,
-      потому что он зарезервирован — придется использовать другой атрибут. Например, forwardedRef.
-
-    - Чтобы React пробрасывал ref, в конец HOC придется добавить такой код:
-
-        const forward = (props, ref) => <FormRow {...props} forwardedRef={ref}/>;
-        forward.displayName = FormRow.displayName;
-        return React.forwardRef(forward);
-
-      Предполагается, что компонент-обертка называется FormRow.
-      Заметь, что React.forwardRef — это почти HOC, а forward — это почти функция-компонент.
-
-    - forwardedRef — это PropTypes.object
-
-    - Когда ref уже лежит в отдельном атрибуте, его несложно использовать:
-        <WrappedComponent ref={forwardedRef} {...rest} />
  */
 
 
@@ -189,3 +169,24 @@ ToggleFormRow.propTypes = {
 
 
 ReactDom.render(<Form />, document.getElementById('app'));
+
+
+/**
+    Подсказки к 4:
+    - Нельзя пробросить переменную для ref из внешнего компонента во внутренний через атрибут ref,
+      потому что он зарезервирован — придется использовать другой атрибут. Например, forwardedRef.
+
+    - Чтобы React пробрасывал ref, в конец HOC придется добавить такой код:
+
+        const forward = (props, ref) => <FormRow {...props} forwardedRef={ref}/>;
+        forward.displayName = FormRow.displayName;
+        return React.forwardRef(forward);
+
+      Предполагается, что компонент-обертка называется FormRow.
+      Заметь, что React.forwardRef — это почти HOC, а forward — это почти функция-компонент.
+
+    - forwardedRef — это PropTypes.object
+
+    - Когда ref уже лежит в отдельном атрибуте, его несложно использовать:
+        <WrappedComponent ref={forwardedRef} {...rest} />
+ */
