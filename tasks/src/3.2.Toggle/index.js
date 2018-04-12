@@ -20,10 +20,6 @@ class Toggle extends React.Component {
   // constructor(props) {
   // }
 
-  static propTypes = {
-    onChange: PropTypes.func
-  };
-
   render() {
     const checked = true;
     return (
@@ -39,6 +35,10 @@ class Toggle extends React.Component {
   handleClick = () => {
   };
 }
+
+Toggle.propTypes = {
+  onChange: PropTypes.func
+};
 
 ReactDom.render(
   <div className="page">

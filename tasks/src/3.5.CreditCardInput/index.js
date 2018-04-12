@@ -34,11 +34,6 @@ class CreditCardInput extends React.Component {
     this.state = { value: props.value };
   }
 
-  static propTypes = {
-    value: PropTypes.string,
-    onChange: PropTypes.func
-  }
-
   render() {
     return (
       <div className="root">
@@ -71,6 +66,11 @@ class CreditCardInput extends React.Component {
       this.props.onChange(this.state.value);
     }
   };
+}
+
+CreditCardInput.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 class CreditCardInputWithRestore extends React.Component {

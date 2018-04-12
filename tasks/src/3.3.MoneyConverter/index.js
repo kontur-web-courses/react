@@ -31,10 +31,6 @@ class Money extends React.Component {
     };
   }
 
-  static propTypes = {
-    onChange: PropTypes.func
-  };
-
   render() {
     return (
       <input type="text" value={this.state.value} onChange={this.handleChangeValue} />
@@ -46,6 +42,10 @@ class Money extends React.Component {
     this.setState({ value });
     this.props.onChange(value);
   }
+}
+
+Money.propTypes = {
+  onChange: PropTypes.func
 }
 
 class MoneyConverter extends React.Component {
