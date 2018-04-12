@@ -11,7 +11,7 @@ const TimeContext = React.createContext();
 const ColorContext = React.createContext();
 
 
-class ColoursOfTime extends React.Component {
+class ColorsOfTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,12 +67,12 @@ class ColoursOfTime extends React.Component {
   }
 }
 
-ColoursOfTime.propTypes = {
+ColorsOfTime.propTypes = {
   timer: PropTypes.object
 }
 
 
-class BeforeChangeColor extends React.Component {
+class BeforeChangeColor extends React.PureComponent {
   render() {
     return (
       <div>
@@ -86,7 +86,7 @@ class BeforeChangeColor extends React.Component {
 }
 
 
-class AfterChangeColor extends React.Component {
+class AfterChangeColor extends React.PureComponent {
   render() {
     return (
       <div>
@@ -127,4 +127,4 @@ Card.propTypes = {
 
 
 const timer = new Timer();
-ReactDom.render(<ColoursOfTime timer={timer} />, document.getElementById("app"));
+ReactDom.render(<ColorsOfTime timer={timer} />, document.getElementById("app"));

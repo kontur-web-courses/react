@@ -7,6 +7,17 @@ import * as helpers from "./../helpers";
 import defaultUsers from "./../defaultUsers";
 
 
+/**
+    Проблемы в исходной версии.
+
+    Проблема 1. Использовать editingUser &&, иначе лишние маунты при попытке редактирования.
+    Проблема 2. UserTable надо сделать PureComponent, иначе при попытке редактирования таблица перерисовывается.
+    Проблема 3. Использовать user.id вместо index. Чтобы помогло надо сначала UserTableRow сделать PureComponent.
+                После добавление станет работать эффективнее.
+    Проблема 4. Написать свой shouldComponentUpdate в UserTableRow.
+                Редактирование невидимых полей не должно приводить к рендерингу.
+ */
+
 let generation = 1;
 let generationEvents = 1;
 

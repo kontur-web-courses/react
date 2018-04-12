@@ -8,14 +8,33 @@ import Timer from "./Timer";
 
 
 /**
-- создать контексты
-const TimeContext = React.createContext();
-- добавить контексты в render ColoursOfTime
-- впилить время и цвет
-- поменять местами цветное локальное и серый лондон
+    Автор кода явно сделал много лишней работы,
+    прокидывая информацию о времени и настройках цвета через все компоненты.
+    А все потому, что не знал про context!
+    
+    Отрефактори код по следующим шагам:
+    1. Создай TimeContext и ColorContext.
+    2. Оберни содержимое ColorsOfTime в TimeContext.Provider и ColorContext.Provider.
+    3. Используй TimeContext.Consumer и ColorContext.Consumer, чтобы не прокидывать time и color через свойства.
+       Не забудь убрать весь ненужный теперь код.
+    4. Поставь Лондон сразу после Пекина, а локальное время поставь на место Лондона. Так логичнее!
+       Обрати внимание сколько props тебе пришлось прокинуть для этого действия!
+    5. Посмотри, что перерисовывается каждую секунду. Оптимизируй. Можно ли было сделать без использования context?
+
+    Подсказки:
+    - Создание контекста:
+      const CakeContext = React.createContext();
+    - Поставка значения:
+      <CakeContext.Provider value={cheeseCake}>
+        ...
+      </CakeContext.Provider>
+    - Потребление значения:
+      <CakeContext.Consumer>
+        {cake => <Hungry food={cake} />}
+      </CakeContext.Consumer>
  */
 
-class ColoursOfTime extends React.Component {
+class ColorsOfTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,7 +87,7 @@ class ColoursOfTime extends React.Component {
   }
 }
 
-ColoursOfTime.propTypes = {
+ColorsOfTime.propTypes = {
   timer: PropTypes.object
 }
 
@@ -128,11 +147,11 @@ class Card extends React.Component {
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   timezone: PropTypes.number,
   time: PropTypes.object.isRequired
 }
 
 
 const timer = new Timer();
-ReactDom.render(<ColoursOfTime timer={timer} />, document.getElementById("app"));
+ReactDom.render(<ColorsOfTime timer={timer} />, document.getElementById("app"));
