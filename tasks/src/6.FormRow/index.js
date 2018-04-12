@@ -11,7 +11,7 @@ import Toggle from "./Toggle";
     В новой форме понадобилось поддержать самописный Toggle — пришлось написать ToggleFormRow.
     Получилось много дублирующегося кода и это грустно :(
     
-    На помощь могут прийти Hight Order Components — функции вида Component → Component.
+    На помощь могут прийти Higher Order Components (HOC) — функции вида Component → Component.
     Используя HOC можно создавать новые улучшенные компоненты из обычных:
         const EnhancedComponent = enchance(JustComponent); // enchance — это HOC
 

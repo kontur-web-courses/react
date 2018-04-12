@@ -14,7 +14,7 @@ import defaultUsers from "./../defaultUsers";
     Проблема 2. UserTable надо сделать PureComponent, иначе при попытке редактирования таблица перерисовывается.
     Проблема 3. Использовать user.id вместо index. Чтобы помогло надо сначала UserTableRow сделать PureComponent.
                 После добавление станет работать эффективнее.
-    Проблема 4. Написать свой shouldComponentUpdate в UserTableRow.
+    Проблема 4. Написать свой shouldComponentUpdate в UserTableRow. При этом придется сделать его обратно Component.
                 Редактирование невидимых полей не должно приводить к рендерингу.
  */
 
