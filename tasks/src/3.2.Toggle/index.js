@@ -42,6 +42,6 @@ class Toggle extends React.Component {
 
 ReactDom.render(
   <div className="page">
-    <Toggle onChange={value => console.log(value)}/> Использовать умные компоненты
+    <Toggle onChange={value => console.log(value)} /> Использовать умные компоненты
   </div>,
   document.getElementById("app"));

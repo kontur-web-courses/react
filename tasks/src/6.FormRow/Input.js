@@ -9,7 +9,7 @@ export default class Input extends React.Component {
   }
 
   render() {
-    return <input ref={this.ref} {...this.props}/>
+    return <input ref={this.ref} {...this.props} />
   }
 
   focus = () => {

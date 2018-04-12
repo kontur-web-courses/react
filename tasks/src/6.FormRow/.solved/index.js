@@ -30,7 +30,7 @@ function createFormRow(WrappedComponent) {
   const wrappedName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
   FormRow.displayName = `FormRow(${wrappedName})`;
 
-  const forward = (props, ref) => <FormRow {...props} forwardedRef={ref}/>;
+  const forward = (props, ref) => <FormRow {...props} forwardedRef={ref} />;
   forward.displayName = FormRow.displayName;
   return React.forwardRef(forward);
 }

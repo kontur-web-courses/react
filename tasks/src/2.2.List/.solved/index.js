@@ -28,7 +28,7 @@ function renderPost(post) {
   return (
     <div key={post.id} className="post">
       <div className="postHeader">
-        <span className="postAuthor">{post.author}</span><br/>
+        <span className="postAuthor">{post.author}</span><br />
         <span className="postTime">{post.time}</span>
       </div>
       <div className="postMessage">{post.message}</div>

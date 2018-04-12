@@ -47,7 +47,7 @@ function renderPost(post) {
   return (
     <div className="post">
       <div className="postHeader">
-        <span className="postAuthor">{post.author}</span><br/>
+        <span className="postAuthor">{post.author}</span><br />
         <span className="postTime">{post.time}</span>
       </div>
       <div className="postMessage">{post.message}</div>
@@ -61,7 +61,8 @@ ReactDom.render(
       {renderPost({
         author: "Милая девушка",
         time: "3 часа назад",
-        message: "Можно использовать для выпекания чизкейков :)"}
+        message: "Можно использовать для выпекания чизкейков :)"
+      }
       )}
     </div>
   </div>,

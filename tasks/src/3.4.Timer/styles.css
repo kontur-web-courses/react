@@ -1,25 +1,25 @@
 /* Styling it all now! */
 * {
-    font-family: arial;
+  font-family: arial;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #b9b7b1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #b9b7b1;
 }
 
 .time {
-    position: relative;
-    left: 50%;
-    margin-left: -150px;
-    width: 300px;
-    padding: 20px;
-    text-align: center;
-    font-size: 30px;
-    border-top: 3px solid #e54b6b;
-    background: #fff;
-    color: #707070;
+  position: relative;
+  left: 50%;
+  margin-left: -150px;
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+  font-size: 30px;
+  border-top: 3px solid #e54b6b;
+  background: #fff;
+  color: #707070;
 }

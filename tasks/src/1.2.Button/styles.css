@@ -1,28 +1,28 @@
 * {
-    font-family: arial;
+  font-family: arial;
 }
 
 .root {
-    margin: auto;
-    width: 600px;
+  margin: auto;
+  width: 600px;
 }
 
 .form {
-    padding: 10px;
-    background: #fda;
-    text-align: center;
+  padding: 10px;
+  background: #fda;
+  text-align: center;
 }
 
 .button {
-    background: linear-gradient(#2899ea, #167ac1);
-    color: #fff;
-    height: 34px;
-    border-radius: 2px 2px 2px 2px;
-    padding: 0 15px;
-    border: 0;
+  background: linear-gradient(#2899ea, #167ac1);
+  color: #fff;
+  height: 34px;
+  border-radius: 2px 2px 2px 2px;
+  padding: 0 15px;
+  border: 0;
 }
 
 .button:hover {
-    background: linear-gradient(#0087d5, #167ac1);
-    cursor: pointer;
+  background: linear-gradient(#0087d5, #167ac1);
+  cursor: pointer;
 }

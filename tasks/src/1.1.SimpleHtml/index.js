@@ -26,7 +26,7 @@ import "./styles.css";
  */
 
 ReactDom.render(
-    <form>
-    </form>,
-    document.getElementById("app")
+  <form>
+  </form>,
+  document.getElementById("app")
 );

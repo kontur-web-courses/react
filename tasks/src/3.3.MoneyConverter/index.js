@@ -37,13 +37,13 @@ class Money extends React.Component {
 
   render() {
     return (
-      <input type="text" value={this.state.value} onChange={this.handleChangeValue}/>
+      <input type="text" value={this.state.value} onChange={this.handleChangeValue} />
     );
   }
 
   handleChangeValue = event => {
     const value = extractNumber(event.target.value);
-    this.setState({value});
+    this.setState({ value });
     this.props.onChange(value);
   }
 }
@@ -56,9 +56,9 @@ class MoneyConverter extends React.Component {
           <h2>Конвертер валют</h2>
           <div>
             <span>&#8381;</span>
-            <Money/>
+            <Money />
             &mdash;
-            <Money/>
+            <Money />
             <span>&euro;</span>
           </div>
         </div>

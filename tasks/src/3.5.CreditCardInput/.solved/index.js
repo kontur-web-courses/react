@@ -12,11 +12,11 @@ class CreditCardInput extends React.Component {
     this.state = {};
   }
 
-  static getDerivedStateFromProps(nextProps, prevState){
+  static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.changed || nextProps.value === prevState.value) {
       return null;
     }
-    return {value: nextProps.value, changed:false};
+    return { value: nextProps.value, changed: false };
   }
 
   static propTypes = {
@@ -42,13 +42,13 @@ class CreditCardInput extends React.Component {
     );
   }
 
-  handleFocus = () =>{
-    this.setState({value:""});
+  handleFocus = () => {
+    this.setState({ value: "" });
   }
 
   handleChange = event => {
     const formattedValue = CreditCardNumber.format(event.target.value);
-    this.setState({ value: formattedValue, changed:true });
+    this.setState({ value: formattedValue, changed: true });
   };
 
   handleBlur = () => {

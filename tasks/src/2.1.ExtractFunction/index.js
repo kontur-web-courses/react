@@ -27,7 +27,7 @@ ReactDom.render(
     <div className="posts">
       <div className="post">
         <div className="postHeader">
-          <span className="postAuthor">Парень не промах</span><br/>
+          <span className="postAuthor">Парень не промах</span><br />
           <span className="postTime">2 часа назад</span>
         </div>
         <div className="postMessage">
@@ -36,7 +36,7 @@ ReactDom.render(
       </div>
       <div className="post">
         <div className="postHeader">
-          <span className="postAuthor">Милая девушка</span><br/>
+          <span className="postAuthor">Милая девушка</span><br />
           <span className="postTime">3 часа назад</span>
         </div>
         <div className="postMessage">

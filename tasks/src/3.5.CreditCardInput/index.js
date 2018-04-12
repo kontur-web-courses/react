@@ -57,8 +57,8 @@ class CreditCardInput extends React.Component {
     );
   }
 
-  handleFocus = () =>{
-    this.setState({value:""});
+  handleFocus = () => {
+    this.setState({ value: "" });
   }
 
   handleChange = event => {

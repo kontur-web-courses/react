@@ -10,13 +10,13 @@ function extractNumber(value) {
   return +(value.replace(/^0+/g, '').replace(/[^0-9]/g, ''));
 }
 
-function Money({value, onChange}) {
+function Money({ value, onChange }) {
   const handleChange = event => {
     onChange(extractNumber(event.target.value));
   };
 
   return (
-    <input type="text" value={value} onChange={handleChange}/>
+    <input type="text" value={value} onChange={handleChange} />
   );
 }
 
@@ -41,9 +41,9 @@ class MoneyConverter extends React.Component {
           <h2>Конвертер валют</h2>
           <div>
             <span>&#8381;</span>
-            <Money value={this.state.valueInRubles} onChange={this.handleChangeRubles}/>
+            <Money value={this.state.valueInRubles} onChange={this.handleChangeRubles} />
             &mdash;
-            <Money value={this.state.valueInEuros} onChange={this.handleChangeEuros}/>
+            <Money value={this.state.valueInEuros} onChange={this.handleChangeEuros} />
             <span>&euro;</span>
           </div>
         </div>
@@ -54,13 +54,13 @@ class MoneyConverter extends React.Component {
   handleChangeRubles = value => {
     this.setState({
       valueInRubles: value,
-      valueInEuros: Math.round(100*value/RUBLES_IN_ONE_EURO)/100
+      valueInEuros: Math.round(100 * value / RUBLES_IN_ONE_EURO) / 100
     });
   }
 
   handleChangeEuros = value => {
     this.setState({
-      valueInRubles: Math.round(100*value*RUBLES_IN_ONE_EURO)/100,
+      valueInRubles: Math.round(100 * value * RUBLES_IN_ONE_EURO) / 100,
       valueInEuros: value
     });
   }

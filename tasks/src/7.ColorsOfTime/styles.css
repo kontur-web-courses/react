@@ -1,11 +1,10 @@
-/* Styling it all now! */
 * {
-    font-family: arial;
+  font-family: arial;
 }
 
 html,
 body {
-    background: #b9b7b1;
+  background: #b9b7b1;
 }
 
 h1, h2, h3 {
@@ -29,15 +28,15 @@ h3 {
 }
 
 .time {
-    position: relative;
-    left: 50%;
-    margin-left: -75px;
-    width: 150px;
-    padding: 10px 0px;
-    text-align: center;
-    font-size: 24px;
-    background: #fff;
-    color: #707070;
+  position: relative;
+  left: 50%;
+  margin-left: -75px;
+  width: 150px;
+  padding: 10px 0px;
+  text-align: center;
+  font-size: 24px;
+  background: #fff;
+  color: #707070;
 }
 
 .blue {

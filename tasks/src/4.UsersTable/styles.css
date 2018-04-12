@@ -18,7 +18,7 @@ input {
 }
 
 input:focus {
-    border: 1px solid #555;
+  border: 1px solid #555;
 }
 
 .saveContainer {

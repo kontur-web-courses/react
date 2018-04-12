@@ -15,25 +15,25 @@ import "./styles.css";
 let userName = "По умолчанию";
 
 let mydom =
-    <div className="root">
-        <div className="form">
-            <div style={{ paddingRight: "10px", display: "inline-block" }}>
-                <label htmlFor="name">Имя</label>
-            </div>
-            <input
-                id="name"
-                type="text"
-                size="39"
-                onChange={event => {
-                    const target = event.target;
-                    debugger;
-                }}
-                onBlur={() => alert(`userName: ${userName}`)}
-            />
-        </div>
-    </div>;
+  <div className="root">
+    <div className="form">
+      <div style={{ paddingRight: "10px", display: "inline-block" }}>
+        <label htmlFor="name">Имя</label>
+      </div>
+      <input
+        id="name"
+        type="text"
+        size="39"
+        onChange={event => {
+          const target = event.target;
+          debugger;
+        }}
+        onBlur={() => alert(`userName: ${userName}`)}
+      />
+    </div>
+  </div>;
 
 ReactDom.render(
-    mydom,
-    document.getElementById("app")
+  mydom,
+  document.getElementById("app")
 );

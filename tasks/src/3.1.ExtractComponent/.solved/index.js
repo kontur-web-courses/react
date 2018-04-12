@@ -8,7 +8,7 @@ function Post(props) {
   return (
     <div className="post">
       <div className="postHeader">
-        <span className="postAuthor">{props.author}</span><br/>
+        <span className="postAuthor">{props.author}</span><br />
         <span className="postTime">{props.time}</span>
       </div>
       <div className="postMessage">{props.children}</div>
