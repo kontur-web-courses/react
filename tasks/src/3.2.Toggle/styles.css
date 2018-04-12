@@ -1,0 +1,67 @@
+* {
+    font-family: arial;
+}
+
+.page {
+  margin: auto;
+  width: 600px;
+}
+
+.lot {
+  padding: 10px;
+  background: #fda;
+}
+
+.lotName {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.lotDescription {
+  font-size: 16px;
+}
+
+.posts {
+  padding-top: 20px;
+  padding-left: 40px;
+}
+
+.post {
+  padding: 10px;
+  background: #eee;
+  margin-bottom: 10px;
+}
+
+.postHeader {
+  margin-bottom: 10px;
+}
+
+.postAuthor {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.postTime {
+  color: #777;
+  font-size: 16px;
+}
+
+.postMessage {
+  font-size: 16px;
+}
+
+.formHeader {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.formField {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.formFooter {
+  font-size: 16px;
+  padding: 10px;
+}

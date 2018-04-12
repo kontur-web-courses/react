@@ -1,0 +1,72 @@
+/* Styling it all now! */
+* {
+    font-family: arial;
+}
+
+html,
+body {
+    background: #b9b7b1;
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+h3 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.page {
+  margin: auto;
+  width: 250px;
+}
+
+.card {
+  background: #cccccc;
+  padding: 10px;
+  margin: 10px 0px;
+}
+
+.time {
+    position: relative;
+    left: 50%;
+    margin-left: -75px;
+    width: 150px;
+    padding: 10px 0px;
+    text-align: center;
+    font-size: 24px;
+    background: #fff;
+    color: #707070;
+}
+
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.actionButton {
+  background: linear-gradient(#2899ea, #167ac1);
+  color: #fff;
+  height: 34px;
+  border-radius: 2px 2px 2px 2px;
+  padding: 0 15px;
+  border: 0;
+}
+
+.actionButton:hover {
+  background: linear-gradient(#0087d5, #167ac1);
+  cursor: pointer;
+}
+
+.buttonContainer {
+  margin-top: 20px;
+  text-align: center;
+}

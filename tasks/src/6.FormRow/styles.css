@@ -1,0 +1,120 @@
+* {
+  font-family: arial;
+}
+
+.root {
+  margin: auto;
+  width: 800px;
+}
+
+input {
+  padding: 5px;
+  margin: 10px 15px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  height: 18px;
+  width: 200px;
+  font-size: 18px;
+}
+
+input:focus {
+    border: 1px solid #555;
+}
+
+.openContainer {
+  text-align: center;
+}
+
+.saveContainer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.addContainer {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.actionButton {
+  background: linear-gradient(#2899ea, #167ac1);
+  color: #fff;
+  height: 34px;
+  border-radius: 2px 2px 2px 2px;
+  padding: 0 15px;
+  border: 0;
+}
+
+.actionButton:hover {
+  background: linear-gradient(#0087d5, #167ac1);
+  cursor: pointer;
+}
+
+.editButton {
+  background: linear-gradient(#2899ea, #167ac1);
+  color: #fff;
+  height: 28px;
+  width: 140px;
+  border-radius: 2px 2px 2px 2px;
+  padding: 0 15px;
+  border: 0;
+  font-size: 16px;
+}
+
+.editButton:hover {
+  background: linear-gradient(#0087d5, #167ac1);
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #eee;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th {
+  background-color: #eee;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+td {
+  border-bottom: 1px solid #eee;
+  padding: 0.75rem;
+  border: 1px solid #eee;
+  vertical-align: middle;
+}
+
+tr:hover {
+  background-color: #daeffc;
+  cursor: pointer;
+}
+
+.form {
+  margin: 0px auto 20px auto;
+  width: 600px;
+  border: 1px solid #ddd;
+  background-color: #eee;
+  padding: 10px;
+}
+
+.row {
+  height: 40px;
+}
+
+.label {
+  display: inline-block;
+  font-size: 18px;
+  width: 200px;
+}
+
+.table {
+  width: 800px;
+  display: block;
+  padding: 20px;
+  border: 1px solid #eee;
+  margin: auto;
+}
