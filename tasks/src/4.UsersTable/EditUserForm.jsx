@@ -85,7 +85,7 @@ export default class EditUserForm extends React.Component {
     );
   }
 
-  handleUserChange(change) {
+  handleUserChange = change => {
     this.setState({
       user: { ...this.state.user, ...change }
     });
