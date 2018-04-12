@@ -31,7 +31,7 @@ import "./styles.css";
  *      b: "default value"
  *    }
  * 
- *  4. Переделай компонент так, чтобы message передавался передавался через props.children.
+ *  4. Переделай компонент так, чтобы message передавался через props.children.
  * 
  *  Подсказки:
  *  - <MyComponent>Значение</MyComponent>

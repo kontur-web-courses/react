@@ -12,16 +12,16 @@ class CreditCardInput extends React.Component {
     this.state = {};
   }
 
+  static getDerivedStateFromProps(nextProps, prevState){
+    if (prevState.changed || nextProps.value === prevState.value) {
+      return null;
+    }
+    return {value: nextProps.value, changed:false};
+  }
+
   static propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.value !== nextProps.value) {
-      return { value: nextProps.value };
-    }
-    return null;
   }
 
   render() {
@@ -33,6 +33,7 @@ class CreditCardInput extends React.Component {
             pattern="9999 9999 9999 9999"
             value={this.state.value || ""}
             width={120}
+            onFocus={this.handleFocus}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
           />
@@ -41,9 +42,13 @@ class CreditCardInput extends React.Component {
     );
   }
 
+  handleFocus = () =>{
+    this.setState({value:""});
+  }
+
   handleChange = event => {
     const formattedValue = CreditCardNumber.format(event.target.value);
-    this.setState({ value: formattedValue });
+    this.setState({ value: formattedValue, changed:true });
   };
 
   handleBlur = () => {
@@ -57,7 +62,7 @@ class CreditCardInputWithRestore extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: null
+      value: "0000 0000 0000 0000"
     };
   }
 

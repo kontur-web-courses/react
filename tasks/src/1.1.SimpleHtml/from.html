@@ -11,12 +11,12 @@
         - checked → defaultChecked
         - value → defaultValue
     - {} и "" для передачи значений
-    - Оформление style в виде объекта: style={paddingTop: 10, paddingBottom: "20px"}
+    - Оформление style в виде объекта: <div style={{paddingTop: 10, paddingBottom: "20px"}}>
     - Общее правило именование атрибутов и свойств — camelCase
 
     2. Убедись, что новая форма выглядит также как старая, поля редактируются,
        флажок переключается при нажатии на слово «Согласие»
-    3. Попробуй перенести <input> в следующую строчку в *.html и *.jsx — убедитесь, что появилась разница!
+    3. Попробуй перенести <input id="name"> в следующую строчку в *.html и *.jsx и убедитесь, что jsx и html начали рендерится по-разному!
 -->
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
                     <div class="caption">
                         <label for="name">Имя</label>
                     </div><input id="name" type="text" size="39">
-                </div>
+                    </div>
                 <div class="row">
                     <div class="caption">
                         <label for="mail">Почта</label>
