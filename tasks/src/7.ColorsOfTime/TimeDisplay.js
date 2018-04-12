@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDom from "react-dom";
-import PropTypes from "prop-types";
-import "./styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import './styles.css';
 
 
 export default function TimeDisplay({ time, color }) {

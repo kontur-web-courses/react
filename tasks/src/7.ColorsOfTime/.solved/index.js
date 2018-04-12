@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDom from "react-dom";
-import PropTypes from "prop-types";
-import "./../styles.css";
-import * as helpers from "./../helpers";
-import TimeDisplay from "./../TimeDisplay";
-import Timer from "./../Timer";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import '../styles.css';
+import * as helpers from '../helpers';
+import TimeDisplay from '../TimeDisplay';
+import Timer from '../Timer';
 
 
 const TimeContext = React.createContext();
@@ -127,4 +127,4 @@ Card.propTypes = {
 
 
 const timer = new Timer();
-ReactDom.render(<ColorsOfTime timer={timer} />, document.getElementById("app"));
+ReactDom.render(<ColorsOfTime timer={timer} />, document.getElementById('app'));

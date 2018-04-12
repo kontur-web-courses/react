@@ -1,8 +1,8 @@
-import React from "react";
-import ReactDom from "react-dom";
-import PropTypes from "prop-types";
-import "./../styles.css";
-import Toggle from "./../Toggle";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import '../styles.css';
+import Toggle from '../Toggle';
 
 
 function createFormRow(WrappedComponent) {
@@ -127,4 +127,4 @@ Form.propTypes = {
   user: PropTypes.object,
 };
 
-ReactDom.render(<Form />, document.getElementById("app"));
+ReactDom.render(<Form />, document.getElementById('app'));

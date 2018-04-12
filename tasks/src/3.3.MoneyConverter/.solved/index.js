@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./../styles.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import '../styles.css';
 
 
 const RUBLES_IN_ONE_EURO = 70;
@@ -66,4 +66,4 @@ class MoneyConverter extends React.Component {
   }
 }
 
-ReactDom.render(<MoneyConverter />, document.getElementById("app"));
+ReactDom.render(<MoneyConverter />, document.getElementById('app'));

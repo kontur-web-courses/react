@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "../styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import '../styles.css';
 
 
 function renderPosts(posts) {
@@ -22,7 +22,7 @@ function renderPosts(posts) {
 function renderLot(name, description, tags) {
   return (
     <div className="lot">
-      <div className="lotName">{name || "<Неизвестный предмет>"}</div>
+      <div className="lotName">{name || '<Неизвестный предмет>'}</div>
       {description && <div className="lotDescription">{description}</div>}
       {renderTags(tags)}
     </div>
@@ -32,7 +32,7 @@ function renderLot(name, description, tags) {
 function renderTags(tags) {
   if (!tags || tags.length == 0)
     return null;
-  const content = tags.join(", ");
+  const content = tags.join(', ');
   return (
     <div className="lotTags">{content}</div>
   );
@@ -40,7 +40,7 @@ function renderTags(tags) {
 
 ReactDom.render(
   <div className="page">
-    {renderLot("", "", [])}
+    {renderLot('', '', [])}
     {renderPosts([])}
   </div>,
-  document.getElementById("app"));
+  document.getElementById('app'));

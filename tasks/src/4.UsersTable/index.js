@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDom from "react-dom";
-import PropTypes from "prop-types";
-import EditUserForm from "./EditUserForm";
-import "./styles.css";
-import * as helpers from "./helpers";
-import defaultUsers from "./defaultUsers";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import EditUserForm from './EditUserForm';
+import './styles.css';
+import * as helpers from './helpers';
+import defaultUsers from './defaultUsers';
 
 
 /**
@@ -206,4 +206,4 @@ UserTableRow.propTypes = {
   onEditUser: PropTypes.func,
 };
 
-ReactDom.render(<Users />, document.getElementById("app"));
+ReactDom.render(<Users />, document.getElementById('app'));

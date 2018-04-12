@@ -1,6 +1,6 @@
 export function calculateAge(birthday) {
   if (!birthday || isNaN(+birthday)) {
-    return "";
+    return '';
   }
   const ageDifMs = Date.now() - new Date(birthday).getTime();
   const ageDate = new Date(ageDifMs);

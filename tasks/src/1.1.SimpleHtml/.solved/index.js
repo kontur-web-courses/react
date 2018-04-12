@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./../styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import '../styles.css';
 
 
 ReactDom.render(
@@ -43,5 +43,5 @@ ReactDom.render(
       </div>
     </div>
   </form>,
-  document.getElementById("app")
+  document.getElementById('app')
 );

@@ -1,9 +1,9 @@
-import React from "react";
-import ReactDom from "react-dom";
-import PropTypes from "prop-types";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
 
 
-// Часто "улучшаемый" компонент называют WrappedComponent.
+// Часто «улучшаемый» компонент называют WrappedComponent.
 // Первая прописная буква подчеркивает, что это компонент.
 function enchance(WrappedComponent) {
   // Внутри HOC определяет компонент-обертку с помощью класса или функции.

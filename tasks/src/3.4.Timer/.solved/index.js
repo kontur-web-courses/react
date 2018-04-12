@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./../styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import '../styles.css';
 
 
 class Timer extends React.Component {
@@ -45,4 +45,4 @@ class Timer extends React.Component {
   }
 }
 
-ReactDom.render(<Timer />, document.getElementById("app"));
+ReactDom.render(<Timer />, document.getElementById('app'));

@@ -1,8 +1,8 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "../styles.css";
-import "../toggle.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import '../styles.css';
+import '../toggle.css';
 
 
 class Toggle extends React.Component {
@@ -44,4 +44,4 @@ ReactDom.render(
   <div className="page">
     <Toggle onChange={value => console.log(value)} /> Использовать умные компоненты
   </div>,
-  document.getElementById("app"));
+  document.getElementById('app'));

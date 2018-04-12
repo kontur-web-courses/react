@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import './styles.css';
 
 
 /**
@@ -45,4 +45,4 @@ ReactDom.render(
       </div>
     </div>
   </div>,
-  document.getElementById("app"));
+  document.getElementById('app'));

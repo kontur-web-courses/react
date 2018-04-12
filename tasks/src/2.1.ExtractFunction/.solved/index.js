@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "../styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import '../styles.css';
 
 
 function renderLot() {
@@ -28,8 +28,8 @@ ReactDom.render(
   <div className="page">
     {renderLot()}
     <div className="posts">
-      {renderPost("Парень не промах", "2 часа назад", "Попробую с удовольствием ;)")}
-      {renderPost("Милая девушка", "3 часа назад", "Можно использовать для выпекания чизкейков :)")}
+      {renderPost('Парень не промах', '2 часа назад', 'Попробую с удовольствием ;)')}
+      {renderPost('Милая девушка', '3 часа назад', 'Можно использовать для выпекания чизкейков :)')}
     </div>
   </div>,
-  document.getElementById("app"));
+  document.getElementById('app'));

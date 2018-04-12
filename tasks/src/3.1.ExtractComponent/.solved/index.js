@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./styles.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import './styles.css';
 
 
 function Post(props) {
@@ -23,7 +23,7 @@ Post.propTypes = {
 }
 
 Post.defaultProps = {
-  author: "<Неизвестный автор>"
+  author: '<Неизвестный автор>'
 }
 
 ReactDom.render(
@@ -34,4 +34,4 @@ ReactDom.render(
       </Post>
     </div>
   </div>,
-  document.getElementById("app"));
+  document.getElementById('app'));

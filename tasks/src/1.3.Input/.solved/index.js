@@ -1,9 +1,9 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./../styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import '../styles.css';
 
 
-let userName = "По умолчанию";
+let userName = 'По умолчанию';
 
 ReactDom.render(
   <div className="root">
@@ -22,5 +22,5 @@ ReactDom.render(
       />
     </div>
   </div>,
-  document.getElementById("app")
+  document.getElementById('app')
 );

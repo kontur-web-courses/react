@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./styles.css";
-//import PropTypes from "prop-types";
+import React from 'react';
+import ReactDom from 'react-dom';
+//import PropTypes from 'prop-types';
+import './styles.css';
 
 
 /**
     1. Переделай renderPost в функциональный компонент Post
    
     Подсказки:
-    - {renderMyComponent({a: 1, b: "some"})} → <MyComponent a={1}, b="some">
+    - {renderMyComponent({a: 1, b: 'some'})} → <MyComponent a={1}, b="some">
     - Первый аргумент функции компонента обычно называется props
    
     2. ESLint настроен так, чтобы проверять переданные атрибуты. Поэтому задай propTypes.
@@ -28,7 +28,7 @@ import "./styles.css";
    
     Подсказки:
     - MyComponent.defaultProps = {
-        b: "default value"
+        b: 'default value'
       }
    
     4. Переделай компонент так, чтобы message передавался через props.children.
@@ -59,11 +59,11 @@ ReactDom.render(
   <div className="page">
     <div className="posts">
       {renderPost({
-        author: "Милая девушка",
-        time: "3 часа назад",
-        message: "Можно использовать для выпекания чизкейков :)"
+        author: 'Милая девушка',
+        time: '3 часа назад',
+        message: 'Можно использовать для выпекания чизкейков :)'
       }
       )}
     </div>
   </div>,
-  document.getElementById("app"));
+  document.getElementById('app'));

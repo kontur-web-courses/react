@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import './styles.css';
 
 
 /**
@@ -12,7 +12,7 @@ import "./styles.css";
     - Посмотри, что приходит первым аргументом в обработчик onChange.
  */
 
-let userName = "По умолчанию";
+let userName = 'По умолчанию';
 
 let mydom =
   <div className="root">
@@ -35,5 +35,5 @@ let mydom =
 
 ReactDom.render(
   mydom,
-  document.getElementById("app")
+  document.getElementById('app')
 );

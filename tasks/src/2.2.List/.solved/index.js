@@ -1,26 +1,26 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "../styles.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import ../styles.css';
 
 
 const posts = [
   {
-    id: "1",
-    author: "Парень не промах",
-    time: "2 часа назад",
-    message: "Попробую с удовольствием ;)"
+    id: '1',
+    author: 'Парень не промах',
+    time: '2 часа назад',
+    message: 'Попробую с удовольствием ;)'
   },
   {
-    id: "2",
-    author: "Милая девушка",
-    time: "3 часа назад",
-    message: "Можно использовать для выпекания чизкейков :)"
+    id: '2',
+    author: 'Милая девушка',
+    time: '3 часа назад',
+    message: 'Можно использовать для выпекания чизкейков :)'
   },
   {
-    id: "3",
-    author: "Скупец",
-    time: "вчера",
-    message: "Цену-то загнули!"
+    id: '3',
+    author: 'Скупец',
+    time: 'вчера',
+    message: 'Цену-то загнули!'
   },
 ];
 
@@ -51,4 +51,4 @@ ReactDom.render(
     </div>
     {renderAuthors(posts)}
   </div>,
-  document.getElementById("app"));
+  document.getElementById('app'));

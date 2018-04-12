@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "regenerator-runtime/runtime";
-import PropTypes from "prop-types";
-import "./styles.css";
-import Api from "./Api";
-import CreditCardNumber from "./CreditCardNumber";
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+import 'regenerator-runtime/runtime';
+import './styles.css';
+import Api from './Api';
+import CreditCardNumber from './CreditCardNumber';
 
 
 /**
@@ -46,7 +46,7 @@ class CreditCardInput extends React.Component {
           <input
             type="text"
             pattern="9999 9999 9999 9999"
-            value={this.state.value || ""}
+            value={this.state.value || ''}
             width={120}
             onFocus={this.handleFocus}
             onChange={this.handleChange}
@@ -58,7 +58,7 @@ class CreditCardInput extends React.Component {
   }
 
   handleFocus = () => {
-    this.setState({ value: "" });
+    this.setState({ value: '' });
   }
 
   handleChange = event => {
@@ -77,7 +77,7 @@ class CreditCardInputWithRestore extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: "0000 0000 0000 0000"
+      value: '0000 0000 0000 0000'
     };
   }
 
@@ -101,4 +101,4 @@ class CreditCardInputWithRestore extends React.Component {
 }
 
 
-ReactDom.render(<CreditCardInputWithRestore />, document.getElementById("app"));
+ReactDom.render(<CreditCardInputWithRestore />, document.getElementById('app'));
