@@ -56,7 +56,7 @@ import defaultUsers from "./defaultUsers";
     - Ключ к производительности — в правильном задании key.
 
     - В конце тебе пригодится shouldComponentUpdate(nextProps, nextState).
-*/
+ */
 
 let generation = 1;
 let generationEvents = 1;

@@ -54,7 +54,7 @@ import Toggle from "./Toggle";
 
     - Когда ref уже лежит в отдельном атрибуте, его несложно использовать:
         <WrappedComponent ref={forwardedRef} {...rest} />
-*/
+ */
 
 
 class InputFormRow extends React.Component {

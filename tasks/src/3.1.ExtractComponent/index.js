@@ -5,38 +5,38 @@ import "./styles.css";
 
 
 /**
- *  1. Переделай renderPost в функциональный компонент Post
- * 
- *  Подсказки:
- *  - {renderMyComponent({a: 1, b: "some"})} → <MyComponent a={1}, b="some">
- *  - Первый аргумент функции компонента обычно называется props
- * 
- *  2. ESLint настроен так, чтобы проверять переданные атрибуты. Поэтому задай propTypes.
- *     У нас везде атрибуты — это строки. Сделай свойства author и time обязательными.
- * 
- *  Подсказки:
- *  - В начале файла нужно импортировать PropTypes
- *  - MyComponent.propTypes = {
- *      a: PropTypes.number.isRequired,
- *      b: PropTypes.string
- *    }
- * 
- *  3. Сделай так, чтобы в author подставлялось значение <Неизвестный автор>,
- *     если атрибут не передали.
- *     Используй для этого defaultProps.
- *     Проверь что работает, убрав имя автора.
- * 
- *  Подсказки:
- *  - MyComponent.defaultProps = {
- *      b: "default value"
- *    }
- * 
- *  4. Переделай компонент так, чтобы message передавался через props.children.
- * 
- *  Подсказки:
- *  - <MyComponent>Значение</MyComponent>
- *  - const value = props.children;
- *  - children: PropTypes.string,
+    1. Переделай renderPost в функциональный компонент Post
+   
+    Подсказки:
+    - {renderMyComponent({a: 1, b: "some"})} → <MyComponent a={1}, b="some">
+    - Первый аргумент функции компонента обычно называется props
+   
+    2. ESLint настроен так, чтобы проверять переданные атрибуты. Поэтому задай propTypes.
+       У нас везде атрибуты — это строки. Сделай свойства author и time обязательными.
+   
+    Подсказки:
+    - В начале файла нужно импортировать PropTypes
+    - MyComponent.propTypes = {
+        a: PropTypes.number.isRequired,
+        b: PropTypes.string
+      }
+   
+    3. Сделай так, чтобы в author подставлялось значение <Неизвестный автор>,
+       если атрибут не передали.
+       Используй для этого defaultProps.
+       Проверь что работает, убрав имя автора.
+   
+    Подсказки:
+    - MyComponent.defaultProps = {
+        b: "default value"
+      }
+   
+    4. Переделай компонент так, чтобы message передавался через props.children.
+   
+    Подсказки:
+    - <MyComponent>Значение</MyComponent>
+    - const value = props.children;
+    - children: PropTypes.string,
  */
 
 // Эта строка нужна, чтобы ESLint не сильно ругался, пока не написаны PropTypes.

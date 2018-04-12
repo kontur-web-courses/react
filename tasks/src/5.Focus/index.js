@@ -22,7 +22,7 @@ import "./styles.css";
 
     Обрати внимание:
     - Как все props, кроме нужных, элегантно пробрасываются в input.
-*/
+ */
 
 class InputFormRow extends React.Component {
   constructor(props) {

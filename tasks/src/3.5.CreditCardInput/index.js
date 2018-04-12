@@ -26,7 +26,7 @@ import CreditCardNumber from "./CreditCardNumber";
     - componentWillReceiveProps(nextProps) вызывается при получении компонентом измененных props,
       но React 16 — последняя версия, где он будет доступен — останется только UNSAFE_componentWillReceiveProps.
     - Даже при задании getDerivedStateFromProps состояние должно инициализироваться в конструкторе.
-*/
+ */
 
 class CreditCardInput extends React.Component {
   constructor(props) {
