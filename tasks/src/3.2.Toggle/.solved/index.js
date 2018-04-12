@@ -40,6 +40,7 @@ Toggle.propTypes = {
   onChange: PropTypes.func
 };
 
+
 ReactDom.render(
   <div className="page">
     <Toggle onChange={value => console.log(value)} /> Использовать умные компоненты

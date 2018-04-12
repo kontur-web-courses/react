@@ -6,24 +6,6 @@ import '../styles.css';
 
 const RUBLES_IN_ONE_EURO = 70;
 
-function extractNumber(value) {
-  return +(value.replace(/^0+/g, '').replace(/[^0-9]/g, ''));
-}
-
-function Money({ value, onChange }) {
-  const handleChange = event => {
-    onChange(extractNumber(event.target.value));
-  };
-
-  return (
-    <input type="text" value={value} onChange={handleChange} />
-  );
-}
-
-Money.propTypes = {
-  value: PropTypes.number.isRequired,
-  onChange: PropTypes.func
-};
 
 class MoneyConverter extends React.Component {
   constructor(props) {
@@ -65,5 +47,27 @@ class MoneyConverter extends React.Component {
     });
   }
 }
+
+
+function Money({ value, onChange }) {
+  const handleChange = event => {
+    onChange(extractNumber(event.target.value));
+  };
+
+  return (
+    <input type="text" value={value} onChange={handleChange} />
+  );
+}
+
+Money.propTypes = {
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func
+};
+
+
+function extractNumber(value) {
+  return +(value.replace(/^0+/g, '').replace(/[^0-9]/g, ''));
+}
+
 
 ReactDom.render(<MoneyConverter />, document.getElementById('app'));

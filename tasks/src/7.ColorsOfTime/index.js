@@ -34,6 +34,7 @@ import Timer from './Timer';
       </CakeContext.Consumer>
  */
 
+
 class ColorsOfTime extends React.Component {
   constructor(props) {
     super(props);

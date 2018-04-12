@@ -15,6 +15,7 @@ import './styles.css';
       но быстрый способ написать обработчик событий
  */
 
+
 ReactDom.render(
   <div className="root">
     <div className="form">

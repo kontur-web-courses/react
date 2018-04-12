@@ -57,47 +57,6 @@ import Toggle from './Toggle';
  */
 
 
-class InputFormRow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { label, ...rest } = this.props;
-    return (
-      <div className="row">
-        <div className="label">{label}</div>
-        <Input {...rest} />
-      </div>
-    );
-  }
-}
-
-InputFormRow.propTypes = {
-  label: PropTypes.string.isRequired
-}
-
-class ToggleFormRow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { label, ...rest } = this.props;
-    return (
-      <div className="row">
-        <div className="label">{label}</div>
-        <Toggle {...rest} />
-      </div>
-    );
-  }
-}
-
-ToggleFormRow.propTypes = {
-  label: PropTypes.string.isRequired
-}
-
-
 class Form extends React.Component {
   constructor() {
     super();
@@ -185,5 +144,48 @@ class Form extends React.Component {
 Form.propTypes = {
   user: PropTypes.object,
 };
+
+
+class InputFormRow extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { label, ...rest } = this.props;
+    return (
+      <div className="row">
+        <div className="label">{label}</div>
+        <Input {...rest} />
+      </div>
+    );
+  }
+}
+
+InputFormRow.propTypes = {
+  label: PropTypes.string.isRequired
+}
+
+
+class ToggleFormRow extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { label, ...rest } = this.props;
+    return (
+      <div className="row">
+        <div className="label">{label}</div>
+        <Toggle {...rest} />
+      </div>
+    );
+  }
+}
+
+ToggleFormRow.propTypes = {
+  label: PropTypes.string.isRequired
+}
+
 
 ReactDom.render(<Form />, document.getElementById('app'));

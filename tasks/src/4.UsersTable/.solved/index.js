@@ -21,6 +21,7 @@ import defaultUsers from '../defaultUsers';
                 Заметь, что shouldComponentUpdate нельзя опредилить у PureComponent.
  */
 
+
 let generation = 1;
 let generationEvents = 1;
 
@@ -76,6 +77,7 @@ class Users extends React.Component {
   };
 }
 
+
 class UserTable extends React.PureComponent {
   componentDidMount() {
     logEvent('UserTable\t\t did mount');
@@ -122,6 +124,7 @@ UserTable.propTypes = {
   onEditUser: PropTypes.func,
   onAddUser: PropTypes.func,
 };
+
 
 class UserTableRow extends React.Component {
   componentDidMount() {
@@ -173,5 +176,6 @@ UserTableRow.propTypes = {
   user: PropTypes.object,
   onEditUser: PropTypes.func,
 };
+
 
 ReactDom.render(<Users />, document.getElementById('app'));

@@ -26,6 +26,7 @@ Post.defaultProps = {
   author: '<Неизвестный автор>'
 }
 
+
 ReactDom.render(
   <div className="page">
     <div className="posts">

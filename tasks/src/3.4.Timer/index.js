@@ -17,6 +17,7 @@ import './styles.css';
       Гарантированно вызовется, если элемент «did mount». Отличное место, чтобы освобождать ресурсы.
  */
 
+
 class Timer extends React.Component {
   constructor() {
     super();
@@ -33,5 +34,6 @@ class Timer extends React.Component {
     );
   }
 }
+
 
 ReactDom.render(<Timer />, document.getElementById('app'));

@@ -25,6 +25,7 @@ import './styles.css';
        и убедитесь, что jsx и html начали рендерится по-разному!
  */
 
+
 ReactDom.render(
   <form>
   </form>,

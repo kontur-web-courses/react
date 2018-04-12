@@ -5,6 +5,7 @@ import '../styles.css';
 
 let userName = 'По умолчанию';
 
+
 ReactDom.render(
   <div className="root">
     <div className="form">

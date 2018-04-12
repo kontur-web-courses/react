@@ -6,6 +6,34 @@ import Api from '../Api';
 import CreditCardNumber from '../CreditCardNumber';
 
 
+class CreditCardInputWithRestore extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '0000 0000 0000 0000'
+    };
+  }
+
+  componentDidMount() {
+    this.restoreFromApi();
+  }
+
+  render() {
+    return (
+      <CreditCardInput
+        value={this.state.value}
+        onChange={val => console.log(val)}
+      />
+    );
+  }
+
+  async restoreFromApi() {
+    const value = await Api.getValue();
+    this.setState({ value: value });
+  }
+}
+
+
 class CreditCardInput extends React.Component {
   constructor(props) {
     super(props);
@@ -56,33 +84,6 @@ class CreditCardInput extends React.Component {
 CreditCardInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func
-}
-
-class CreditCardInputWithRestore extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      value: '0000 0000 0000 0000'
-    };
-  }
-
-  componentDidMount() {
-    this.restoreFromApi();
-  }
-
-  render() {
-    return (
-      <CreditCardInput
-        value={this.state.value}
-        onChange={val => console.log(val)}
-      />
-    );
-  }
-
-  async restoreFromApi() {
-    const value = await Api.getValue();
-    this.setState({ value: value });
-  }
 }
 
 

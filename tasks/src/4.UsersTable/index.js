@@ -58,6 +58,7 @@ import defaultUsers from './defaultUsers';
     - В конце тебе пригодится shouldComponentUpdate(nextProps, nextState).
  */
 
+
 let generation = 1;
 let generationEvents = 1;
 
@@ -69,6 +70,7 @@ function updateGeneration() {
 function logEvent(msg) {
   console.log(` ${generation}.${generationEvents++}\t${msg}`);
 }
+
 
 class Users extends React.Component {
   constructor() {
@@ -167,6 +169,7 @@ UserTable.propTypes = {
   onAddUser: PropTypes.func,
 };
 
+
 class UserTableRow extends React.Component {
   componentDidMount() {
     logEvent('UserTableRow\t did mount with id=' + this.props.user.id)
@@ -205,5 +208,6 @@ UserTableRow.propTypes = {
   user: PropTypes.object,
   onEditUser: PropTypes.func,
 };
+
 
 ReactDom.render(<Users />, document.getElementById('app'));

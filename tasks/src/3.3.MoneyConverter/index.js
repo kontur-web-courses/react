@@ -17,11 +17,29 @@ import './styles.css';
     - Заметь, что компонент Money теперь не содержит состояние и его можно переделать в функциональный компонент.
  */
 
+
 const RUBLES_IN_ONE_EURO = 70;
 
-function extractNumber(value) {
-  return +(value.replace(/^0+/g, '').replace(/[^0-9]/g, ''));
+
+class MoneyConverter extends React.Component {
+  render() {
+    return (
+      <div className="root">
+        <div className="form">
+          <h2>Конвертер валют</h2>
+          <div>
+            <span>&#8381;</span>
+            <Money />
+            &mdash;
+            <Money />
+            <span>&euro;</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
+
 
 class Money extends React.Component {
   constructor(props) {
@@ -48,23 +66,10 @@ Money.propTypes = {
   onChange: PropTypes.func
 }
 
-class MoneyConverter extends React.Component {
-  render() {
-    return (
-      <div className="root">
-        <div className="form">
-          <h2>Конвертер валют</h2>
-          <div>
-            <span>&#8381;</span>
-            <Money />
-            &mdash;
-            <Money />
-            <span>&euro;</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
+
+function extractNumber(value) {
+  return +(value.replace(/^0+/g, '').replace(/[^0-9]/g, ''));
 }
+
 
 ReactDom.render(<MoneyConverter />, document.getElementById('app'));

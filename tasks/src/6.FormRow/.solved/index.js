@@ -35,6 +35,7 @@ function createFormRow(WrappedComponent) {
   return React.forwardRef(forward);
 }
 
+
 const InputFormRow = createFormRow(Input);
 const ToggleFormRow = createFormRow(Toggle);
 
@@ -126,5 +127,6 @@ class Form extends React.Component {
 Form.propTypes = {
   user: PropTypes.object,
 };
+
 
 ReactDom.render(<Form />, document.getElementById('app'));

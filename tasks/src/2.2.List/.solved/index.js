@@ -44,6 +44,7 @@ function renderAuthors(posts) {
   return (<div className="authors">{authors}</div>);
 }
 
+
 ReactDom.render(
   <div className="page">
     <div className="posts">

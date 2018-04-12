@@ -12,6 +12,7 @@ import './styles.css';
     - Посмотри, что приходит первым аргументом в обработчик onChange.
  */
 
+
 let userName = 'По умолчанию';
 
 let mydom =
@@ -32,6 +33,7 @@ let mydom =
       />
     </div>
   </div>;
+
 
 ReactDom.render(
   mydom,

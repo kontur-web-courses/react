@@ -39,6 +39,7 @@ import './styles.css';
     - children: PropTypes.string,
  */
 
+
 // Эта строка нужна, чтобы ESLint не сильно ругался, пока не написаны PropTypes.
 /*eslint react/prop-types: "warn" */
 
@@ -54,6 +55,7 @@ function renderPost(post) {
     </div>
   );
 }
+
 
 ReactDom.render(
   <div className="page">

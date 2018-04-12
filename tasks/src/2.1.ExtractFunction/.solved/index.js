@@ -24,6 +24,7 @@ function renderPost(author, time, message) {
   )
 }
 
+
 ReactDom.render(
   <div className="page">
     {renderLot()}

@@ -29,6 +29,7 @@ InputFormRow.propTypes = {
   label: PropTypes.string.isRequired
 }
 
+
 ReactDom.render(
   <div className="form">
     <form>

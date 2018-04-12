@@ -24,6 +24,7 @@ import './styles.css';
     - Как все props, кроме нужных, элегантно пробрасываются в input.
  */
 
+
 class InputFormRow extends React.Component {
   constructor(props) {
     super(props);
@@ -46,6 +47,7 @@ class InputFormRow extends React.Component {
 InputFormRow.propTypes = {
   label: PropTypes.string.isRequired
 }
+
 
 ReactDom.render(
   <div className="form">

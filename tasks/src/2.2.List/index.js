@@ -22,6 +22,7 @@ import './styles.css';
         Используй id в качестве значения key в основном тэге поста и основном тэге автора.
  */
 
+
 const posts = [
   {
     author: 'Парень не промах',
@@ -61,6 +62,7 @@ function renderAuthors(posts) {
     </div>
   );
 }
+
 
 ReactDom.render(
   <div className="page">

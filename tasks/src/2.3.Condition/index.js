@@ -14,6 +14,7 @@ import './styles.css';
     4. Если у лота нет тэгов, то div с классом lotTags должен отсутствовать
  */
 
+
 function renderPosts(posts) {
   //<div className="emptyPosts">Нет откликов</div>
   //<div className="singlePost">Единственный отклик</div>
@@ -38,6 +39,7 @@ function renderTags(tags) {
     <div className="lotTags">{content}</div>
   );
 }
+
 
 ReactDom.render(
   <div className="page">

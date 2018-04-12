@@ -18,6 +18,7 @@ import './styles.css';
            );
  */
 
+
 ReactDom.render(
   <div className="page">
     <div className="lot">
