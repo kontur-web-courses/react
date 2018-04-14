@@ -12,7 +12,7 @@ import Toggle from './Toggle';
     Получилось много дублирующегося кода и это грустно :(
     
     На помощь могут прийти Higher Order Components (HOC) — функции вида Component → Component.
-    Используя HOC можно создавать новые улучшенные компоненты из обычных:
+    Используя HOC, можно создавать новые улучшенные компоненты из обычных:
         const EnhancedComponent = enchance(JustComponent); // enchance — это HOC
 
     HOC не получится использовать с элементами, например с input,

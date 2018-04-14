@@ -59,7 +59,8 @@ ReactDom.render(
     - В начале файла нужно импортировать PropTypes
     - MyComponent.propTypes = {
         a: PropTypes.number.isRequired,
-        b: PropTypes.string
+        b: PropTypes.string,
+        onFire: PropTypes.func
       }
    
     Подсказки к 3:
