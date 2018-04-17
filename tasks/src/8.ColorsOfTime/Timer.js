@@ -8,9 +8,9 @@ export default class Timer {
     this.handlers.push(handler);
     if (!this.tickInterval) {
       this.tickInterval = setInterval(() => {
-        const time = new Date();
+        const currentTime = new Date();
         for (const handler of this.handlers) {
-          handler(time);
+          handler(currentTime);
         }
       }, 1000);
     }

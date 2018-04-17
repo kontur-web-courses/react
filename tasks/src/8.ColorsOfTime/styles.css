@@ -40,32 +40,42 @@ h3 {
 }
 
 .blue {
-  color: blue;
+  color: hsl(240, 100%, 30%);
+}
+
+.blueBack {
+  background-color: hsl(240, 70%, 90%);
 }
 
 .red {
-  color: red;
+  color: hsl(0, 100%, 30%);
+}
+
+.redBack {
+  background-color: hsl(0, 70%, 90%);
 }
 
 .green {
-  color: green;
+  color: hsl(120, 100%, 30%);
 }
 
-.actionButton {
-  background: linear-gradient(#2899ea, #167ac1);
-  color: #fff;
+.greenBack {
+  background-color: hsl(120, 70%, 90%);
+}
+
+.button {
   height: 34px;
   border-radius: 2px 2px 2px 2px;
   padding: 0 15px;
-  border: 0;
+  border: solid 2px;
 }
 
-.actionButton:hover {
-  background: linear-gradient(#0087d5, #167ac1);
+.button:hover {
   cursor: pointer;
 }
 
-.buttonContainer {
-  margin-top: 20px;
+.block {
+  margin-top: 30px;
   text-align: center;
+  margin-bottom: 30px;
 }

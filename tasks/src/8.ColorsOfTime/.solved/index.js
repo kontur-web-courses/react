@@ -101,6 +101,7 @@ class AfterChangeColor extends React.PureComponent {
 
 class Card extends React.Component {
   render() {
+    registerRenderForDebug();
     const { title, timezone, color } = this.props;
     return (
       <div className="card">
@@ -121,8 +122,13 @@ class Card extends React.Component {
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   timezone: PropTypes.number,
+}
+
+
+function registerRenderForDebug() {
+  console.log(`render at ${new Date().toLocaleTimeString()}`);
 }
 
 
