@@ -108,12 +108,18 @@ class Bottom extends React.PureComponent {
       <div className="block">
         <ChangeThemeContext.Consumer>
           {dispatchChangeTheme => (
-            <ThemedButton value="← цвет" onClick={() => dispatchChangeTheme('prev')} />
+            <ThemedButton
+              value="← цвет"
+              onClick={() => dispatchChangeTheme('prev')}
+            />
           )}
         </ChangeThemeContext.Consumer>
         <ChangeThemeContext.Consumer>
           {dispatchChangeTheme => (
-            <ThemedButton value="цвет →" onClick={() => dispatchChangeTheme('next')} />
+            <ThemedButton
+              value="цвет →"
+              onClick={() => dispatchChangeTheme('next')}
+            />
           )}
         </ChangeThemeContext.Consumer>
       </div>

@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-
 export default function Button({ value, theme, onClick }) {
   return (
     <input

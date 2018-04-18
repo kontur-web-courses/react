@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-
 /**
     InputFormRow позволяет клепать формы еще быстрее, чем раньше!
     Количество дублирования кода уменьшается, а еще благодаря нему
@@ -14,7 +13,6 @@ import './styles.css';
     Обрати внимание:
     - Как все props, кроме нужных, элегантно пробрасываются в input.
  */
-
 
 class InputFormRow extends React.Component {
   constructor(props) {
@@ -31,33 +29,27 @@ class InputFormRow extends React.Component {
     );
   }
 
-  handleClick = () => {
-  }
+  handleClick = () => {};
 }
 
 InputFormRow.propTypes = {
   label: PropTypes.string.isRequired
-}
-
+};
 
 ReactDom.render(
   <div className="form">
     <form>
-      <InputFormRow label="Фамилия" type="text" value="Иванов" />
-      <InputFormRow label="Имя" type="text" value="Иван" />
-      <InputFormRow label="Отчество" type="text" value="Иванович" />
-      <InputFormRow label="Вегетарианец" type="checkbox" checked />
+      <InputFormRow label="Фамилия" type="text" defaultValue="Иванов" />
+      <InputFormRow label="Имя" type="text" defaultValue="Иван" />
+      <InputFormRow label="Отчество" type="text" defaultValue="Иванович" />
+      <InputFormRow label="Вегетарианец" type="checkbox" defaultChecked />
     </form>
     <div className="saveContainer">
-      <input
-        type="submit"
-        className="actionButton"
-        value="Сохранить"
-      />
+      <input type="submit" className="actionButton" value="Сохранить" />
     </div>
   </div>,
-  document.getElementById('app'));
-
+  document.getElementById('app')
+);
 
 /**
     Подсказки:

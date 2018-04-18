@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import '../styles.css';
 
-
 ReactDom.render(
   <form className="form">
     <h1>Добавление отзыва</h1>
@@ -29,7 +28,7 @@ ReactDom.render(
         <div className="caption">
           <label htmlFor="comment">Отзыв</label>
         </div>
-        <textarea id="comment" cols="40"></textarea>
+        <textarea id="comment" cols="40" />
       </div>
       <div className="row">
         <div className="caption">
@@ -38,7 +37,10 @@ ReactDom.render(
         <input id="agreement" type="checkbox" defaultChecked />
       </div>
       <br />
-      <div className="row" style={{ marginTop: "10px", width: "400px", textAlign: "center" }}>
+      <div
+        className="row"
+        style={{ marginTop: '10px', width: '400px', textAlign: 'center' }}
+      >
         <input type="button" className="button" defaultValue="Отправить" />
       </div>
     </div>

@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-
 export default function TimeDisplay({ time, color }) {
   return (
     <div className={`time ${color || ''}`}>
@@ -15,4 +14,4 @@ export default function TimeDisplay({ time, color }) {
 TimeDisplay.propTypes = {
   time: PropTypes.object,
   color: PropTypes.string
-}
+};

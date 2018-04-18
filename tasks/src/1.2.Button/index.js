@@ -2,27 +2,20 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import './styles.css';
 
-
 /**
     Напиши обработчик нажатия на кнопку.
     При нажатии должно выводиться диалоговое окно с сообщением «Отправлено».
  */
 
-
 ReactDom.render(
   <div className="root">
     <div className="form">
-      <div style={{ marginBottom: "10px" }}>Нажми отправить</div>
-      <input
-        type="button"
-        className="button"
-        value="Отправить"
-      />
+      <div style={{ marginBottom: '10px' }}>Нажми отправить</div>
+      <input type="button" className="button" value="Отправить" />
     </div>
   </div>,
   document.getElementById('app')
 );
-
 
 /**
     Подсказки:

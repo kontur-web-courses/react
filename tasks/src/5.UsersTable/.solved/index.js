@@ -6,7 +6,6 @@ import EditUserForm from '../EditUserForm';
 import * as helpers from '../helpers';
 import defaultUsers from '../defaultUsers';
 
-
 /**
     Проблемы в исходной версии.
 
@@ -20,7 +19,6 @@ import defaultUsers from '../defaultUsers';
                 потому что редактирование невидимых полей не должно приводить к рендерингу.
                 Заметь, что shouldComponentUpdate нельзя опредилить у PureComponent.
  */
-
 
 let generation = 1;
 let generationEvents = 1;
@@ -39,7 +37,7 @@ class Users extends React.Component {
     super();
     this.state = {
       users: defaultUsers,
-      editingUser: null,
+      editingUser: null
     };
   }
 
@@ -47,8 +45,14 @@ class Users extends React.Component {
     const { users, editingUser } = this.state;
     return (
       <div className="root">
-        {editingUser && <EditUserForm user={editingUser} onSave={this.handleSaveUser} />}
-        <UserTable users={users} onEditUser={this.handleEditUser} onAddUser={this.handleAddUser} />
+        {editingUser && (
+          <EditUserForm user={editingUser} onSave={this.handleSaveUser} />
+        )}
+        <UserTable
+          users={users}
+          onEditUser={this.handleEditUser}
+          onAddUser={this.handleAddUser}
+        />
       </div>
     );
   }
@@ -61,22 +65,21 @@ class Users extends React.Component {
     });
   };
 
-  handleEditUser = (user) => {
+  handleEditUser = user => {
     updateGeneration();
     this.setState({
       editingUser: user
     });
-  }
+  };
 
-  handleSaveUser = (user) => {
+  handleSaveUser = user => {
     updateGeneration();
     this.setState({
       editingUser: null,
-      users: this.state.users.map(u => u.id == user.id ? user : u)
+      users: this.state.users.map(u => (u.id == user.id ? user : u))
     });
   };
 }
-
 
 class UserTable extends React.PureComponent {
   componentDidMount() {
@@ -84,11 +87,11 @@ class UserTable extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    logEvent('UserTable\t\t will unmount')
+    logEvent('UserTable\t\t will unmount');
   }
 
   render() {
-    logEvent('UserTable\t\t render')
+    logEvent('UserTable\t\t render');
     const { users, onEditUser, onAddUser } = this.props;
     return (
       <div className="table">
@@ -122,13 +125,12 @@ class UserTable extends React.PureComponent {
 UserTable.propTypes = {
   users: PropTypes.array,
   onEditUser: PropTypes.func,
-  onAddUser: PropTypes.func,
+  onAddUser: PropTypes.func
 };
-
 
 class UserTableRow extends React.Component {
   componentDidMount() {
-    logEvent('UserTableRow\t did mount with id=' + this.props.user.id)
+    logEvent('UserTableRow\t did mount with id=' + this.props.user.id);
   }
 
   componentWillUnmount() {
@@ -141,15 +143,18 @@ class UserTableRow extends React.Component {
     }
     const prevUser = this.props.user;
     const nextUser = nextProps.user;
-    return prevUser.surname !== nextUser.surname
-      || prevUser.surname !== nextUser.surname
-      || (prevUser.dateOfBirth !== nextUser.dateOfBirth
-        && helpers.calculateAge(prevUser.dateOfBirth) !== helpers.calculateAge(nextUser.dateOfBirth));
+    return (
+      prevUser.surname !== nextUser.surname ||
+      prevUser.surname !== nextUser.surname ||
+      (prevUser.dateOfBirth !== nextUser.dateOfBirth &&
+        helpers.calculateAge(prevUser.dateOfBirth) !==
+          helpers.calculateAge(nextUser.dateOfBirth))
+    );
   }
 
   render() {
     const { user } = this.props;
-    logEvent('UserTableRow\t render with id=' + user.id)
+    logEvent('UserTableRow\t render with id=' + user.id);
     return (
       <tr>
         <td>{user.surname}</td>
@@ -169,13 +174,12 @@ class UserTableRow extends React.Component {
 
   handleEditUser = () => {
     this.props.onEditUser(this.props.user);
-  }
+  };
 }
 
 UserTableRow.propTypes = {
   user: PropTypes.object,
-  onEditUser: PropTypes.func,
+  onEditUser: PropTypes.func
 };
-
 
 ReactDom.render(<Users />, document.getElementById('app'));

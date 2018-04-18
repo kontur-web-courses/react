@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 
-
 // Часто «улучшаемый» компонент называют WrappedComponent.
 // Первая прописная буква подчеркивает, что это компонент.
 function enchance(WrappedComponent) {
@@ -24,12 +23,13 @@ function enchance(WrappedComponent) {
 
   Enchanced.propTypes = {
     value1: PropTypes.any,
-    value2: PropTypes.any,
-  }
+    value2: PropTypes.any
+  };
 
   // Заданное displayName делает отладку удобнее.
   // В частности, это имя будет отображаться в Chrome Developer Tools на вкладке React.
-  const wrappedName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  const wrappedName =
+    WrappedComponent.displayName || WrappedComponent.name || 'Component';
   Enchanced.displayName = `Enchanced(${wrappedName})`;
 
   //Этот компонент-обертка возвращается в качестве результата работы HOC.

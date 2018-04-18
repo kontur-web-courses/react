@@ -6,7 +6,6 @@ import './styles.css';
 import * as helpers from './helpers';
 import defaultUsers from './defaultUsers';
 
-
 /**
     Есть таблица гостей и форма для добавления гостя. В таблице отображена только основная информация.
     Всё работает, но неэффективно — при любом действии пользователя происходит множество лишних операций внутри React.
@@ -37,7 +36,6 @@ import defaultUsers from './defaultUsers';
         const { a, b } = this.state;
  */
 
-
 let generation = 1;
 let generationEvents = 1;
 
@@ -50,13 +48,12 @@ function logEvent(msg) {
   console.log(` ${generation}.${generationEvents++}\t${msg}`);
 }
 
-
 class Users extends React.Component {
   constructor() {
     super();
     this.state = {
       users: defaultUsers,
-      editingUser: null,
+      editingUser: null
     };
   }
 
@@ -66,13 +63,21 @@ class Users extends React.Component {
       return (
         <div className="root">
           <EditUserForm user={editingUser} onSave={this.handleSaveUser} />
-          <UserTable users={users} onEditUser={this.handleEditUser} onAddUser={this.handleAddUser} />
+          <UserTable
+            users={users}
+            onEditUser={this.handleEditUser}
+            onAddUser={this.handleAddUser}
+          />
         </div>
-      )
+      );
     }
     return (
       <div className="root">
-        <UserTable users={users} onEditUser={this.handleEditUser} onAddUser={this.handleAddUser} />
+        <UserTable
+          users={users}
+          onEditUser={this.handleEditUser}
+          onAddUser={this.handleAddUser}
+        />
       </div>
     );
   }
@@ -85,18 +90,18 @@ class Users extends React.Component {
     });
   };
 
-  handleEditUser = (user) => {
+  handleEditUser = user => {
     updateGeneration();
     this.setState({
       editingUser: user
     });
-  }
+  };
 
-  handleSaveUser = (user) => {
+  handleSaveUser = user => {
     updateGeneration();
     this.setState({
       editingUser: null,
-      users: this.state.users.map(u => u.id == user.id ? user : u)
+      users: this.state.users.map(u => (u.id == user.id ? user : u))
     });
   };
 }
@@ -107,11 +112,11 @@ class UserTable extends React.Component {
   }
 
   componentWillUnmount() {
-    logEvent('UserTable\t\t will unmount')
+    logEvent('UserTable\t\t will unmount');
   }
 
   render() {
-    logEvent('UserTable\t\t render')
+    logEvent('UserTable\t\t render');
     const { users, onEditUser, onAddUser } = this.props;
     return (
       <div className="table">
@@ -145,13 +150,12 @@ class UserTable extends React.Component {
 UserTable.propTypes = {
   users: PropTypes.array,
   onEditUser: PropTypes.func,
-  onAddUser: PropTypes.func,
+  onAddUser: PropTypes.func
 };
-
 
 class UserTableRow extends React.Component {
   componentDidMount() {
-    logEvent('UserTableRow\t did mount with id=' + this.props.user.id)
+    logEvent('UserTableRow\t did mount with id=' + this.props.user.id);
   }
 
   componentWillUnmount() {
@@ -160,7 +164,7 @@ class UserTableRow extends React.Component {
 
   render() {
     const { user } = this.props;
-    logEvent('UserTableRow\t render with id=' + user.id)
+    logEvent('UserTableRow\t render with id=' + user.id);
     return (
       <tr>
         <td>{user.surname}</td>
@@ -180,17 +184,15 @@ class UserTableRow extends React.Component {
 
   handleEditUser = () => {
     this.props.onEditUser(this.props.user);
-  }
+  };
 }
 
 UserTableRow.propTypes = {
   user: PropTypes.object,
-  onEditUser: PropTypes.func,
+  onEditUser: PropTypes.func
 };
 
-
 ReactDom.render(<Users />, document.getElementById('app'));
-
 
 /**
     Подсказки:

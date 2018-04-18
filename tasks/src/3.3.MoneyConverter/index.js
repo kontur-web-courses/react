@@ -3,16 +3,13 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-
 /**
     Допиши конвертер валют.
     - Если пользователь ввел значение в рублях, то количество евро обновляется согласно курсу
     - Если пользователь ввел значение в евро, то количество рублей обновляется согласно курсу
  */
 
-
 const RUBLES_IN_ONE_EURO = 70;
-
 
 class MoneyConverter extends React.Component {
   render() {
@@ -33,7 +30,6 @@ class MoneyConverter extends React.Component {
   }
 }
 
-
 class Money extends React.Component {
   constructor(props) {
     super(props);
@@ -44,29 +40,29 @@ class Money extends React.Component {
 
   render() {
     return (
-      <input type="text" value={this.state.value} onChange={this.handleChangeValue} />
+      <input
+        type="text"
+        value={this.state.value}
+        onChange={this.handleChangeValue}
+      />
     );
   }
 
   handleChangeValue = event => {
-    const value = extractNumber(event.target.value);
+    const value = extractNumberString(event.target.value);
     this.setState({ value });
-    this.props.onChange(value);
-  }
+  };
 }
 
-Money.propTypes = {
-  onChange: PropTypes.func
+Money.propTypes = {};
+
+function extractNumberString(value) {
+  const str = value.replace(/^0+/g, '').replace(/[^\.0-9]/g, '');
+  const parts = str.split('.');
+  return parts.length > 2 ? parts[0] + '.' + parts.slice(1).join('') : str;
 }
-
-
-function extractNumber(value) {
-  return +(value.replace(/^0+/g, '').replace(/[^0-9]/g, ''));
-}
-
 
 ReactDom.render(<MoneyConverter />, document.getElementById('app'));
-
 
 /**
     Подсказки:

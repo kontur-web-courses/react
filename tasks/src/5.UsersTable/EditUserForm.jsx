@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import * as helpers from './helpers';
 
-
 export default class EditUserForm extends React.Component {
   constructor() {
     super();
@@ -37,7 +36,9 @@ export default class EditUserForm extends React.Component {
             <input
               type="text"
               value={user.firstName || ''}
-              onChange={e => this.handleUserChange({ firstName: e.target.value })}
+              onChange={e =>
+                this.handleUserChange({ firstName: e.target.value })
+              }
             />
           </div>
           <div className="row">
@@ -45,7 +46,9 @@ export default class EditUserForm extends React.Component {
             <input
               type="text"
               value={user.patronymic || ''}
-              onChange={e => this.handleUserChange({ patronymic: e.target.value })}
+              onChange={e =>
+                this.handleUserChange({ patronymic: e.target.value })
+              }
             />
           </div>
           <div className="row">
@@ -53,7 +56,9 @@ export default class EditUserForm extends React.Component {
             <input
               type="date"
               value={helpers.formatDate(user.dateOfBirth)}
-              onChange={e => this.handleUserChange({ dateOfBirth: new Date(e.target.value) })}
+              onChange={e =>
+                this.handleUserChange({ dateOfBirth: new Date(e.target.value) })
+              }
             />
           </div>
           <div className="row">
@@ -61,7 +66,9 @@ export default class EditUserForm extends React.Component {
             <input
               type="checkbox"
               checked={user.isVegetarian}
-              onChange={e => this.handleUserChange({ isVegetarian: e.target.checked })}
+              onChange={e =>
+                this.handleUserChange({ isVegetarian: e.target.checked })
+              }
             />
           </div>
           <div className="row">
@@ -89,11 +96,11 @@ export default class EditUserForm extends React.Component {
     this.setState({
       user: { ...this.state.user, ...change }
     });
-  }
+  };
 
   handleSave = () => {
-    this.props.onSave(this.state.user)
-  }
+    this.props.onSave(this.state.user);
+  };
 }
 
 EditUserForm.propTypes = {

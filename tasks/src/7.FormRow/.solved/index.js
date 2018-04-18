@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import '../styles.css';
 import Toggle from '../Toggle';
 
-
 function createFormRow(WrappedComponent) {
   class FormRow extends React.Component {
     constructor(props) {
@@ -25,9 +24,10 @@ function createFormRow(WrappedComponent) {
   FormRow.propTypes = {
     label: PropTypes.string.isRequired,
     forwardedRef: PropTypes.object
-  }
+  };
 
-  const wrappedName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  const wrappedName =
+    WrappedComponent.displayName || WrappedComponent.name || 'Component';
   FormRow.displayName = `FormRow(${wrappedName})`;
 
   const forward = (props, ref) => <FormRow {...props} forwardedRef={ref} />;
@@ -35,10 +35,8 @@ function createFormRow(WrappedComponent) {
   return React.forwardRef(forward);
 }
 
-
 const InputFormRow = createFormRow(Input);
 const ToggleFormRow = createFormRow(Toggle);
-
 
 class Form extends React.Component {
   constructor() {
@@ -47,7 +45,7 @@ class Form extends React.Component {
     this.firstRowRef = React.createRef();
 
     this.state = {
-      opened: false,
+      opened: false
     };
   }
 
@@ -71,7 +69,7 @@ class Form extends React.Component {
           onClick={this.handleOpen}
         />
       </div>
-    )
+    );
   }
 
   componentDidMount() {
@@ -107,13 +105,13 @@ class Form extends React.Component {
     this.setState({
       opened: true
     });
-  }
+  };
 
   handleSave = () => {
     this.setState({
       opened: false
     });
-  }
+  };
 
   setFocusOnOpen = () => {
     if (this.state.opened) {
@@ -121,12 +119,11 @@ class Form extends React.Component {
       // пока this.firstRowRef не устанавливается корректно.
       this.firstRowRef.current.focus && this.firstRowRef.current.focus();
     }
-  }
+  };
 }
 
 Form.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.object
 };
-
 
 ReactDom.render(<Form />, document.getElementById('app'));

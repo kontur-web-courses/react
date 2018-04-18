@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import ../styles.css';
-
+import '../styles.css';
 
 const posts = [
   {
@@ -21,14 +20,15 @@ const posts = [
     author: 'Скупец',
     time: 'вчера',
     message: 'Цену-то загнули!'
-  },
+  }
 ];
 
 function renderPost(post) {
   return (
     <div key={post.id} className="post">
       <div className="postHeader">
-        <span className="postAuthor">{post.author}</span><br />
+        <span className="postAuthor">{post.author}</span>
+        <br />
         <span className="postTime">{post.time}</span>
       </div>
       <div className="postMessage">{post.message}</div>
@@ -39,17 +39,15 @@ function renderPost(post) {
 function renderAuthors(posts) {
   const authors = [];
   for (const post of posts) {
-    authors.push(<span key={post.id}>{post.author}</span>)
+    authors.push(<span key={post.id}>{post.author}</span>);
   }
-  return (<div className="authors">{authors}</div>);
+  return <div className="authors">{authors}</div>;
 }
-
 
 ReactDom.render(
   <div className="page">
-    <div className="posts">
-      {posts.map(post => renderPost(post))}
-    </div>
+    <div className="posts">{posts.map(post => renderPost(post))}</div>
     {renderAuthors(posts)}
   </div>,
-  document.getElementById('app'));
+  document.getElementById('app')
+);

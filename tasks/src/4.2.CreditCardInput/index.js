@@ -6,7 +6,6 @@ import './styles.css';
 import Api from './Api';
 import CreditCardNumber from './CreditCardNumber';
 
-
 /**
     CreditCardInput не просто показывает переданное value,
     а использует внутреннее состояние для форматирования ввода пользователя.
@@ -19,7 +18,6 @@ import CreditCardNumber from './CreditCardNumber';
     (наш «сервер» всегда отвечает 1234 5678 9012 3456).
     Иначе значение с сервера нужно проигнорировать.
  */
-
 
 class CreditCardInputWithRestore extends React.Component {
   constructor() {
@@ -48,7 +46,6 @@ class CreditCardInputWithRestore extends React.Component {
   }
 }
 
-
 class CreditCardInput extends React.Component {
   constructor(props) {
     super(props);
@@ -75,7 +72,7 @@ class CreditCardInput extends React.Component {
 
   handleFocus = () => {
     this.setState({ value: '' });
-  }
+  };
 
   handleChange = event => {
     const formattedValue = CreditCardNumber.format(event.target.value);
@@ -92,18 +89,14 @@ class CreditCardInput extends React.Component {
 CreditCardInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func
-}
-
+};
 
 ReactDom.render(<CreditCardInputWithRestore />, document.getElementById('app'));
-
 
 /**
     Подсказки:
     - static getDerivedStateFromProps(nextProps, prevState) вызывается сразу после вызова конструктора,
       а также при получении компонентом измененных props. Он тебе поможет. Из него нужно вернуть новый state,
       полученный умным объединением старого состояния и новых свойств.
-    - componentWillReceiveProps(nextProps) вызывается при получении компонентом измененных props,
-      но React 16 — последняя версия, где он будет доступен — останется только UNSAFE_componentWillReceiveProps.
     - Даже при задании getDerivedStateFromProps состояние должно инициализироваться в конструкторе.
  */

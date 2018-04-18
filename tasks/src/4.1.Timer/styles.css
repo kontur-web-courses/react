@@ -11,6 +11,12 @@ body {
   background: #b9b7b1;
 }
 
+.page {
+  margin: auto;
+  width: 300px;
+  text-align: center;
+}
+
 .time {
   position: relative;
   left: 50%;
@@ -22,4 +28,17 @@ body {
   border-top: 3px solid #e54b6b;
   background: #fff;
   color: #707070;
+}
+
+.button {
+  width: 100px;
+  height: 34px;
+  border-radius: 2px 2px 2px 2px;
+  padding: 0 15px;
+  margin: 5px;
+  border: solid 2px;
+}
+
+.button:hover {
+  cursor: pointer;
 }

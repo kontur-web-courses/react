@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import './styles.css';
 import './toggle.css';
 
-
 /**
     Допиши компонент Toggle.
     Пусть флаг хранится во внутреннем состоянии,
@@ -18,7 +17,10 @@ class Toggle extends React.Component {
   render() {
     const checked = true;
     return (
-      <span className={'container' + (checked ? ' isChecked' : '')} onClick={this.handleClick}>
+      <span
+        className={'container' + (checked ? ' isChecked' : '')}
+        onClick={this.handleClick}
+      >
         <span className="handle">
           <div className="bg" />
           <span className="hinge" />
@@ -27,21 +29,20 @@ class Toggle extends React.Component {
     );
   }
 
-  handleClick = () => {
-  };
+  handleClick = () => {};
 }
 
 Toggle.propTypes = {
   onChange: PropTypes.func
 };
 
-
 ReactDom.render(
   <div className="page">
-    <Toggle onChange={value => console.log(value)} /> Использовать умные компоненты
+    <Toggle onChange={value => console.log(value)} /> Использовать умные
+    компоненты
   </div>,
-  document.getElementById('app'));
-
+  document.getElementById('app')
+);
 
 /**
     Подсказки:

@@ -5,7 +5,6 @@ import '../styles.css';
 import Api from '../Api';
 import CreditCardNumber from '../CreditCardNumber';
 
-
 class CreditCardInputWithRestore extends React.Component {
   constructor() {
     super();
@@ -32,7 +31,6 @@ class CreditCardInputWithRestore extends React.Component {
     this.setState({ value: value });
   }
 }
-
 
 class CreditCardInput extends React.Component {
   constructor(props) {
@@ -67,7 +65,7 @@ class CreditCardInput extends React.Component {
 
   handleFocus = () => {
     this.setState({ value: '' });
-  }
+  };
 
   handleChange = event => {
     const formattedValue = CreditCardNumber.format(event.target.value);
@@ -84,7 +82,6 @@ class CreditCardInput extends React.Component {
 CreditCardInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func
-}
-
+};
 
 ReactDom.render(<CreditCardInputWithRestore />, document.getElementById('app'));

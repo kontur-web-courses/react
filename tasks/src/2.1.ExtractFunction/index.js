@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import './styles.css';
 
-
 /**
      Выдели метод отрисовки лота (renderLot), метод отрисовки поста (renderPost) и используй их.
  */
-
 
 ReactDom.render(
   <div className="page">
@@ -17,16 +15,16 @@ ReactDom.render(
     <div className="posts">
       <div className="post">
         <div className="postHeader">
-          <span className="postAuthor">Парень не промах</span><br />
+          <span className="postAuthor">Парень не промах</span>
+          <br />
           <span className="postTime">2 часа назад</span>
         </div>
-        <div className="postMessage">
-          Попробую с удовольствием ;)
-        </div>
+        <div className="postMessage">Попробую с удовольствием ;)</div>
       </div>
       <div className="post">
         <div className="postHeader">
-          <span className="postAuthor">Милая девушка</span><br />
+          <span className="postAuthor">Милая девушка</span>
+          <br />
           <span className="postTime">3 часа назад</span>
         </div>
         <div className="postMessage">
@@ -35,13 +33,13 @@ ReactDom.render(
       </div>
     </div>
   </div>,
-  document.getElementById('app'));
-
+  document.getElementById('app')
+);
 
 /**
      Подсказки:
      - Чтобы вставить какое-то значение из JavaScript в верстку используй фигурные скобки:
-       <div className={required ? 'star' : ''}>{surname + ' ' + name}</div>
+       <div className={'star' + ' ' + 'person'}>{surname + ' ' + name}</div>
      - Воспринимай тэг верстки как литерал, описывающий значение некоторого типа данных.
          - Это значение можно положить в переменную или вернуть:
            const label = <span>Надпись</span>;
@@ -49,4 +47,5 @@ ReactDom.render(
            return (
              <span>Надпись</span>
            );
+     - Используй автоформатирование кода. Например, в Visual Studio Code оно вызывается сочетанием Control+Shift+F
  */

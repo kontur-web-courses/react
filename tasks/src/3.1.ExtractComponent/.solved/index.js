@@ -3,12 +3,12 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-
 function Post(props) {
   return (
     <div className="post">
       <div className="postHeader">
-        <span className="postAuthor">{props.author}</span><br />
+        <span className="postAuthor">{props.author}</span>
+        <br />
         <span className="postTime">{props.time}</span>
       </div>
       <div className="postMessage">{props.children}</div>
@@ -19,13 +19,12 @@ function Post(props) {
 Post.propTypes = {
   author: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
-  children: PropTypes.string,
-}
+  children: PropTypes.node
+};
 
 Post.defaultProps = {
   author: '<Неизвестный автор>'
-}
-
+};
 
 ReactDom.render(
   <div className="page">
@@ -35,4 +34,5 @@ ReactDom.render(
       </Post>
     </div>
   </div>,
-  document.getElementById('app'));
+  document.getElementById('app')
+);

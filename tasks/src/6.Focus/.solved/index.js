@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import '../styles.css';
 
-
 class InputFormRow extends React.Component {
   constructor(props) {
     super(props);
@@ -22,28 +21,24 @@ class InputFormRow extends React.Component {
 
   handleClick = () => {
     this.inputRef.current.focus();
-  }
+  };
 }
 
 InputFormRow.propTypes = {
   label: PropTypes.string.isRequired
-}
-
+};
 
 ReactDom.render(
   <div className="form">
     <form>
-      <InputFormRow label="Фамилия" type="text" value="Иванов" />
-      <InputFormRow label="Имя" type="text" value="Иван" />
-      <InputFormRow label="Отчество" type="text" value="Иванович" />
-      <InputFormRow label="Вегетарианец" type="checkbox" checked />
+      <InputFormRow label="Фамилия" type="text" defaultValue="Иванов" />
+      <InputFormRow label="Имя" type="text" defaultValue="Иван" />
+      <InputFormRow label="Отчество" type="text" defaultValue="Иванович" />
+      <InputFormRow label="Вегетарианец" type="checkbox" defaultChecked />
     </form>
     <div className="saveContainer">
-      <input
-        type="submit"
-        className="actionButton"
-        value="Сохранить"
-      />
+      <input type="submit" className="actionButton" value="Сохранить" />
     </div>
   </div>,
-  document.getElementById('app'));
+  document.getElementById('app')
+);
