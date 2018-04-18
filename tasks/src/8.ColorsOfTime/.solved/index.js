@@ -3,20 +3,22 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import '../styles.css';
 import * as helpers from '../helpers';
+import * as themes from '../themes';
 import TimeDisplay from '../TimeDisplay';
 import Timer from '../Timer';
 
+const CurrentTimeContext = React.createContext();
+const ThemeContext = themes.Context;
+const ChangeThemeContext = React.createContext();
 
-const TimeContext = React.createContext();
-const ColorContext = React.createContext();
-
+const ThemedButton = themes.withTheme(Button);
 
 class ColorsOfTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: new Date(),
-      color: 'red'
+      currentTime: null,
+      theme: themes.red
     };
   }
 
@@ -29,108 +31,147 @@ class ColorsOfTime extends React.Component {
   }
 
   render() {
+    const { currentTime, theme } = this.state;
     return (
-      <div className="page">
-        <TimeContext.Provider value={this.state.time}>
-          <ColorContext.Provider value={this.state.color}>
-            <h1>Цвета времени</h1>
-            <BeforeChangeColor />
-            {this.renderChangeColor()}
-            <AfterChangeColor />
-          </ColorContext.Provider>
-        </TimeContext.Provider>
-      </div>
+      <ChangeThemeContext.Provider value={this.dispatchChangeTheme}>
+        <ThemeContext.Provider value={theme}>
+          <CurrentTimeContext.Provider value={currentTime}>
+            <div className="page">
+              <h1>Цвета времени</h1>
+              <Top />
+              <Middle />
+              <Bottom />
+            </div>
+          </CurrentTimeContext.Provider>
+        </ThemeContext.Provider>
+      </ChangeThemeContext.Provider>
     );
   }
 
-  renderChangeColor() {
-    return (
-      <div className="buttonContainer">
-        <input
-          className="actionButton"
-          type="button"
-          value="Сменить цвет"
-          onClick={this.handleNextColor}
-        />
-      </div>
-    );
-  }
+  handleTimerUpdated = currentTime => {
+    this.setState({ currentTime: currentTime });
+  };
 
-  handleTimerUpdated = time => {
-    this.setState({ time: time });
-  }
-
-  handleNextColor = () => {
-    const colors = ['red', 'green', 'blue'];
-    const nextColor = colors[(colors.indexOf(this.state.color) + 1) % colors.length];
-    this.setState({ color: nextColor });
-  }
+  dispatchChangeTheme = type => {
+    let newTheme = null;
+    switch (type) {
+      case 'prev':
+        newTheme = themes.getPrevTheme(this.state.theme);
+        break;
+      case 'next':
+        newTheme = themes.getNextTheme(this.state.theme);
+        break;
+    }
+    this.setState({ theme: newTheme });
+  };
 }
 
 ColorsOfTime.propTypes = {
   timer: PropTypes.object
-}
+};
 
-
-class BeforeChangeColor extends React.PureComponent {
+class Top extends React.PureComponent {
   render() {
+    registerRenderForDebug('Top');
     return (
-      <div>
-        <Card title="Синий Нью Йорк" timezone={-4} color="blue" />
+      <div className="block">
+        <Card title="Серый Лондон" timezone={+0} />
+        <Card title="Синий Нью-Йорк" timezone={-4} color="blue" />
         <Card title="Зеленый Париж" timezone={+2} color="green" />
         <Card title="Красный Пекин" timezone={+8} color="red" />
-        <Card title="Серый Лондон" timezone={+0} />
       </div>
-    )
+    );
   }
 }
 
+Top.propTypes = {};
 
-class AfterChangeColor extends React.PureComponent {
+class Middle extends React.PureComponent {
   render() {
     return (
-      <div>
-        <ColorContext.Consumer>
-          {color => <Card title="Цветное локальное" color={color} />}
-        </ColorContext.Consumer>
+      <div className="block">
+        <ThemeContext.Consumer>
+          {theme => (
+            <Card title="Цветное локальное" color={theme.foregroundColor} />
+          )}
+        </ThemeContext.Consumer>
       </div>
-    )
+    );
   }
 }
 
+Middle.propTypes = {};
+
+class Bottom extends React.PureComponent {
+  render() {
+    return (
+      <div className="block">
+        <ChangeThemeContext.Consumer>
+          {dispatchChangeTheme => (
+            <ThemedButton value="← цвет" onClick={() => dispatchChangeTheme('prev')} />
+          )}
+        </ChangeThemeContext.Consumer>
+        <ChangeThemeContext.Consumer>
+          {dispatchChangeTheme => (
+            <ThemedButton value="цвет →" onClick={() => dispatchChangeTheme('next')} />
+          )}
+        </ChangeThemeContext.Consumer>
+      </div>
+    );
+  }
+}
+
+Bottom.propTypes = {};
 
 class Card extends React.Component {
   render() {
-    registerRenderForDebug();
+    registerRenderForDebug('Card');
     const { title, timezone, color } = this.props;
     return (
       <div className="card">
         <h3>{title}</h3>
         <div>
-          <TimeContext.Consumer>
-            {time =>
+          <CurrentTimeContext.Consumer>
+            {currentTime => (
               <TimeDisplay
-                time={timezone ? helpers.toTimezone(time, timezone) : time}
+                time={
+                  timezone
+                    ? helpers.toTimezone(currentTime, timezone)
+                    : currentTime
+                }
                 color={color}
-              />}
-          </TimeContext.Consumer>
+              />
+            )}
+          </CurrentTimeContext.Consumer>
         </div>
       </div>
-    )
+    );
   }
 }
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
-  timezone: PropTypes.number,
+  timezone: PropTypes.number
+};
+
+function registerRenderForDebug(name) {
+  console.log(`render ${name} at ${new Date().toLocaleTimeString()}`);
 }
-
-
-function registerRenderForDebug() {
-  console.log(`render at ${new Date().toLocaleTimeString()}`);
-}
-
 
 const timer = new Timer();
 ReactDom.render(<ColorsOfTime timer={timer} />, document.getElementById('app'));
+
+/**
+    Подсказки:
+    - Создание контекста:
+      const CakeContext = React.createContext();
+    - Поставка значения:
+      <CakeContext.Provider value={cheeseCake}>
+        ...
+      </CakeContext.Provider>
+    - Потребление значения:
+      <CakeContext.Consumer>
+        {cake => <Hungry food={cake} />}
+      </CakeContext.Consumer>
+ */

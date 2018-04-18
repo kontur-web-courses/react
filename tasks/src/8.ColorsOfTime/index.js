@@ -15,30 +15,39 @@ import Timer from './Timer';
 
     Для начала разведка ситуации:
     1. Открой Developer Tools и убедись, что render в Card вызывается по 5 раз каждую секунду.
-    2. Почему render в Top вызывается каждую секунду, если Top — это PureComponent у которого в props нет currentTime?
-    3. Подумай, что нужно сделать, чтобы перенести карточку Нью-Йорка в блок Top, а кнопки смены цвета в блок Bottom.
+    2. Убедись, что render в Card вызывается при использовании кнопок смены цвета.
+    3. Почему render в Top вызывается каждую секунду, если Top — это PureComponent у которого в props нет currentTime?
+    4. Подумай, что нужно сделать, чтобы перенести карточку Нью-Йорка в блок Top, а кнопки смены цвета в блок Bottom.
     
     Отрефактори код по шагам:
     1. Создай CurrentTimeContext.
-    2. В компоненте ColorsOfTime оберни содержимое метода render в CurrentTimeContext.Provider,
-       чтобы предоставить максимально большой доступ к currentTime.
+    2. В компоненте ColorsOfTime в методе render оберни <div className="page">...</div> в CurrentTimeContext.Provider,
+       чтобы предоставить максимально большой доступ к value провайдера. В качестве value в тэге Provider задай currentTime.
     3. Используй CurrentTimeContext.Consumer, чтобы не прокидывать currentTime через свойства.
-       Тут другая стратегия: надо оборачивать в Consumer те компоненты, которым ресурс требуется.
+       Тут стратегия минимизации: надо оборачивать в Consumer только те компоненты, которым ресурс требуется.
        Потому что при обновлении значения контекста будет перерисовываться все, что внутри Consumer'ов.
     4. Не забудь убрать ненужное теперь простаскивание currentTime через параметры!
-    5. Проделай то же самое для ThemeContext:
+    5. Открой Developer Tools и посмотри, как часто вызывается render в Card с течением времени.
+       Попробуй объяснить, почему использование context привело к такому эффекту.
+    6. Проделай то же самое для ThemeContext:
        - Создай ThemeContext
        - Оберни CurrentTimeContext.Provider в ThemeContext.Provider
-       - Используй ThemeContext.Consumer для передачи темы в кнопку и в Card с цветным локальным временем
+       - Используй ThemeContext.Consumer для передачи темы в кнопки и в Card с цветным локальным временем
        - Снова приберись в коде!
-    6. Добавь ChangeThemeContext. Пусть он хранит ссылку на функцию dispatchChangeTheme.
-       Пусть кнопки смены цвета теперь создают обработчики на основе ChangeThemeContext.
+    7. Добавь ChangeThemeContext. Пусть он хранит ссылку на функцию dispatchChangeTheme.
+       Пусть кнопки смены цвета теперь создают обработчики на основе ChangeThemeContext,
+       а не получают их через onPrevTheme и onNextTheme.
        Приберись в коде.
-    7. Открой Developer Tools и посмотри, как часто вызывается render в Card с течением времени. Понажимай на кнопки смены цвета.
-       Попробуй объяснить, почему использование context привело к таким эффектам.
-    8. Перенеси Лондон в блок Top, за ним в блок Top перенеси Нью-Йорк, Париж и Пекин.
+    8. Открой Developer Tools, и убедись, перестал происходить render в Top. Объясни, почему так.
+    9. Перенеси Лондон в блок Top, за ним в блок Top перенеси Нью-Йорк, Париж и Пекин.
        А кнопки смены цвета перенеси в блок Bottom.
        Удобно ли было переносить эти компоненты сейчас?
+   10. Если контекст используется часто, можно создать специальный HOC компонент, чтобы оборачивать компоненты в Consumer.
+       Найди в themes.js Context и используй в качесте ThemeContext:
+          const ThemeContext = themes.Context;
+       Теперь ты можешь определить кнопку так:
+          const ThemedButton = themes.withTheme(Button);
+       Используй ее!
  */
 
 class ColorsOfTime extends React.Component {
@@ -122,10 +131,10 @@ class Middle extends React.PureComponent {
       <div className="block">
         <Card
           title="Цветное локальное"
-          time={currentTime}
+          currentTime={currentTime}
           color={theme.foregroundColor}
         />
-        <Card title="Серый Лондон" timezone={+0} time={currentTime} />
+        <Card title="Серый Лондон" timezone={+0} currentTime={currentTime} />
       </div>
     );
   }
@@ -144,19 +153,19 @@ class Bottom extends React.PureComponent {
         <Card
           title="Синий Нью-Йорк"
           timezone={-4}
-          time={currentTime}
+          currentTime={currentTime}
           color="blue"
         />
         <Card
           title="Зеленый Париж"
           timezone={+2}
-          time={currentTime}
+          currentTime={currentTime}
           color="green"
         />
         <Card
           title="Красный Пекин"
           timezone={+8}
-          time={currentTime}
+          currentTime={currentTime}
           color="red"
         />
       </div>
@@ -171,13 +180,15 @@ Bottom.propTypes = {
 class Card extends React.Component {
   render() {
     registerRenderForDebug('Card');
-    const { title, timezone, time, color } = this.props;
+    const { title, timezone, currentTime, color } = this.props;
     return (
       <div className="card">
         <h3>{title}</h3>
         <div>
           <TimeDisplay
-            time={timezone ? helpers.toTimezone(time, timezone) : time}
+            time={
+              timezone ? helpers.toTimezone(currentTime, timezone) : currentTime
+            }
             color={color}
           />
         </div>
@@ -190,7 +201,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
   timezone: PropTypes.number,
-  time: PropTypes.object
+  currentTime: PropTypes.object
 };
 
 function registerRenderForDebug(name) {
