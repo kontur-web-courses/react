@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 import * as helpers from './helpers';
+import * as themes from './themes';
 import Button from './Button';
 import TimeDisplay from './TimeDisplay';
 import Timer from './Timer';
@@ -12,9 +13,10 @@ import Timer from './Timer';
     прокидывая информацию о времени и настройках цвета через все компоненты.
     А все потому, что не знал про context!
 
-    Для начала открой Developer Tools и убедись, что render в Card вызывается по 5 раз каждую секунду.
-
-    Поизучай код и ответь на вопрос: что нужно сделать, чтобы перенести карточку Нью-Йорка в блок Top, а кнопку «Сменить тему» в блок Bottom.
+    Для начала разведка ситуации:
+    1. Открой Developer Tools и убедись, что render в Card вызывается по 5 раз каждую секунду.
+    2. Почему render в Top вызывается каждую секунду, если Top — это PureComponent у которого в props нет currentTime?
+    3. Подумай, что нужно сделать, чтобы перенести карточку Нью-Йорка в блок Top, а кнопки смены цвета в блок Bottom.
     
     Отрефактори код по шагам:
     1. Создай CurrentTimeContext.
@@ -29,26 +31,22 @@ import Timer from './Timer';
        - Оберни CurrentTimeContext.Provider в ThemeContext.Provider
        - Используй ThemeContext.Consumer для передачи темы в кнопку и в Card с цветным локальным временем
        - Снова приберись в коде!
-    6. Добавь ChangeThemeContext. Пусть он хранит ссылку на функцию handleNextTheme.
-       Пусть кнопка «Сменить тему» берет обработчик из ChangeThemeContext.
+    6. Добавь ChangeThemeContext. Пусть он хранит ссылку на функцию dispatchChangeTheme.
+       Пусть кнопки смены цвета теперь создают обработчики на основе ChangeThemeContext.
        Приберись в коде.
-    7. Открой Developer Tools и посмотри, как часто вызывается render в Card с течением времени. Понажимай на кнопку «Сменить тему.
+    7. Открой Developer Tools и посмотри, как часто вызывается render в Card с течением времени. Понажимай на кнопки смены цвета.
        Попробуй объяснить, почему использование context привело к таким эффектам.
     8. Перенеси Лондон в блок Top, за ним в блок Top перенеси Нью-Йорк, Париж и Пекин.
-       А кнопку «Сменить тему» перенеси в блок Bottom.
+       А кнопки смены цвета перенеси в блок Bottom.
        Удобно ли было переносить эти компоненты сейчас?
  */
-
-const redTheme = { foregroundColor: 'red', backgroundColor: 'redBack' };
-const greenTheme = { foregroundColor: 'green', backgroundColor: 'greenBack' };
-const blueTheme = { foregroundColor: 'blue', backgroundColor: 'blueBack' };
 
 class ColorsOfTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentTime: null,
-      theme: redTheme
+      theme: themes.red
     };
   }
 
@@ -65,7 +63,11 @@ class ColorsOfTime extends React.Component {
     return (
       <div className="page">
         <h1>Цвета времени</h1>
-        <Top theme={theme} onChangeTheme={this.handleNextTheme} />
+        <Top
+          theme={theme}
+          onPrevTheme={() => this.dispatchChangeTheme('prev')}
+          onNextTheme={() => this.dispatchChangeTheme('next')}
+        />
         <Middle currentTime={currentTime} theme={theme} />
         <Bottom currentTime={currentTime} />
       </div>
@@ -76,11 +78,17 @@ class ColorsOfTime extends React.Component {
     this.setState({ currentTime: currentTime });
   };
 
-  handleNextTheme = () => {
-    const themes = [redTheme, greenTheme, blueTheme];
-    const nextTheme =
-      themes[(themes.indexOf(this.state.theme) + 1) % themes.length];
-    this.setState({ theme: nextTheme });
+  dispatchChangeTheme = type => {
+    let newTheme = null;
+    switch (type) {
+      case 'prev':
+        newTheme = themes.getPrevTheme(this.state.theme);
+        break;
+      case 'next':
+        newTheme = themes.getNextTheme(this.state.theme);
+        break;
+    }
+    this.setState({ theme: newTheme });
   };
 }
 
@@ -88,12 +96,14 @@ ColorsOfTime.propTypes = {
   timer: PropTypes.object
 };
 
-class Top extends React.Component {
+class Top extends React.PureComponent {
   render() {
-    const { theme, onChangeTheme } = this.props;
+    registerRenderForDebug('Top');
+    const { theme, onPrevTheme, onNextTheme } = this.props;
     return (
       <div className="block">
-        <Button value="Сменить тему" theme={theme} onClick={onChangeTheme} />
+        <Button value="← цвет" theme={theme} onClick={onPrevTheme} />
+        <Button value="цвет →" theme={theme} onClick={onNextTheme} />
       </div>
     );
   }
@@ -101,10 +111,11 @@ class Top extends React.Component {
 
 Top.propTypes = {
   theme: PropTypes.object.isRequired,
-  onChangeTheme: PropTypes.func.isRequired
+  onPrevTheme: PropTypes.func,
+  onNextTheme: PropTypes.func
 };
 
-class Middle extends React.Component {
+class Middle extends React.PureComponent {
   render() {
     const { currentTime, theme } = this.props;
     return (
@@ -125,7 +136,7 @@ Middle.propTypes = {
   currentTime: PropTypes.object
 };
 
-class Bottom extends React.Component {
+class Bottom extends React.PureComponent {
   render() {
     const { currentTime } = this.props;
     return (
@@ -159,7 +170,7 @@ Bottom.propTypes = {
 
 class Card extends React.Component {
   render() {
-    registerRenderForDebug();
+    registerRenderForDebug('Card');
     const { title, timezone, time, color } = this.props;
     return (
       <div className="card">
@@ -182,8 +193,8 @@ Card.propTypes = {
   time: PropTypes.object
 };
 
-function registerRenderForDebug() {
-  console.log(`render at ${new Date().toLocaleTimeString()}`);
+function registerRenderForDebug(name) {
+  console.log(`render ${name} at ${new Date().toLocaleTimeString()}`);
 }
 
 const timer = new Timer();
