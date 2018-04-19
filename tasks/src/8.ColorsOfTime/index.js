@@ -177,7 +177,7 @@ Bottom.propTypes = {
   currentTime: PropTypes.object
 };
 
-class Card extends React.Component {
+class Card extends React.PureComponent {
   render() {
     registerRenderForDebug('Card');
     const { title, timezone, currentTime, color } = this.props;
