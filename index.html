@@ -1,0 +1,1206 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="reveal/css/theme/kontur-light.css" id="theme">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="reveal/css/highlight/idea-for-light.css">
+    <link rel="stylesheet" href="reveal/css/highlight/darkula-for-dark.css">
+    <!--[if lt IE 9]>
+    <script src="reveal/js/html5shiv.js"></script>
+    <![endif]-->
+	<script defer src="reveal/js/head.min.js"></script>
+	<script defer src="reveal/js/reveal.js"></script>
+	<script defer src="reveal/initialize.js"></script>
+	<script defer src="reveal/js/d3.min.js"></script>
+
+    <style>
+		.fragment-container {
+			position: relative;
+		}
+		
+		.fragment-container .fragment {
+			position: absolute;
+			top: 0px;
+			width: 100%;
+		}
+    </style>
+	
+	<title>React</title>
+</head>
+<body>
+
+<div class="reveal"><div class="slides">
+
+<section data-markdown><script type="text/template">
+
+# React
+
+<p style="text-align: center;"><a href="https://github.com/kontur-courses/react">https://github.com/kontur-courses/<b>react</b></a></p>
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Сначала самое ~~долгое~~ важное
+
+Скачиваем все необходимые пакеты Node.js:
+```
+cd tasks
+npm install
+```
+
+Затем запусти dev-сервер, чтобы видеть результаты решений задач:
+```cmd
+npm run start
+```
+
+Посмотреть можно будет на <a href="http://localhost:8080">http://localhost:8080</a>
+
+Перестроение автоматическое, пока работает dev-сервер
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Зачем понадобился React?
+
+***
+
+### Слои HTML, JS, CSS 😫
+
+	HTML =================================
+	CSS  ======
+	JS   ===
+
+Удобно для документов, для данных, но не для приложений
+
+***
+
+### Компонентный подход 😍
+
+```js
+HTML+CSS+JS   |   HTML+CSS+JS   |   HTML+CSS+JS
+```
+
+- Каждый компонент = HTML + JS + CSS
+- Можно комбинировать и переиспользовать!
+- Изолированы: в отличие от обычного CSS
+
+***
+
+### HTML - недоязык 😞
+
+<pre><code class="lang-html hljs">
+&lt;script&gt;
+function handleClick() {
+	...
+}
+&lt;/script&gt;
+
+&lt;input type="button" onclick="handleClick()"/&gt;</code></pre>
+
+Хочется методов и описания обработчиков сразу и рядом
+
+***
+
+### JSX = HTML + JS 😇
+
+```js
+function ButtonWithHandle() {
+    function handleClick() {
+	    ...
+	}
+	
+	return <input type="button" onClick={handleClick}/>
+}
+```
+
+***
+
+### DOM медленный 😕
+
+А вот JavaScript — быстрый за счет JIT-компиляции!
+
+***
+
+### VirtualDOM — берет на себя упячку 😎
+
+И обновляет DOM когда на самом деле что-то поменялось
+
+***
+
+### Только View в MV* 🔨
+
+React решает одну проблему и делает это хорошо
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 1. JSX — улучшенный HTML
+
+***
+
+### Вставка React на страницу
+
+<pre><code class="lang-html hljs">&lt;div id="app"&gt;&lt;/div&gt;</code></pre>
+
+```js
+ReactDom.render(
+  <div className="fromReact"></div>,
+  document.getElementById('app')
+);
+```
+
+- Можно вставить в любое место, даже в легаси
+- Можно несколько раз
+
+***
+
+### Отличия верстки на JSX
+
+Верстка на JSX похожа на HTML, но есть отличия
+
+***
+
+### Элементы
+
+React-обертки для встроенного в HTML
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;div&gt;</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;div&gt;</code></pre>
+
+Элементы именуются с маленькой буквы
+
+***
+
+### Тэги должны быть закрытыми
+
+Либо закрывающий тэг
+<pre><code class="lang-html hljs">&lt;div&gt;&lt;/div&gt;</code></pre>
+
+Либо слэш в конце
+<pre><code class="lang-html hljs">&lt;br /&gt;</code></pre>
+
+***
+
+### Именование свойств в camelCase
+
+Вместо dash-case
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;input type="text" tabindex="0" onclick="alert()"&gt;</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;input type="text" tabIndex="0" onClick="alert()" /&gt;</code></pre>
+
+***
+
+### Два способа передачи значения атрибута
+
+Через `""` как в HTML
+
+<pre><code class="lang-html hljs">&lt;input type="text" tabIndex="0" /&gt;</code></pre>
+
+Через `{}` с возможностью вставки произвольного JS
+
+<pre><code class="lang-html hljs">&lt;input type={"text"} tabIndex={a + 5} onClick={alert()} /&gt;</code></pre>
+
+В этом случае в IDE работает подсветка и рефакторинги
+
+***
+
+### Вставка JS-значений в верстку
+
+<pre><code class="lang-html hljs">&lt;div&gt;{Math.round(1000/3)}&lt;/div&gt;</code></pre>
+
+***
+
+### Escaping
+
+```js
+const title = response.potentiallyMaliciousInput;
+// This is safe:
+const element = <h1>{title}</h1>;
+```
+
+```js
+function render() {
+  const value = {__html: 'First &middot; Second'};
+  return <div dangerouslySetInnerHTML={value} />;
+}
+```
+
+***
+
+### class → className
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;div class="red"&gt;&lt;/div&gt;</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;div className="red"&gt;&lt;/div&gt;</code></pre>
+
+class — слишком популярное слово
+
+***
+
+### style — это JS-объект
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;div style="text-align: center; width: 5em; height: 100px"&gt;</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;div style={{textAlign: "center", width: "5em"; height: 100 }}&gt;</code></pre>
+
+Записываем в виде JSON: `{key1: value1, key2: value2}`
+Передаем через `{}`
+
+***
+
+### for → htmlFor
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;label for="something"&gt;Нечто&lt;/label&gt;&lt;input id="something" type="text"&gt;</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;label htmlFor="something"&gt;Нечто&lt;/label&gt;&lt;input id="something" type="text" /&gt;</code></pre>
+
+***
+
+### value → defaultValue,<br>checked → defaultChecked
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;input type="text" value="Candy"&gt;
+&lt;input type="checkbox" checked&gt;
+</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;input type="text" defaultValue="Candy"/ &gt;
+&lt;input type="checkbox" defaultChecked /&gt;
+</code></pre>
+
+- Так логичнее
+- Атрибуты value и checked в React используются для контроля текущего значения
+
+***
+
+### Задача 1.1. SimpleHtml
+### Задача 1.2. Button
+### Задача 1.3. Input
+
+***
+
+### Babel: JSX → JS
+
+```js
+var userName = 'По умолчанию';
+
+var mydom = _react2.default.createElement(
+  'div',
+  { className: 'root' },
+  _react2.default.createElement(
+    'div',
+    { className: 'form' },
+    _react2.default.createElement(
+      'div',
+      { style: { paddingRight: "10px", display: "inline-block" } },
+      _react2.default.createElement(
+        'label',
+        { htmlFor: 'name' },
+        '\u0418\u043C\u044F'
+      )
+    ),
+    _react2.default.createElement('input', {
+      id: 'name',
+      type: 'text',
+      size: '39',
+      onChange: function onChange(event) {
+        var target = event.target;
+        debugger;
+      },
+      onBlur: function onBlur() {
+        return alert('userName: ' + userName);
+      }
+    })
+  )
+);
+
+_reactDom2.default.render(mydom, document.getElementById('app'));
+```
+
+***
+
+### VirtualDOM — получается при рендеринге
+
+```json
+{
+  "type": "div",
+  "key": null,
+  "ref": null,
+  "props": {
+    "className": "root",
+    "children": {
+      "type": "div",
+      "key": null,
+      "ref": null,
+      "props": {
+        "className": "form",
+        "children": [
+          {
+            "type": "div",
+            "key": null,
+            "ref": null,
+            "props": {
+              "style": {
+                "paddingRight": "10px",
+                "display": "inline-block"
+              },
+              "children": {
+                "type": "label",
+                "key": null,
+                "ref": null,
+                "props": {
+                  "htmlFor": "name",
+                  "children": "Имя"
+                },
+                "_owner": null,
+                "_store": {
+                  
+                }
+              }
+            },
+            "_owner": null,
+            "_store": {
+              
+            }
+          },
+          {
+            "type": "input",
+            "key": null,
+            "ref": null,
+            "props": {
+              "id": "name",
+              "type": "text",
+              "size": "39"
+            },
+            "_owner": null,
+            "_store": {
+              
+            }
+          }
+        ]
+      },
+      "_owner": null,
+      "_store": {
+        
+      }
+    }
+  },
+  "_owner": null,
+  "_store": {
+    
+  }
+}
+```
+
+***
+
+### VirtualDOM, DOM Elements, SyntheticEvent
+
+<div style="text-align: center">Welcome to the `M A T R I X`</div>
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 2. Функции, циклы, ветвления
+
+***
+
+Пора получать преимущества от перехода на JSX!
+
+***
+
+### Функции и методы
+
+позволяют избавляться от дублирования!
+
+***
+
+### Задача 2.1. ExtractFunction
+
+***
+
+### Циклы и map
+
+**Цикл**
+```js
+const listItems = [];
+const numbers = [1, 2, 3, 4, 5];
+for (const number of numbers) {
+  result.push(<li>{number}</li>);
+}
+```
+
+**map**
+```js
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) =>
+  <li>{number}</li>
+);
+```
+
+***
+
+### Ключи
+
+```js
+const todoItems = todos.map((todo) =>
+  <li key={todo.id}>
+    {todo.text}
+  </li>
+);
+```
+
+Подзволяют React отличать элементы друг от друга
+Это важно при перерисовке
+
+***
+
+### Антипаттерн индекс
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number, index) =>
+  <li key={index}>{number}</li>
+);
+```
+
+Индекс в качестве ключа использовать плохо,
+потому что сортировка может поменяться
+
+Подробнее в части *Reconciliation*
+
+***
+
+### Задача 2.2. List
+
+***
+
+### Ветвления
+
+**if-else**
+```js
+if (isLoggedIn) {
+  return <UserGreeting />;
+}
+return <GuestGreeting />;
+```
+
+**Тернарный оператор**
+```js
+The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+```
+
+**&&**
+```js  
+{unreadMessages.length > 0 &&
+  <h2>You have {unreadMessages.length} unread messages.</h2>}
+```
+
+***
+
+### Скрыть элемент
+
+```js
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+```
+
+Можно вернув `null`, `undefined` или `false`
+
+***
+
+### Задача 2.3. Condition
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 3. Компоненты
+
+***
+
+### Что такое компоненты
+
+Они похожи на функции, возвращающие узлы VirtualDOM
+```html
+<MyComponent a="1" b="message" />
+```
+
+У них могут быть вложенные узлы
+```html
+<Parent>
+  <Child />
+  <Child />
+</Parent>
+```
+
+У них может быть внутреннее состояние
+```html
+<TextInput defaultValue="Let's go" />
+```
+
+***
+
+### Функциональные компоненты
+
+```js
+function MyComponent(props) {
+  return (
+      <div>{props.a} {props.b}</div>
+  );
+}
+```
+
+Properties — входные значения компонента
+
+Через функцию можно задать компоненты, которые зависят только от свойств.
+
+***
+
+### Деструктуризация props
+
+```js
+function MyComponent({a, b}) {
+  return (
+      <div>{a} {b}</div>
+  );
+}
+```
+
+***
+
+### Children
+
+```js
+function Parent(props) {
+  return (<div className="green">{props.children}</div>);
+}
+```
+
+***
+
+### DefaultProps
+
+```js
+MyComponent.defaultProps = {
+  b: 'default value'
+}
+```
+
+***
+
+### PropTypes
+
+```js
+MyComponent.propTypes = {
+  a: PropTypes.number.isRequired,
+  b: PropTypes.string,
+  onFire: PropTypes.func
+}
+```
+
+***
+
+### Задача 3.1. ExtractComponent
+
+***
+
+### Классы-компоненты
+
+```js
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    // Деструктурирующее присваивание
+    const { a, b } = this.props;
+    return (
+	  <div>{a} {b}</div>
+    );
+  }
+}
+```
+
+***
+
+### Компоненты с состоянием
+
+```js
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+	this.state = { value: props.defaultValue, step: props.step };
+  }
+  
+  render() {
+    return <div onClick={this.handleClick}>{this.state.value}</div>;
+  }
+  
+  handleClick = () => {
+    this.setState({
+	  value: this.state.value + this.state.step
+	});
+  }
+}
+```
+
+***
+
+### Нюансы
+
+```js
+// Стрелочные функции в JS берут this там, где создаются,
+// поэтому их можно безопасно передавать в onClick
+handleClick = () => {
+  // В state есть value и step, но передаем мы одно — только оно и обновится
+  this.setState({
+    value: this.state.value * this.state.step
+  });
+  // Здесь this.state.value еще имеет старое значение.
+}
+```
+<br>
+Нельзя просто взять и написать `this.state.value = newValue`
+React это не отследит и не отрисует изменения
+
+***
+
+### Задача 3.2. Toggle
+
+***
+
+### Funcional vs Class
+
+- Класс-компоненты могут все, что и функции-компоненты, и даже больше
+- Можно использовать функции-компоненты там, где не нужны фишки классов
+- Функции-компоненты удобны для создания маленьких компонентов
+
+***
+
+### Dumb vs Smart
+
+Dumb = stateless
+Smart = statefull
+
+***
+
+### Управляемые vs Неуправляемые
+
+**Управляемый input**
+ ```js
+  render() {
+    return <input value={this.state.value} onChange={this.handleChange} />;
+  }
+  
+  handleChange = event => {
+    this.setState({
+	  value: event.target.value
+	});
+  }
+ ```
+
+**Неуправляемый input**
+ ```js
+ <input defaultValue="default text"/>;
+ ```
+
+Если в `value` управляемого передать `undefined`,
+то `input` станет неуправляемым!
+
+***
+
+### Lifting state up
+
+Пусть компонент A хранит в состоянии valueA
+Пусть компонент B хранит в состоянии valueB
+
+Если оказывается, что эти значения необходимо изменять согласовано, то надо поднять valueA и valueB в состояние родительского компонента
+
+Это техника *Lift state up*
+
+***
+
+### Задача 3.3. MoneyConverter
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 4. Жизненный цикл компонента
+
+***
+
+### Вехи жизни компонента
+
+- Mounting
+- Updating
+- Unmounting
+- Error Handling
+
+***
+
+### Методы жизненного цикла
+```js
+// Mounting
+constructor()
+static getDerivedStateFromProps()
+componentWillMount() / UNSAFE_componentWillMount()
+render()
+componentDidMount()
+```
+
+```js
+// Updating
+componentWillReceiveProps() / UNSAFE_componentWillReceiveProps()
+static getDerivedStateFromProps()
+shouldComponentUpdate()
+componentWillUpdate() / UNSAFE_componentWillUpdate()
+render()
+getSnapshotBeforeUpdate()
+componentDidUpdate()
+```
+
+```js
+// Unmounting
+componentWillUnmount()
+```
+
+```js
+// Error Handling
+componentDidCatch()
+```
+
+***
+
+```js
+// Mounting
+componentDidMount()
+```
+Подходит для запросов данных с сервера и подписок на события
+
+<br>
+<br>
+
+```js
+// Unmounting
+componentWillUnmount()
+```
+Подходит для очистки ресурсов, отписок от событий
+
+***
+
+### Задача 4.1. Timer
+
+***
+
+Создан, чтобы обновлять state по новым props
+
+```js
+// Mounting
+static getDerivedStateFromProps(nextProps, prevState)
+```
+
+```js
+// Updating
+static getDerivedStateFromProps(nextProps, prevState)
+```
+
+Должен возвращать только измененные свойства state
+Если возвращает null, то обновлять state не нужно
+
+***
+
+### Задача 4.2. CreditCardInput
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 5. Reconciliation
+
+***
+
+### Монтирование
+
+```js
+class Parent extends React.Component {
+  constructor(props) { ... }
+  render() {
+    const { text } = this.props;
+    const { a, b } = this.state;
+    return (
+	  <div>
+	    <h1>{text}</h1>
+	    <Child a={a} b={b} />
+	  </div>
+	);
+  }
+}
+```
+
+***
+
+### Алгоритм монтирования
+
+Все начинается с `ReactDom.render` или другого `render`
+...
+- Parent constructor
+- Parent render
+  - h1 render
+  - Child constructor
+  - Child render
+    - ...
+
+***
+
+### Обновление
+
+Может ли компонент поменять свое содержимое?
+Может ли компонент перерисовать себя?
+
+***
+
+Компонент не может перерисовать себя или поменять содержимое,
+но может поменять состояние через `setState` и будет перерисован
+
+Компонент будет перерисован, если *кто-то свыше* ему передаст в него новые `props`
+
+*Компонент пассивен*: когда и что происходит решает React
+
+***
+
+### Алгоритм обновления
+
+**С чего все начинается?**
+
+```js
+class Parent extends React.Component {
+  constructor(props) { ... }
+  render() {
+    const { text } = this.props;
+    const { a, b } = this.state;
+    return (
+	  <div>
+	    <h1>{text}</h1>
+	    <Child a={a} b={b} />
+	  </div>
+	);
+  }
+}
+```
+
+
+***
+
+Любое обновление начинается со `setState` на некотором уровне
+
+- Parent setState
+- Parent render
+  - h1 render
+  - Child получает новые свойства
+  - Child render
+    - ...
+	
+*Но возможны варианты!*
+
+***
+
+### На месте Child оказался компонент Bastard
+
+```js
+<div>
+  <h1>{text}</h1>
+  <Bastard a={a} b={b} />
+  <Child a={a} b={b} />
+</div>
+```
+
+Даже если нужный Child идет сразу после...
+
+```html
+Старый Child сносится: componentWillUnmount
+
+Bastard размещается: constructor, ... render, componentDidMount
+
+Новый Child размечается: constructor, ... render, componentDidMount
+```
+
+***
+
+### Child находится на прежнем месте
+
+React пытается переиспользовать Child,
+вызывая методы жизненного цикла
+
+```js
+// Updating
+static getDerivedStateFromProps()
+shouldComponentUpdate()
+render()
+getSnapshotBeforeUpdate()
+componentDidUpdate()
+```
+
+***
+
+### Контроль обновления
+
+```js
+// Updating
+shouldComponentUpdate(nextProps, nextState)
+```
+
+***
+
+### Reconciliation — согласование
+
+<p style="text-align: center"><img src="assets/should-component-update.png"></p>
+
+***
+
+### ShouldComponentUpdate по умолчанию
+
+По сути работает так:
+```js
+shouldComponentUpdate(nextProps, nextState) {
+  return this.props === nextProps;
+}
+```
+
+***
+
+### PureComponent
+
+По сути переопределяет SCU так:
+```js
+shouldComponentUpdate(nextProps, nextState) {
+  return shallowEqual(this.props, nextProps);
+}
+```
+
+Чтобы использовать:
+```js
+MyPureComponent extends React.PureComponent {
+  ...
+}
+```
+
+***
+
+#### PureComponent защищает от render родителя
+
+```js
+class Child extends React.PureComponent { ... }
+
+class Parent extends React.Component {
+  constructor(props) { ... }
+  render() {
+    const { text } = this.props;
+    const { a, b } = this.state;
+    return (
+	  <div>
+	    <h1>{text}</h1>
+	    <Child a={a} b={b} />
+	  </div>
+	);
+  }
+}
+```
+
+***
+
+#### Но не всегда...
+
+```js
+class Child extends React.PureComponent { ... }
+
+class Parent extends React.Component {
+  constructor(props) { ... }
+  render() {
+    const { text } = this.props;
+    const { a, b } = this.state;
+    return (
+	  <div>
+	    <h1>{text}</h1>
+	    <Child a={a} b={b} onClick={() => { alert('!'); }} />
+	  </div>
+	);
+  }
+}
+```
+
+Так зачем мы пишем стрелочные-методы вида handleClick?
+
+***
+
+#### Как соотносятся функция-компонент и PureComponent?
+
+***
+
+- Чистые функции и чистые компоненты — это разные вещи
+- Только класс-компонент может быть PureComponent
+
+***
+
+### Задача 5. UsersTable
+
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 6. Побочные эффекты
+
+***
+
+### Создание ссылок
+
+```{js}
+constructor() {
+  this.myRef = React.createRef();
+}
+
+render () {
+  return <div ref={this.myRef} />
+}
+// После render ссылка окажется в this.myRef.current
+```
+
+```{js}
+constructor() {
+  this.myRef = null;
+}
+
+render () {
+  return <div ref={r => this.myRef = r} />
+}
+// После render ссылка окажется в this.myRef
+```
+
+***
+
+### Задача 6. Focus
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 7. Higher Order Components
+
+***
+
+*Higher Order Components (HOC)* — функции
+вида Component → Component
+
+Используя HOC, можно создавать новые улучшенные компоненты из обычных:
+```js
+const EnhancedComponent = enchance(JustComponent); // enchance — это HOC
+```
+
+***
+
+### Задача 7. FormRow
+
+</script></section>
+
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 8. Context
+
+***
+
+<p style="text-align: center"><img src="assets/states.png"></p>
+
+***
+
+Создание контекста:
+```{js}
+const CakeContext = React.createContext();
+```
+  
+Поставка значения:
+```html
+<CakeContext.Provider value={cheeseCake}>
+  ...
+</CakeContext.Provider>
+```
+
+Потребление значения:
+```html
+<CakeContext.Consumer>
+  {cake => <Hungry food={cake} />}
+</CakeContext.Consumer>
+```
+
+***
+
+### Задача 8. ColorsOfTime
+
+</script></section>
+
+			
+</div></div>
+</body>
+</html>
