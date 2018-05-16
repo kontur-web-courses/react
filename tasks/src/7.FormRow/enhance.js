@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 // Часто «улучшаемый» компонент называют WrappedComponent.
 // Первая прописная буква подчеркивает, что это компонент.
-function enchance(WrappedComponent) {
+function enhance(WrappedComponent) {
   // Внутри HOC определяет компонент-обертку с помощью класса или функции.
-  class Enchanced extends React.Component {
+  class Enhanced extends React.Component {
     render() {
       //Свойства разделяются на две части вот так:
       const { value1, value2, ...rest } = this.props;
 
-      //value1 и value2 может использоваться в Enchanced.
+      //value1 и value2 может использоваться в Enhanced.
       return (
         //А все остальное надо передать в оборачиваемый компонент.
         //В результате HOC можно будет для улучшения компонентов
@@ -21,7 +21,7 @@ function enchance(WrappedComponent) {
     }
   }
 
-  Enchanced.propTypes = {
+  Enhanced.propTypes = {
     value1: PropTypes.any,
     value2: PropTypes.any
   };
@@ -30,8 +30,8 @@ function enchance(WrappedComponent) {
   // В частности, это имя будет отображаться в Chrome Developer Tools на вкладке React.
   const wrappedName =
     WrappedComponent.displayName || WrappedComponent.name || 'Component';
-  Enchanced.displayName = `Enchanced(${wrappedName})`;
+  Enhanced.displayName = `Enhanced(${wrappedName})`;
 
   //Этот компонент-обертка возвращается в качестве результата работы HOC.
-  return Enchanced;
+  return Enhanced;
 }

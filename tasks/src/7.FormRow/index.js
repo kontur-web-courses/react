@@ -12,7 +12,7 @@ import Toggle from './Toggle';
     
     На помощь могут прийти Higher Order Components (HOC) — функции вида Component → Component.
     Используя HOC, можно создавать новые улучшенные компоненты из обычных:
-        const EnhancedComponent = enchance(JustComponent); // enchance — это HOC
+        const EnhancedComponent = enhance(JustComponent); // enhance — это HOC
 
     HOC не получится использовать с элементами, например с input,
     поэтому он уже был обернут в компонент Input.
@@ -20,7 +20,7 @@ import Toggle from './Toggle';
     1. Напиши HOC createFormRow, который можно будет использовать так:
           const InputFormRow = createFormRow(Input);
           const ToggleFormRow = createFormRow(Toggle);
-       В качестве примера используй HOC из enchance.js.
+       В качестве примера используй HOC из enhance.js.
     
     2. Используй createFormRow, удалив старые реализации InputFormRow, ToggleFormRow.
 
@@ -66,7 +66,7 @@ class Form extends React.Component {
         <input
           type="button"
           className="actionButton"
-          value="Открыть"
+          value="Показать форму"
           onClick={this.handleOpen}
         />
       </div>

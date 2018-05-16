@@ -453,7 +453,7 @@ _reactDom2.default.render(mydom, document.getElementById('app'));
 const listItems = [];
 const numbers = [1, 2, 3, 4, 5];
 for (const number of numbers) {
-  result.push(<li>{number}</li>);
+  listItems.push(<li>{number}</li>);
 }
 ```
 
@@ -818,6 +818,20 @@ componentDidCatch()
 
 ***
 
+`componentWillMount` признан неэффективным, потому что в нем стали делать запросы на сервер, например. В то время,
+как Реакт не гарантирует:
+
+ - после componentWillMount случится render,
+ - componentWillMount будет вызван один раз на каждый компонент
+
+Но гарантии есть у `componentDidMount`:
+
+ - он вызывается однажды,
+ - к моменту вызова componentDidMount render уже точно случился,
+ - если был вызван componentDidMount, то точно будет вызван и componentWillUnmount
+
+***
+
 ```js
 // Mounting
 componentDidMount()
@@ -838,6 +852,8 @@ componentWillUnmount()
 ### Задача 4.1. Timer
 
 ***
+
+### getDerivedStateFromProps
 
 Создан, чтобы обновлять state по новым props
 
@@ -955,6 +971,29 @@ class Parent extends React.Component {
 
 ***
 
+### Допустим, рендер выглядел вот так
+
+```js
+  if (a > 10) {
+    return (
+      <div>
+        <h1>{text}</h1>
+        <Bastard a={a} b={b} />
+        <Child a={a} b={b} />
+      </div>
+    );
+  }
+  return (
+    <div>
+      <h1>{text}</h1>
+      <Child a={a} b={b} />
+    </div>
+  );
+
+```
+
+***
+
 ### На месте Child оказался компонент Bastard
 
 ```js
@@ -989,6 +1028,21 @@ shouldComponentUpdate()
 render()
 getSnapshotBeforeUpdate()
 componentDidUpdate()
+```
+
+***
+
+### Как починить ситуацию с бастардом
+
+```js
+return (
+  <div>
+    <h1>{text}</h1>
+    {a > 10 && <Bastard a={a} b={b} />}
+    <Child a={a} b={b} />
+  </div>
+);
+
 ```
 
 ***
@@ -1152,7 +1206,7 @@ render () {
 
 Используя HOC, можно создавать новые улучшенные компоненты из обычных:
 ```js
-const EnhancedComponent = enchance(JustComponent); // enchance — это HOC
+const EnhancedComponent = enhance(JustComponent); // enhance — это HOC
 ```
 
 ***
