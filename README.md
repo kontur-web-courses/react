@@ -9,12 +9,14 @@
 
 Понадобится знание JS
 
-Рекомендуется пройти блок [Frontend Starter](https://github.com/kontur-courses/frontend-starter-tutorial)
+
 
 
 ## Самостоятельная подготовка
 
-Отсутствует.
+Рекомендуется пройти блок [Frontend Starter](https://github.com/kontur-courses/frontend-starter-tutorial)
+
+Предполагаем, что ты уже знаком с ES2015+ синтаксисом JavaScript. Если нет, прочти эту [статью](http://www.js-craft.io/blog/10-The-10-min-ES6-course-for-the-beginner-React-Developer/) или потренируйся в новом синтаксисе [тут](http://es6katas.org/).
 
 ## Очная встреча
 
