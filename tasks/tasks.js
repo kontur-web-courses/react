@@ -10,8 +10,8 @@ var tasks = [
   { order: '3.3', id: 'MoneyConverter' },
   { order: '4.1', id: 'Timer' },
   { order: '4.2', id: 'CreditCardInput' },
-  { order: '5', id: 'UsersTable' },
-  { order: '6', id: 'Focus' },
+  { order: '5', id: 'Focus' },
+  { order: '6', id: 'UsersTable' },
   { order: '7', id: 'FormRow' },
   { order: '8', id: 'ColorsOfTime' },
 ];

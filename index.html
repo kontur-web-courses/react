@@ -882,13 +882,51 @@ static getDerivedStateFromProps(nextProps, prevState)
 
 </script></section>
 
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 5. Побочные эффекты
+
+***
+
+### Создание ссылок
+
+```{js}
+constructor() {
+this.myRef = React.createRef();
+}
+
+render () {
+return <div ref={this.myRef} />
+}
+// После render ссылка окажется в this.myRef.current
+```
+
+```{js}
+constructor() {
+this.myRef = null;
+}
+
+render () {
+return <div ref={r => this.myRef = r} />
+}
+// После render ссылка окажется в this.myRef
+```
+
+***
+
+### Задача 5. Focus
+
+</script></section>
 
 <!-- ************************************************* -->
 
 
 <section data-markdown><script type="text/template">
 
-## 5. Reconciliation
+## 6. Reconciliation
 
 ***
 
@@ -1152,48 +1190,8 @@ class Parent extends React.Component {
 
 ***
 
-### Задача 5. UsersTable
+### Задача 6. UsersTable
 
-
-</script></section>
-
-
-<!-- ************************************************* -->
-
-
-<section data-markdown><script type="text/template">
-
-## 6. Побочные эффекты
-
-***
-
-### Создание ссылок
-
-```{js}
-constructor() {
-  this.myRef = React.createRef();
-}
-
-render () {
-  return <div ref={this.myRef} />
-}
-// После render ссылка окажется в this.myRef.current
-```
-
-```{js}
-constructor() {
-  this.myRef = null;
-}
-
-render () {
-  return <div ref={r => this.myRef = r} />
-}
-// После render ссылка окажется в this.myRef
-```
-
-***
-
-### Задача 6. Focus
 
 </script></section>
 
