@@ -101,7 +101,7 @@ class Users extends React.Component {
     updateGeneration();
     this.setState({
       editingUser: null,
-      users: this.state.users.map(u => (u.id == user.id ? user : u))
+      users: this.state.users.map(u => (u.id === user.id ? user : u))
     });
   };
 }

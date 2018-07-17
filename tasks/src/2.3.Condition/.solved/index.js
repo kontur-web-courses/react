@@ -23,7 +23,7 @@ function renderLot(name, description, tags) {
 }
 
 function renderTags(tags) {
-  if (!tags || tags.length == 0) return null;
+  if (!tags || tags.length === 0) return null;
   const content = tags.join(', ');
   return <div className="lotTags">{content}</div>;
 }

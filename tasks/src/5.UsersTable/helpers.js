@@ -24,5 +24,5 @@ export function formatDate(date) {
 
 function padZero(value) {
   const str = value.toString();
-  return str.length == 1 ? '0' + str : str;
+  return str.length === 1 ? '0' + str : str;
 }

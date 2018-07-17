@@ -15,6 +15,6 @@ export default class CreditCardNumber {
       parts.push(number.substring(i, i + 4));
     }
 
-    return parts.length == 0 ? number : parts.join(' ');
+    return parts.length === 0 ? number : parts.join(' ');
   }
 }
