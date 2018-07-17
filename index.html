@@ -267,7 +267,7 @@ class — слишком популярное слово
 <pre><code class="lang-html hljs">&lt;div style="text-align: center; width: 5em; height: 100px"&gt;</code></pre>
 
 **JSX**
-<pre><code class="lang-html hljs">&lt;div style={{textAlign: "center", width: "5em"; height: 100 }}&gt;</code></pre>
+<pre><code class="lang-html hljs">&lt;div style={{textAlign: "center", width: "5em", height: 100 }}&gt;</code></pre>
 
 Записываем в виде JSON: `{key1: value1, key2: value2}`
 Передаем через `{}`
@@ -1073,7 +1073,7 @@ shouldComponentUpdate(nextProps, nextState)
 По сути работает так:
 ```js
 shouldComponentUpdate(nextProps, nextState) {
-  return this.props === nextProps;
+  return this.props !== nextProps;
 }
 ```
 
@@ -1084,7 +1084,7 @@ shouldComponentUpdate(nextProps, nextState) {
 По сути переопределяет SCU так:
 ```js
 shouldComponentUpdate(nextProps, nextState) {
-  return shallowEqual(this.props, nextProps);
+  return !shallowEqual(this.props, nextProps);
 }
 ```
 
