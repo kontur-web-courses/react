@@ -4,23 +4,9 @@
 <head>
   <title>React</title>
   <meta charset="UTF-8">
-  <script src="tasks.js"></script>
-  <script>
-    function onload() {
-      var $tasks = document.getElementById('tasks');
-      for (var i = 0; i < tasks.length; i++) {
-        var task = tasks[i];
-        var $task = document.createElement('div');
-        var url = task.order + '.' + task.id;
-        var text = task.order + '.&nbsp;' + task.id;
-        $task.innerHTML = '<a href="' + url + '">' + text + '</a>';
-        $tasks.appendChild($task);
-      }
-    }
-  </script>
   <style>
-    * {
-      font-family: arial;
+    body {
+      font-family: arial sans-serif;
     }
 
     #container {
@@ -30,21 +16,37 @@
     }
 
     #tasks div {
-      padding: 5px;
+      margin: 10px 5px;
     }
 
     #tasks a {
-      font: 20px arial;
+      font-size: 20px;
       text-decoration: none;
     }
   </style>
 </head>
 
-<body onload="onload()">
+<body>
   <div id="container">
     <h1>React</h1>
     <div id="tasks"></div>
   </div>
+  <script src="tasks.js"></script>
+  <script>
+      function onload() {
+          var $tasks = document.getElementById('tasks');
+          for (var i = 0; i < tasks.length; i++) {
+              var task = tasks[i];
+              var $task = document.createElement('div');
+              var url = task.order + '.' + task.id;
+              var text = task.order + '.&nbsp;' + task.id;
+              $task.innerHTML = '<a href="' + url + '">' + text + '</a>';
+              $tasks.appendChild($task);
+          }
+      }
+
+      window.addEventListener('load', onload);
+  </script>
 </body>
 
 </html>
