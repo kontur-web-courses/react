@@ -1,0 +1,8 @@
+body {
+    font-family: "Segoe UI", Helvetica, sans-serif;
+}
+
+.label {
+    display: inline-block;
+    width: 120px;
+}
