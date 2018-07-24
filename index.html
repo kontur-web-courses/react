@@ -1345,7 +1345,7 @@ return Enhanced
 
 ***
 
-### Примеры известных HOC
+### Примеры HOC
 
 Роутер
 ```{js}
@@ -1360,6 +1360,37 @@ const CommentWithRelay = Relay.createContainer(Comment, config);
 Redux connect
 ```{js}
 const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
+```
+
+***
+
+### Forwarded Ref
+
+```{js}
+const ref = React.createRef();
+
+<EnhancedButton
+        label="Click Me"
+        ref={ref}
+/>;
+```
+
+```{js}
+function enhance(Component) {
+  class Enhanced extends React.Component {
+      render() {
+        const {forwardedRef, ...rest} = this.props;
+        return <button ref={forwardedRef} {...rest} />
+      }
+  }
+
+  // Мы не можем использовать название атрибута "ref" — это зарезервированное слово
+  // React.forwardRef дает нам доступ к аргументу ref
+  // и его можно теперь передать компоненту под другим именем
+  return React.forwardRef((props, ref) => {
+    return <Enhanced {...props} forwardedRef={ref} />;
+  });
+}
 ```
 
 ***
