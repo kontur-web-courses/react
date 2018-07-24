@@ -182,6 +182,7 @@ ReactDom.render(<Form />, document.getElementById('app'));
 
       Предполагается, что компонент-обертка называется FormRow.
       Заметь, что React.forwardRef — это почти HOC, а forward — это почти функция-компонент.
+      Подробнее про ForwardedRef написано в документации https://reactjs.org/docs/forwarding-refs.html
 
     - forwardedRef — это PropTypes.object
 
