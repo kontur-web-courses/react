@@ -1304,6 +1304,66 @@ const EnhancedComponent = enhance(JustComponent); // enhance — это HOC
 
 ***
 
+### Что происходит в enhance
+
+```{js}
+// Функция принимает компонент...
+function enhance(WrappedComponent) {
+    // ...и возвращает другой компонент
+    return class extends React.Component {
+        render() {
+        // Свойства разделяются на две части вот так:
+        const { value1, value2, ...rest } = this.props;
+
+        // Рендерим новый компонент
+        return (
+            <span className={value2}>
+                { value1 }
+                <WrappedComponent {...rest} isSelected={true} />
+            </span>
+        )}
+    };
+}
+```
+
+***
+
+### Договоренности
+
+1. Не мутировать исходный компонент
+2. Все пропсы прокидывать дальше (кроме может быть тех, которые специально для обертки переданы)
+3. Писать displayName (помогает при дебаге)
+
+```{js}
+const wrappedName =
+WrappedComponent.displayName || WrappedComponent.name || 'Component';
+
+Enhanced.displayName = `Enhanced(${wrappedName})`;
+
+return Enhanced
+```
+
+***
+
+### Примеры известных HOC
+
+Роутер
+```{js}
+const NavbarWithRouter = withRouter(Navbar);
+```
+
+Relay
+```{js}
+const CommentWithRelay = Relay.createContainer(Comment, config);
+```
+
+Redux connect
+```{js}
+const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
+```
+
+***
+
 ### Задача 7. FormRow
 
 </script></section>
