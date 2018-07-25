@@ -891,10 +891,10 @@ static getDerivedStateFromProps(nextProps, prevState)
 
 ***
 
-### Зачем может понадобиться доступ к DOMу
+### Зачем нужен доступ к DOM
 
 - Управление фокусом, выделением текста или проигрыванием аудио/видео
-- Управление анимациями, получение положения элемента на странице или его скролла
+- Управление анимациями, получение положения элемента на&nbsp;странице или его скролла
 - Интеграция со сторонними библиотеками, управляющими DOM
 
 ***
@@ -974,7 +974,7 @@ function MyFunctionalComponent() {
 
 ### Задача
 
-<img src="assets/reactForm.png" alt="Результат выполнения задачи createReactApp">
+<img src="assets/reactForm.png" alt="Результат выполнения задачи userProfile">
 
 ***
 
@@ -1000,9 +1000,9 @@ function MyFunctionalComponent() {
 
 ***
 
-### Задача createReactApp
+### Задача userProfile
 
-1. Перейди в директорию задачи: в корне проекта директория createReactApp
+1. Перейди в директорию задачи: в корне проекта директория userProfile
 2. Установи в ней зависимости `npm i`
 3. Останови прошлый webpack-сервер, если он все еще запущен.
 4. Запусти новый сервер командой `npm start`
@@ -1307,22 +1307,20 @@ const EnhancedComponent = enhance(JustComponent); // enhance — это HOC
 ### Что происходит в enhance
 
 ```{js}
-// Функция принимает компонент...
-function enhance(WrappedComponent) {
-    // ...и возвращает другой компонент
-    return class extends React.Component {
+function enhance(WrappedComponent) { // Функция принимает компонент...
+     class Enhanced extends React.Component { // ...и возвращает другой компонент
         render() {
-        // Свойства разделяются на две части вот так:
-        const { value1, value2, ...rest } = this.props;
-
-        // Рендерим новый компонент
-        return (
-            <span className={value2}>
-                { value1 }
-                <WrappedComponent {...rest} isSelected={true} />
-            </span>
-        )}
+          // Свойства разделяются на две части
+          const { value1, value2, ...rest } = this.props;
+          return ( // Рендерим новый компонент
+              <span className={value2}>
+                  { value1 }
+                  <WrappedComponent {...rest} isSelected={true} />
+              </span>
+          )}
     };
+
+    return Enhanced;
 }
 ```
 
@@ -1341,25 +1339,6 @@ WrappedComponent.displayName || WrappedComponent.name || 'Component';
 Enhanced.displayName = `Enhanced(${wrappedName})`;
 
 return Enhanced
-```
-
-***
-
-### Примеры HOC
-
-Роутер
-```{js}
-const NavbarWithRouter = withRouter(Navbar);
-```
-
-Relay
-```{js}
-const CommentWithRelay = Relay.createContainer(Comment, config);
-```
-
-Redux connect
-```{js}
-const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 ```
 
 ***
@@ -1396,6 +1375,32 @@ function enhance(Component) {
 ***
 
 ### Задача 7. FormRow
+
+***
+
+### Примеры HOC
+
+Роутер
+```{js}
+const NavbarWithRouter = withRouter(Navbar);
+```
+
+Relay
+```{js}
+const CommentWithRelay = Relay.createContainer(Comment, config);
+```
+
+Redux connect
+```{js}
+const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
+```
+
+***
+
+### Основные сценарии HOC
+
+1. Добавление данных компоненту. Как в примерах с Роутером и Редаксом
+2. Добавление разметки или методов. Как в решенной задачке.
 
 </script></section>
 
