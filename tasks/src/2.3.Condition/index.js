@@ -37,9 +37,19 @@ function renderTags(tags) {
 }
 
 ReactDom.render(
-  <div className="page">
-    {renderLot('', '', [])}
-    {renderPosts([])}
+  <div>
+      <div className="page">
+          {renderLot('', 'красный, красивый, твой!', [])}
+          {renderPosts([])}
+      </div>
+      <div className="page">
+          {renderLot('Пирожок с капустой', undefined, ['#свежий', '#ручнаяРабота'])}
+          {renderPosts(['Тут ровно один отклик'])}
+      </div>
+      <div className="page">
+          {renderLot('', '', ['#большой', '#Яркий'])}
+          {renderPosts(['Класс!', 'Хочу еще!', 'Отстой'])}
+      </div>
   </div>,
   document.getElementById('app')
 );
