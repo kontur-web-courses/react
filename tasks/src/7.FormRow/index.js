@@ -24,8 +24,9 @@ import Toggle from './Toggle';
     
     2. Используй createFormRow, удалив старые реализации InputFormRow, ToggleFormRow.
 
-    3. Открой React в Developer Tools в Chrome и убедись,
-       что благодаря заданию displayName получающиеся компоненты называются красиво.
+    3. Открой React в Developer Tools  в Chrome и убедись,
+       что благодаря заданию displayName получающиеся компоненты называются красиво. Если у тебя нет пункта React в
+       Developer Tools, поставь расширение для хрома React Developer Tools.
 
     4. Сделай так, чтобы при открытии формы фокус устанавливался в первом поле формы.
        Весь необходимый код в Form уже написан:
