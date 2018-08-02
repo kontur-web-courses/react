@@ -193,7 +193,7 @@ React-обертки для встроенного в HTML
 ### Тэги должны быть закрытыми
 
 Либо закрывающий тэг
-<pre><code class="lang-html hljs">&lt;div&gt;&lt;/div&gt;</code></pre>
+<pre><code class="lang-html hljs">&lt;div&gt;Hello&lt;/div&gt;</code></pre>
 
 Либо слэш в конце
 <pre><code class="lang-html hljs">&lt;br /&gt;</code></pre>
@@ -259,6 +259,18 @@ function render() {
 
 class — слишком популярное слово
 
+
+***
+
+### for → htmlFor
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;label for="something"&gt;Нечто&lt;/label&gt;&lt;input id="something" type="text"&gt;</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;label htmlFor="something"&gt;Нечто&lt;/label&gt;&lt;input id="something" type="text" /&gt;</code></pre>
+
+
 ***
 
 ### style — это JS-объект
@@ -271,16 +283,6 @@ class — слишком популярное слово
 
 Записываем в виде JSON: `{key1: value1, key2: value2}`
 Передаем через `{}`
-
-***
-
-### for → htmlFor
-
-**HTML**
-<pre><code class="lang-html hljs">&lt;label for="something"&gt;Нечто&lt;/label&gt;&lt;input id="something" type="text"&gt;</code></pre>
-
-**JSX**
-<pre><code class="lang-html hljs">&lt;label htmlFor="something"&gt;Нечто&lt;/label&gt;&lt;input id="something" type="text" /&gt;</code></pre>
 
 ***
 
