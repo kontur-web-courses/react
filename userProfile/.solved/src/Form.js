@@ -5,6 +5,7 @@ import Select from '@skbkontur/react-ui/Select';
 import Gapped from '@skbkontur/react-ui/Gapped';
 import Modal from '@skbkontur/react-ui/Modal';
 
+const cities = ['Москва', 'Урюпинск', 'Новосибирск', 'Екатеринбург', 'Тагиииил'];
 
 const defaultData = {
     name: '',
@@ -32,7 +33,6 @@ export default class Form extends React.Component {
 
     renderForm() {
         const { name, surname, city  } = this.state.current;
-        const cities = ['Москва', 'Урюпинск', 'Новосибирск', 'Екатеринбург', 'Тагиииил'];
         return (
             <form>
                 <Gapped gap={15} vertical>
