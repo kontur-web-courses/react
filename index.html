@@ -181,12 +181,20 @@ ReactDom.render(
 React-обертки для встроенного в HTML
 
 **HTML**
-<pre><code class="lang-html hljs">&lt;div&gt;</code></pre>
+<pre><code class="lang-html hljs">&lt;div&gt;&lt;/div&gt; &lt;span&gt;&lt;/span&gt;</code></pre>
 
 **JSX**
-<pre><code class="lang-html hljs">&lt;div&gt;</code></pre>
+<pre><code class="lang-html hljs">&lt;div&gt;&lt;/div&gt; &lt;span&gt;&lt;/span&gt;</code></pre>
 
-Элементы именуются с маленькой буквы
+***
+
+### Имена элементов в нижнем регистре
+
+**HTML**
+<pre><code class="lang-html hljs">&lt;div&gt;&lt;/div&gt; или &lt;DIV&gt;&lt;/DIV&gt; или &lt;Div&gt;&lt;/diV&gt;</code></pre>
+
+**JSX**
+<pre><code class="lang-html hljs">&lt;div&gt;&lt;/div&gt;</code></pre>
 
 ***
 
@@ -826,16 +834,16 @@ componentDidCatch()
 
 ***
 
-`componentWillMount` признан неэффективным, потому что в нем стали делать запросы на сервер, например. В то время,
-как Реакт не гарантирует:
+`componentWillMount` признан небезопасным,
+потому что в нем стали делать запросы на сервер, например.
 
- - после componentWillMount случится render,
- - componentWillMount будет вызван один раз на каждый компонент
+А ведь React не гарантирует, что:
+ - после componentWillMount случится render
+ - componentWillMount будет вызван только один раз для каждого компонента
 
-Но гарантии есть у `componentDidMount`:
-
- - он вызывается однажды,
- - к моменту вызова componentDidMount render уже точно случился,
+А вот у `componentDidMount` гарантии есть:
+ - он вызывается единожды
+ - к моменту вызова componentDidMount render уже точно случился
  - если был вызван componentDidMount, то точно будет вызван и componentWillUnmount
 
 ***
@@ -903,24 +911,26 @@ static getDerivedStateFromProps(nextProps, prevState)
 
 ### Создание ссылок
 
+** Способ 16+ **
 ```{js}
 constructor() {
-this.myRef = React.createRef();
+  this.myRef = React.createRef();
 }
 
 render () {
-return <div ref={this.myRef} />
+  return <div ref={this.myRef} />
 }
 // После render ссылка окажется в this.myRef.current
 ```
 
+** Хороший проверенный способ **
 ```{js}
 constructor() {
-this.myRef = null;
+  this.myRef = null;
 }
 
 render () {
-return <div ref={r => this.myRef = r} />
+  return <div ref={r => this.myRef = r} />
 }
 // После render ссылка окажется в this.myRef
 ```
@@ -945,7 +955,7 @@ return <div ref={r => this.myRef = r} />
 
 ### Только для компонентов-классов
 
-Функциональные компоненты не унаследовали ниоткуда такого механизма
+Функциональные компоненты не унаследовали такого механизма
 
 ```{js}
 function MyFunctionalComponent() {
@@ -1116,7 +1126,7 @@ class Parent extends React.Component {
 
 ***
 
-### Допустим, рендер выглядел вот так
+### Пусть рендер выглядит так
 
 ```js
   if (a > 10) {
@@ -1177,7 +1187,7 @@ componentDidUpdate()
 
 ***
 
-### Как починить ситуацию с бастардом
+### Так можно исправить ситуацию
 
 ```js
 return (
@@ -1320,19 +1330,19 @@ const EnhancedComponent = enhance(JustComponent); // enhance — это HOC
 
 ```{js}
 function enhance(WrappedComponent) { // Функция принимает компонент...
-     class Enhanced extends React.Component { // ...и возвращает другой компонент
-        render() {
-          // Свойства разделяются на две части
-          const { value1, value2, ...rest } = this.props;
-          return ( // Рендерим новый компонент
-              <span className={value2}>
-                  { value1 }
-                  <WrappedComponent {...rest} isSelected={true} />
-              </span>
-          )}
+    class Enhanced extends React.Component { // ...создает новый компонент...
+      render() {
+        // Свойства разделяются на две части
+        const { value1, value2, ...rest } = this.props;
+        return ( // Рендерим новый компонент
+            <span className={value2}>
+                { value1 }
+                <WrappedComponent {...rest} isSelected={true} />
+            </span>
+        )}
     };
 
-    return Enhanced;
+    return Enhanced; // ...и возвращает созданный компонент.
 }
 ```
 
@@ -1341,12 +1351,13 @@ function enhance(WrappedComponent) { // Функция принимает ком
 ### Договоренности
 
 1. Не мутировать исходный компонент
-2. Все пропсы прокидывать дальше (кроме может быть тех, которые специально для обертки переданы)
-3. Писать displayName (помогает при дебаге)
+2. Все пропсы прокидывать дальше,
+   кроме специально переданных для обертки
+3. Задавать displayName: помогает при дебаге
 
 ```{js}
 const wrappedName =
-WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
 Enhanced.displayName = `Enhanced(${wrappedName})`;
 
@@ -1358,26 +1369,20 @@ return Enhanced
 ### Forwarded Ref
 
 ```{js}
-const ref = React.createRef();
-
-<EnhancedButton
-        label="Click Me"
-        ref={ref}
-/>;
+const someRef = React.createRef();
+<EnhancedButton label="Click Me" ref={someRef} />;
 ```
-
 ```{js}
-function enhance(Component) {
+function enhance(WrappedComponent) {
   class Enhanced extends React.Component {
       render() {
         const {forwardedRef, ...rest} = this.props;
-        return <button ref={forwardedRef} {...rest} />
+        return <WrappedComponent ref={forwardedRef} {...rest} />
       }
-  }
-
-  // Мы не можем использовать название атрибута "ref" — это зарезервированное слово
-  // React.forwardRef дает нам доступ к аргументу ref
-  // и его можно теперь передать компоненту под другим именем
+  }  
+  // React не передает значение атрибута "ref" в props обычных компонентов.
+  // Но компонент React.forwardRef дает нам доступ к значению атрибута "ref"
+  // и теперь это значение можно передать компоненту под другим именем.
   return React.forwardRef((props, ref) => {
     return <Enhanced {...props} forwardedRef={ref} />;
   });
