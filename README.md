@@ -22,4 +22,4 @@
 
 ~ 8 часов
 
-[Презентация](https://kontur-courses.github.io/react)
+[Презентация](https://kontur-courses.github.io/react/)
