@@ -255,7 +255,7 @@ const element = <h1>{title}</h1>;
 ```js
 function render() {
   const value = {__html: 'First &middot; Second'};
-  return <div dangerouslySetInnerHTML={value} />;
+  return <div dangerouslySetInnerHTML={{ __html: value }} />;
 }
 ```
 
