@@ -691,16 +691,17 @@ class MyComponent extends React.Component {
 class Counter extends React.Component {
   constructor(props) {
     super(props);
-	this.state = { value: props.defaultValue, step: props.step };
+	this.state = { value: props.defaultValue, checked: false };
   }
-  
   render() {
-    return <div onClick={this.handleClick}>{this.state.value}</div>;
+    return <div onClick={this.handleClick}
+                className={this.state.checked && 'checked'}
+            >{this.state.value}</div>;
   }
   
   handleClick = () => {
     this.setState({
-	  value: this.state.value + this.state.step
+	  value: this.state.value + this.props.step
 	});
   }
 }
@@ -714,9 +715,9 @@ class Counter extends React.Component {
 // Стрелочные функции в JS берут this там, где создаются,
 // поэтому их можно безопасно передавать в onClick
 handleClick = () => {
-  // В state есть value и step, но передаем мы одно — только оно и обновится
+  // В state есть value и checked, но передаем мы одно — только оно и обновится
   this.setState({
-    value: this.state.value * this.state.step
+    value: this.state.value * this.props.step
   });
   // Здесь this.state.value еще имеет старое значение.
 }
@@ -737,37 +738,49 @@ React это не отследит и не отрисует изменения
 - Можно использовать функции-компоненты там, где не нужны фишки классов
 - Функции-компоненты удобны для создания маленьких компонентов
 
-***
-
-### Dumb vs Smart
-
-Dumb = stateless
-Smart = statefull
 
 ***
 
 ### Управляемые vs Неуправляемые
 
 **Управляемый input**
- ```js
-  render() {
-    return <input value={this.state.value} onChange={this.handleChange} />;
-  }
-  
-  handleChange = event => {
-    this.setState({
-	  value: event.target.value
-	});
-  }
- ```
+```js
+render() {
+  return <input value={this.state.value} onChange={this.handleChange} />;
+}
+
+handleChange = event => {
+  this.setState({
+    value: event.target.value
+  });
+}
+```
 
 **Неуправляемый input**
- ```js
- <input defaultValue="default text"/>;
- ```
+```js
+<input defaultValue="default text"/>;
+```
 
 Если в `value` управляемого передать `undefined`,
 то `input` станет неуправляемым!
+
+***
+
+### Stateless vs Statefull
+
+
+
+***
+
+### Lifting state up
+
+<div style="margin-left: 20px; position: relative">
+![children components](assets/LiftStateUp.png)
+
+<div class="fragment" data-fragment-index="1" style="position: absolute; top: 0; background: white;">
+  ![with parent component](assets/LiftStateUp2.png)
+</div>
+</div>
 
 ***
 

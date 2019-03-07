@@ -11,8 +11,19 @@ import './style.css';
  *  4. Добавь в разметку Button из библиотеки компонентов Контура (@skbkontur/react-ui).
  *     npm-пакет с библиотекой уже добавлен в проект.
  *
- *     Тут инструкция по использованию библиотеки:
- *         https://github.com/skbkontur/retail-ui/blob/master/packages/retail-ui/README.md
+ *     Импортируется компонент на страницу так:
+ *
+ *     import Button from '@skbkontur/react-ui/Button';
+ *
+ *     Используется компонент так:
+ *
+ *     const MyApp = () => (
+ *        <div>
+ *            Click this button <Button onClick={() => console.log('Hey!')}>Click me</Button>
+ *        </div>
+ *     );
+ *
+ *
  *     Тут можно посмотреть, как компонентами пользоваться, какие у них атрибуты есть:
  *         http://tech.skbkontur.ru/react-ui/
  *
