@@ -907,6 +907,99 @@ static getDerivedStateFromProps(nextProps, prevState)
 
 ### Задача 4.2. CreditCardInput
 
+</script></section></script>
+
+<!-- ************************************************* -->
+
+
+<section data-markdown><script type="text/template">
+
+## 5. Жизненный цикл в функциональных компонентах
+
+***
+
+> **Хуки** — это функции, с помощью которых вы можете «подцепиться» к состоянию и методам жизненного цикла React из функциональных компонентов.
+> Хуки не работают внутри классов — они дают вам возможность использовать React без классов.
+
+Хуки всегда должны начинаться со слова ***use*** и находиться в начале функционального компонента.
+
+***
+
+### Mounting
+
+```js
+function MyFunctionalComponent() {
+  // constructor
+  const [value, setValue] = useState(1);
+
+  //componentDidMount
+  useEffect(() => {
+    setValue(2);
+  }, []);
+
+  //getDerivedStateFromProps
+  if (value < 2) {
+    setValue(3);
+  }
+
+  //render
+  return <div>{value}</div>;
+}
+```
+
+***
+
+### Updating
+
+```js
+function MyFunctionalComponent() {
+  // constructor
+  const [value, setValue] = useState(1);
+  const [fetching, setFetching] = useState(false);
+
+  //componentDidUpdate
+  useEffect(() => {
+    setFetching(true);
+  }, [value]);
+
+  //render
+  return <div>{value}</div>;
+}
+```
+
+Метод getSnapshotBeforeUpdate отсутствует, но его поведение можно реализовать через useRef();
+
+***
+
+### Unmounting
+
+```js
+function MyFunctionalComponent() {
+  // constructor
+  const timer = useRef(null);
+
+  //componentDidMount
+  useEffect(() => {
+    timer.current = setTimeout(console.log, 10000, 'Прошло 10000 мс');
+
+    //componentWillUnmount
+    return () => {
+      clearTimeout(timer.current);
+    }
+  }, []);
+
+  //render
+  return <div>{value}</div>;
+}
+```
+
+Методы *getSnapshotBeforeUpdate* и *componentDidCatch* отсутствуют
+
+***
+
+### Задача 5. Hooks
+
+
 </script></section>
 
 <!-- ************************************************* -->
@@ -914,7 +1007,7 @@ static getDerivedStateFromProps(nextProps, prevState)
 
 <section data-markdown><script type="text/template">
 
-## 5. Побочные эффекты
+## 6. Побочные эффекты
 
 ***
 
@@ -988,7 +1081,7 @@ function MyFunctionalComponent() {
 
 ***
 
-### Задача 5. Focus
+### Задача 6. Focus
 
 </script></section>
 
@@ -1054,7 +1147,7 @@ function MyFunctionalComponent() {
 
 <section data-markdown><script type="text/template">
 
-## 6. Reconciliation
+## 7. Reconciliation
 
 ***
 
@@ -1315,6 +1408,7 @@ class Parent extends React.Component {
 
 - Чистые функции и чистые компоненты — это разные вещи
 - Только класс-компонент может быть PureComponent
+- ShouldComponentUpdate для функциональных компонент реализуется посредством использования [React.memo](https://ru.reactjs.org/docs/react-api.html#reactmemo)
 
 ***
 
@@ -1329,7 +1423,7 @@ class Parent extends React.Component {
 
 <section data-markdown><script type="text/template">
 
-## 7. Higher Order Components
+## 8. Higher Order Components
 
 ***
 
@@ -1408,7 +1502,7 @@ function enhance(WrappedComponent) {
 
 ***
 
-### Задача 7. FormRow
+### Задача 8. FormRow
 
 ***
 
@@ -1436,6 +1530,28 @@ const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 1. Добавление данных компоненту. Как в примерах с Роутером и Редаксом
 2. Добавление разметки или методов. Как в решенной задачке.
 
+***
+
+### Переиспользование логики в функциональных компонентах
+
+Использование HOC-ов приводит к *Wrapper Hell*. При написании компонентов на *Hooks* можно создавать кастомные хуки.
+
+```js
+function useMyOwnHook(initialValue) {
+  const [value, setValue] = useState(initialValue);
+  const [value2, setValue2] = useState(initialValue);
+
+  useEffect(() => {
+    ...
+    return () => {
+      ...
+    };
+  }, []);
+
+  return [value, value2];
+}
+```
+
 </script></section>
 
 
@@ -1444,7 +1560,7 @@ const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 
 <section data-markdown><script type="text/template">
 
-## 8. Context
+## 9. Context
 
 ***
 
@@ -1473,7 +1589,22 @@ const CakeContext = React.createContext();
 
 ***
 
-### Задача 8. ColorsOfTime
+Контекст в класс-компоненте:
+```{js}
+class MyClass extends React.Component {
+  render() {
+    return (
+      <>{ this.context }</>
+    );
+  }
+}
+
+MyClass.contextType = MyContext;
+```
+
+***
+
+### Задача 9. ColorsOfTime
 
 </script></section>
 
