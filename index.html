@@ -911,7 +911,6 @@ static getDerivedStateFromProps(nextProps, prevState)
 
 <!-- ************************************************* -->
 
-
 <section data-markdown><script type="text/template">
 
 ## 5. Побочные эффекты
@@ -957,13 +956,13 @@ render () {
 ### Можно повешать на элемент или компонент
 
 ```{js}
-<input ref={this.myRef}>
+<input ref={this.myRef} />
 
 ```
 
 
 ```{js}
-<MyComponent ref={this.myRef}>
+<MyComponent ref={this.myRef} />
 
 ```
 
@@ -991,6 +990,215 @@ function MyFunctionalComponent() {
 ### Задача 5. Focus
 
 </script></section>
+
+<section data-markdown><script type="text/template">
+
+## 6. Жизненный цикл в функциональных компонентах
+
+***
+
+> **Хуки** — это функции, с помощью которых вы можете «подцепиться» к состоянию и методам жизненного цикла React из функциональных компонентов.
+> Хуки не работают внутри классов — они дают вам возможность использовать React без классов.
+
+Хуки всегда должны начинаться со слова ***use*** и находиться в начале функционального компонента.
+
+***
+
+### Методы жизненного цикла
+
+```js
+//Mounting, Updating and Unmounting
+useState
+useMemo
+useRef
+useEffect
+useCallback
+```
+
+***
+
+### useState
+
+```js
+function MyFunctionalComponent() {
+  const [counter1, setCounter1] = useState(0);
+  const [counter2, setCounter2] = useState(0);
+
+  return (
+    <div>
+      <div>
+        <span>{counter1}</span>
+        <button type="button" onClick={() => setCounter1(counter1 + 1)}>+</button>
+      </div>
+      <div>
+        <span>{counter2}</span>
+        <button type="button" onClick={() => setCounter1(counter2 + 1)}>+</button>
+      </div>
+    </div>
+      )
+}
+```
+
+***
+
+### useMemo
+
+```js
+function MyFunctionalComponent({value}) {
+  const [square, cube] = useMemo(() => {
+    return [Math.pow(value, 2), Math.pow(value, 3)];
+  }, [value])
+
+  return (
+    <div>
+      <div>Значение {value}</div>
+      <div>В квадрате {square}</div>
+      <div>В кубе {cube}</div>
+    </div>
+  );
+}
+```
+
+***
+
+### useRef
+
+```js
+function MyFunctionalComponent({value}) {
+  const inputRef = useRef(null);
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button type="button" onClick={() => inputRef.current.focus()}>
+        Установить фокус
+      </button>
+    </div>
+  );
+}
+```
+
+***
+
+### useEffect
+
+```js
+function MyFunctionalComponent({value}) {
+  const timer = useRef(null);
+
+  useEffect(() => {
+    timer.current = setTimeout(console.log, 10000, 'Прошло 10000 мс');
+
+    return () => {
+      clearTimeout(timer.current);
+    }
+  }, [value]);
+
+  ...
+
+}
+```
+
+***
+
+### useCallback
+
+```js
+function MyFunctionalComponent({initialValue}) {
+  const [value, setValue] = useState(initialValue);
+
+  const handleChange = useCallback(event => {
+    setValue(event.target.value);
+  }, []);
+
+  return <input type="text" value={value} onChange={handleChange} />;
+
+}
+```
+
+***
+
+### Другие этапы жизненного цикла
+
+Методы *getSnapshotBeforeUpdate* и *componentDidCatch* отсутствуют, но возможно появятся в будующих версиях React.
+Метод *getSnapshotBeforeUpdate* отсутствует, но его поведение можно реализовать через useRef();
+
+***
+
+### Помните?
+
+```js
+class TimeDisplay extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      localTime: new Date()
+    };
+    this.localTickInterval = null;
+  }
+
+  componentDidMount() {
+    this.localTickInterval = setInterval(() => {
+      this.setState({
+        localTime: new Date()
+      });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.localTickInterval);
+  }
+
+  render() {
+    return (
+      <div className="time">{this.state.localTime.toLocaleTimeString()}</div>
+    );
+  }
+}
+```
+
+***
+
+### А теперь на Хуках! 😎
+
+```js
+function TimeDisplay() {
+  const [localTime, setLocalTime] = useState(new Date());
+  const localTickInterval = useRef(null);
+
+  useEffect(() => {
+    localTickInterval.current = setInterval(() => {
+      setLocalTime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(localTickInterval.current);
+    }
+  }, []);
+
+  return (
+    <div className="time">{localTime.toLocaleTimeString()}</div>
+  );
+}
+```
+
+***
+
+### Задача 6. Hooks
+
+***
+
+### Когда использовать?
+
+1. Хуки позволяют не использовать ключевое словов ***this***, благодаря чему код выглядит чище.
+2. Компоненты реализованные на Хуках почти всегда занимают меньше места и благодаря этому проще читаются
+3. Хуки проще типизировать
+4. Большой компонент на хуках может стать сложным для прочтения. В таком случае стоит подумать о разбиении компонента на части или о переписывании компонента в виде класса.
+
+
+</script></section>
+<!-- ************************************************* -->
+
 
 <!-- ************************************************* -->
 
@@ -1054,7 +1262,7 @@ function MyFunctionalComponent() {
 
 <section data-markdown><script type="text/template">
 
-## 6. Reconciliation
+## 7. Reconciliation
 
 ***
 
@@ -1315,6 +1523,7 @@ class Parent extends React.Component {
 
 - Чистые функции и чистые компоненты — это разные вещи
 - Только класс-компонент может быть PureComponent
+- ShouldComponentUpdate для функциональных компонент реализуется посредством использования [React.memo](https://ru.reactjs.org/docs/react-api.html#reactmemo)
 
 ***
 
@@ -1329,7 +1538,7 @@ class Parent extends React.Component {
 
 <section data-markdown><script type="text/template">
 
-## 7. Higher Order Components
+## 8. Higher Order Components
 
 ***
 
@@ -1408,7 +1617,7 @@ function enhance(WrappedComponent) {
 
 ***
 
-### Задача 7. FormRow
+### Задача 8. FormRow
 
 ***
 
@@ -1436,6 +1645,68 @@ const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 1. Добавление данных компоненту. Как в примерах с Роутером и Редаксом
 2. Добавление разметки или методов. Как в решенной задачке.
 
+***
+
+### Добавление разметки без логики
+
+```js
+const FormRow = ({label, children}) => {
+  return (
+    <div className="row">
+      <div className="label">{label}</div>
+      {children}
+    </div>
+  );
+}
+```
+
+Также для расширения функциональности компонента можно использовать паттерн [RenderProps](https://ru.reactjs.org/docs/render-props.html).
+
+***
+
+### Wrapper Hell
+
+```js
+const withCustomization = WithCustomization(CheckForm);
+const withIdentity = WithFormData(withCustomization, FormIdentity, false);
+const withDocuments = WithFormData(withIdentity, FormDocuments, true);
+const withSignStatementData = WithFormData(withDocuments, SignStatementData, true);
+
+const mapStateToProps = state => ({editableForm: state.forms.editableForm});
+const mapDispatchToProps = dispatch => bindActionCreators({
+  saveForm,
+  changeFormStep,
+  getFormData
+}, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withSignStatementData);
+```
+
+***
+
+### Переиспользование логики в функциональных компонентах
+
+При написании компонентов на *Hooks* можно создавать кастомные хуки, избегая при этом *WrapperHell*.
+
+```js
+function useMyOwnHook(initialValue) {
+  const [value, setValue] = useState(initialValue);
+  const [value2, setValue2] = useState(initialValue);
+
+  useEffect(() => {
+    ...
+    return () => {
+      ...
+    };
+  }, []);
+
+  return [value, value2];
+}
+```
+
 </script></section>
 
 
@@ -1444,7 +1715,7 @@ const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 
 <section data-markdown><script type="text/template">
 
-## 8. Context
+## 9. Context
 
 ***
 
@@ -1473,7 +1744,22 @@ const CakeContext = React.createContext();
 
 ***
 
-### Задача 8. ColorsOfTime
+Контекст в класс-компоненте:
+```{js}
+class MyClass extends React.Component {
+  render() {
+    return (
+      <>{ this.context }</>
+    );
+  }
+}
+
+MyClass.contextType = MyContext;
+```
+
+***
+
+### Задача 9. ColorsOfTime
 
 </script></section>
 

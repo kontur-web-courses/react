@@ -11,9 +11,10 @@ var tasks = [
   { order: '4.1', id: 'Timer' },
   { order: '4.2', id: 'CreditCardInput' },
   { order: '5', id: 'Focus' },
-  { order: '6', id: 'UsersTable' },
-  { order: '7', id: 'FormRow' },
-  { order: '8', id: 'ColorsOfTime' },
+  { order: '6', id: 'Hooks' },
+  { order: '7', id: 'UsersTable' },
+  { order: '8', id: 'FormRow' },
+  { order: '9', id: 'ColorsOfTime' },
 ];
 
 if (typeof exports !== 'undefined') {
