@@ -1004,19 +1004,6 @@ function MyFunctionalComponent() {
 
 ***
 
-### Методы жизненного цикла
-
-```js
-//Mounting, Updating and Unmounting
-useState
-useMemo
-useRef
-useEffect
-useCallback
-```
-
-***
-
 ### useState
 
 ```js
@@ -1089,15 +1076,18 @@ function MyFunctionalComponent({value}) {
   useEffect(() => {
     timer.current = setTimeout(console.log, 10000, 'Прошло 10000 мс');
 
-    return () => {
+    return () => { // componentWillUnmount
       clearTimeout(timer.current);
     }
-  }, [value]);
+  }, [value]); // componentWillReceiveProps
 
   ...
 
 }
 ```
+
+Если не передать `value`, то вызывается после каждого рендера,
+ как `componentDidMount` и `componentDidUpdate`
 
 ***
 
@@ -1115,13 +1105,6 @@ function MyFunctionalComponent({initialValue}) {
 
 }
 ```
-
-***
-
-### Другие этапы жизненного цикла
-
-Методы *getSnapshotBeforeUpdate* и *componentDidCatch* отсутствуют, но возможно появятся в будующих версиях React.
-Метод *getSnapshotBeforeUpdate* отсутствует, но его поведение можно реализовать через useRef();
 
 ***
 
