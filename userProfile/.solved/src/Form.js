@@ -41,7 +41,7 @@ export default class Form extends React.Component {
                         <Input
                             placeholder='Введите имя пользователя'
                             value={ name }
-                            onChange={this.onChangeName}
+                            onChange={this.onChange('name')}
                         />
                     </label>
                     <label>
@@ -49,7 +49,7 @@ export default class Form extends React.Component {
                         <Input
                             placeholder='Введите фамилию пользователя'
                             value={ surname }
-                            onChange={this.onChangeSurname}
+                            onChange={this.onChange('surname')}
                         />
                     </label>
                     <label>
@@ -58,7 +58,7 @@ export default class Form extends React.Component {
                             placeholder='Выберите город'
                             items={cities}
                             value={ city }
-                            onChange={this.onChangeCity}
+                            onChange={this.onChange('city')}
                         />
                     </label>
                     <Button use='primary' size='large' onClick={this.openModal}>Сохранить</Button>
@@ -120,26 +120,15 @@ export default class Form extends React.Component {
         });
     };
 
-    onChangeName = (_, val) => {
-        this.onChange('name', val);
-    };
-
-    onChangeSurname = (_, val) => {
-        this.onChange('surname', val);
-    };
-
-    onChangeCity = (_, val) => {
-        this.onChange('city', val);
-    };
-
-    onChange = (field, val) => {
-        this.setState({
-            current: {
-                ...this.state.current,
-                [field]: val,
-            }
-        });
-    };
-
+    onChange = (field) => {
+        return (_, val) => {
+            this.setState({
+                current: {
+                    ...this.state.current,
+                    [field]: val,
+                }
+            });
+        } 
+    }
 }
 

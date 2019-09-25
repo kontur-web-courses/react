@@ -12,7 +12,7 @@ export default class EditUserForm extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.user && prevState.user !== nextProps.user) {
+    if (nextProps.user && prevState.user !== nextProps.user && !prevState.changed) {
       return { user: nextProps.user };
     }
     return null;
@@ -94,6 +94,7 @@ export default class EditUserForm extends React.Component {
 
   handleUserChange = change => {
     this.setState({
+      changed: true,
       user: { ...this.state.user, ...change }
     });
   };
