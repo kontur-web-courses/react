@@ -913,7 +913,7 @@ static getDerivedStateFromProps(nextProps, prevState)
 
 <section data-markdown><script type="text/template">
 
-## 5. Побочные эффекты
+## 5. Доступ к DOM
 
 ***
 
@@ -993,14 +993,16 @@ function MyFunctionalComponent() {
 
 <section data-markdown><script type="text/template">
 
-## 6. Жизненный цикл в функциональных компонентах
+## 6. Hooks
 
 ***
 
-> **Хуки** — это функции, с помощью которых вы можете «подцепиться» к состоянию и методам жизненного цикла React из функциональных компонентов.
-> Хуки не работают внутри классов — они дают вам возможность использовать React без классов.
+### Hooks
 
-Хуки всегда должны начинаться со слова ***use*** и находиться в начале функционального компонента.
+- функции, которые позволяют в функциональных компонентах использовать фичи классов
+- работают только в функциональных компонентах
+- всегда начинаются со слова ***use***
+- используются в начале функционального компонента
 
 ***
 
@@ -1012,37 +1014,17 @@ function MyFunctionalComponent() {
   const [counter2, setCounter2] = useState(0);
 
   return (
-    <div>
+    <>
       <div>
         <span>{counter1}</span>
-        <button type="button" onClick={() => setCounter1(counter1 + 1)}>+</button>
+        <button onClick={() => setCounter1(counter1 + 1)}>+</button>
       </div>
       <div>
         <span>{counter2}</span>
-        <button type="button" onClick={() => setCounter1(counter2 + 1)}>+</button>
+        <button onClick={() => setCounter2(с2 => c2 + 1)}>+</button>
       </div>
-    </div>
-      )
-}
-```
-
-***
-
-### useMemo
-
-```js
-function MyFunctionalComponent({value}) {
-  const [square, cube] = useMemo(() => {
-    return [Math.pow(value, 2), Math.pow(value, 3)];
-  }, [value])
-
-  return (
-    <div>
-      <div>Значение {value}</div>
-      <div>В квадрате {square}</div>
-      <div>В кубе {cube}</div>
-    </div>
-  );
+    </>
+  )
 }
 ```
 
@@ -1086,8 +1068,32 @@ function MyFunctionalComponent({value}) {
 }
 ```
 
-Если не передать `value`, то вызывается после каждого рендера,
+Если не передать `[value]`, то вызывается после каждого рендера,
  как `componentDidMount` и `componentDidUpdate`
+
+Если передать вторым аргументом `[]`, то вызовется только один раз, как `componentDidMount`
+
+
+***
+
+### useMemo
+
+```js
+function MyFunctionalComponent({value}) {
+    const [square, cube] = useMemo(() => {
+        return [Math.pow(value, 2), Math.pow(value, 3)];
+    }, [value])
+
+    return (
+        <div>
+            <div>Значение {value}</div>
+            <div>В квадрате {square}</div>
+            <div>В кубе {cube}</div>
+        </div>
+    );
+}
+```
+
 
 ***
 
@@ -1167,6 +1173,13 @@ function TimeDisplay() {
 
 ***
 
+### Почему хуки появились?
+
+- Никто не понимает, как работает this в js
+- Переиспользовать невизуальную логику при помощи создания своих хуков
+
+***
+
 ### Задача 6. Hooks
 
 ***
@@ -1176,13 +1189,11 @@ function TimeDisplay() {
 1. Хуки позволяют не использовать ключевое словов ***this***, благодаря чему код выглядит чище.
 2. Компоненты реализованные на Хуках почти всегда занимают меньше места и благодаря этому проще читаются
 3. Хуки проще типизировать
-4. Большой компонент на хуках может стать сложным для прочтения. В таком случае стоит подумать о разбиении компонента на части или о переписывании компонента в виде класса.
+4. Большой компонент на хуках может стать сложным для прочтения. В таком случае стоит подумать о разбиении компонента
+на части или о переписывании компонента в виде класса.
 
 
 </script></section>
-<!-- ************************************************* -->
-
-
 <!-- ************************************************* -->
 
 
@@ -1506,11 +1517,10 @@ class Parent extends React.Component {
 
 - Чистые функции и чистые компоненты — это разные вещи
 - Только класс-компонент может быть PureComponent
-- ShouldComponentUpdate для функциональных компонент реализуется посредством использования [React.memo](https://ru.reactjs.org/docs/react-api.html#reactmemo)
 
 ***
 
-### Задача 6. UsersTable
+### Задача 7. UsersTable
 
 
 </script></section>
@@ -1626,7 +1636,7 @@ const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 ### Основные сценарии HOC
 
 1. Добавление данных компоненту. Как в примерах с Роутером и Редаксом
-2. Добавление разметки или методов. Как в решенной задачке.
+2. Добавление разметки и методов. Как в решенной задачке.
 
 ***
 
@@ -1723,21 +1733,6 @@ const CakeContext = React.createContext();
 <CakeContext.Consumer>
   {cake => <Hungry food={cake} />}
 </CakeContext.Consumer>
-```
-
-***
-
-Контекст в класс-компоненте:
-```{js}
-class MyClass extends React.Component {
-  render() {
-    return (
-      <>{ this.context }</>
-    );
-  }
-}
-
-MyClass.contextType = MyContext;
 ```
 
 ***
