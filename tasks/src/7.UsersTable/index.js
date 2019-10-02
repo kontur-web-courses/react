@@ -197,9 +197,6 @@ ReactDom.render(<Users />, document.getElementById('app'));
 /**
     Подсказки:
 
-    - Установи расширение React Developer Tools для Chrome и в Developer Tools появится вкладка React.
-      Установи флажок Highlight Updates, чтобы видеть что React обновляет.
-
     - React перерисовывает узлы по порядку.
       Если он увидит, что на месте div стоит span, то div будет полностью удален (unmount),
       даже если нужный div идет следом за этим span.
