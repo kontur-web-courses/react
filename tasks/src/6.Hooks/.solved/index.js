@@ -1,31 +1,27 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactDom from "react-dom";
 import "./styles.css";
 
 const App = () => {
+  const lastBlockIdRef = useRef(0);
   const [blockIds, setBlockIds] = useState([]);
-  const lastBlockId = useRef(0);
 
-  const addNewElement = useCallback(() => {
-    lastBlockId.current++;
-    setBlockIds(blockIds => [...blockIds, lastBlockId.current]);
+  const addNew = useCallback(() => {
+    lastBlockIdRef.current++;
+    setBlockIds(ids => [...ids, lastBlockIdRef.current]);
   }, []);
 
-  const removeLastElement = useCallback(() => {
-    setBlockIds(blockIds => blockIds.slice(0, blockIds.length - 1));
+  const removeLast = useCallback(() => {
+    setBlockIds(ids => ids.slice(0, ids.length - 1));
   }, []);
 
   return (
-    <div>
-      <div>
-        <button
-          type="button"
-          onClick={removeLastElement}
-          className="actionButton"
-        >
+    <div className="page">
+      <div className="controlPanel">
+        <button type="button" onClick={removeLast} className="actionButton">
           -
         </button>
-        <button type="button" onClick={addNewElement} className="actionButton">
+        <button type="button" onClick={addNew} className="actionButton">
           +
         </button>
       </div>
@@ -36,21 +32,21 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
 const CounterBlock = () => {
   const [value, setValue] = useState(0);
-  const timer = useRef(0);
+  const timerRef = useRef();
 
   useEffect(() => {
-    timer.current = setInterval(setValue, 1000, v => v + 1);
+    timerRef.current = setInterval(setValue, 1000, v => v + 1);
 
     return () => {
-      clearInterval(timer.current);
+      clearInterval(timerRef.current);
     };
   }, []);
 
   return <div className="block">{value}</div>;
-};
+}
 
 ReactDom.render(<App />, document.getElementById("app"));

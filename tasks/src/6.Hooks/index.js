@@ -2,7 +2,14 @@ import React from "react";
 import ReactDom from "react-dom";
 import "./styles.css";
 
-/* Сделай так, чтобы в приложении все классы заменились на функциональные компоненты, для этого используй Hooks */
+/**
+    Сделай так, чтобы в приложении все классы заменились на функциональные компоненты, для этого используй Hooks
+
+    Импортировать нужные хуки можно так:
+        import React, { useState } from "react";
+
+    Список хуков, которые могут пригодиться: useState, useRef, useEffect, useCallback
+ */
 
 class App extends React.Component {
   constructor(props) {
@@ -13,14 +20,14 @@ class App extends React.Component {
     };
   }
 
-  addNewElement = () => {
+  addNew = () => {
     this.lastBlockId++;
     this.setState({
       blockIds: [...this.state.blockIds, this.lastBlockId]
     });
   };
 
-  removeLastElement = () => {
+  removeLast = () => {
     this.setState({
       blockIds: this.state.blockIds.slice(0, this.state.blockIds.length - 1)
     });
@@ -32,16 +39,12 @@ class App extends React.Component {
         <div className="controlPanel">
           <button
             type="button"
-            onClick={this.removeLastElement}
+            onClick={this.removeLast}
             className="actionButton"
           >
             -
           </button>
-          <button
-            type="button"
-            onClick={this.addNewElement}
-            className="actionButton"
-          >
+          <button type="button" onClick={this.addNew} className="actionButton">
             +
           </button>
         </div>
