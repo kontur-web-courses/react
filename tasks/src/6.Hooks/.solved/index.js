@@ -3,16 +3,16 @@ import ReactDom from "react-dom";
 import "./styles.css";
 
 const App = () => {
-  const [array, setArray] = useState([]);
-  const sequence = useRef(0);
+  const [blockIds, setBlockIds] = useState([]);
+  const lastBlockId = useRef(0);
 
   const addNewElement = useCallback(() => {
-    sequence.current++;
-    setArray(array => [...array, sequence.current]);
+    lastBlockId.current++;
+    setBlockIds(blockIds => [...blockIds, lastBlockId.current]);
   }, []);
 
   const removeLastElement = useCallback(() => {
-    setArray(array => array.slice(0, array.length - 1));
+    setBlockIds(blockIds => blockIds.slice(0, blockIds.length - 1));
   }, []);
 
   return (
@@ -30,8 +30,8 @@ const App = () => {
         </button>
       </div>
       <div className="container">
-        {array.map(value => (
-          <CounterBlock key={value} />
+        {blockIds.map(blockId => (
+          <CounterBlock key={blockId} />
         ))}
       </div>
     </div>

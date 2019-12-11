@@ -7,22 +7,22 @@ import "./styles.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.sequence = 0;
+    this.lastBlockId = 0;
     this.state = {
-      array: []
+      blockIds: []
     };
   }
 
   addNewElement = () => {
-    this.sequence++;
+    this.lastBlockId++;
     this.setState({
-      array: [...this.state.array, this.sequence]
+      blockIds: [...this.state.blockIds, this.lastBlockId]
     });
   };
 
   removeLastElement = () => {
     this.setState({
-      array: this.state.array.slice(0, this.state.array.length - 1)
+      blockIds: this.state.blockIds.slice(0, this.state.blockIds.length - 1)
     });
   };
 
@@ -46,8 +46,8 @@ class App extends React.Component {
           </button>
         </div>
         <div className="container">
-          {this.state.array.map(value => (
-            <CounterBlock key={value} />
+          {this.state.blockIds.map(blockId => (
+            <CounterBlock key={blockId} />
           ))}
         </div>
       </div>
