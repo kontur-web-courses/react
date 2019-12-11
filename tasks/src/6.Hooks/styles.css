@@ -2,6 +2,19 @@
   font-family: arial;
 }
 
+.page {
+  margin: auto;
+  width: 600px;
+  padding: 20px;
+  background: lightblue;
+}
+
+.controlPanel {
+  margin: auto;
+  width: 100px;
+  text-align: center;
+}
+
 .actionButton {
   background: linear-gradient(#2899ea, #167ac1);
   color: #fff;
@@ -25,13 +38,17 @@
   display: inline-block;
   border: solid 1px #f3f3f3;
   padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .block {
   display: inline-flex;
-  padding: 20px 22px;
+  padding: 20px 20px;
   margin: 2px;
   background: #76c1ec;
-  border-radius: 2px;
-  align-content: center;
+  width: 28px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }

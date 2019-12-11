@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import './styles.css';
+import React from "react";
+import ReactDom from "react-dom";
+import "./styles.css";
 
-
-/*Сделай так, чтобы в приложении все классы заменились на функциональные компоненты, для этого используй Hooks*/
+/* Сделай так, чтобы в приложении все классы заменились на функциональные компоненты, для этого используй Hooks */
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +10,7 @@ class App extends React.Component {
     this.sequence = 0;
     this.state = {
       array: []
-    }
+    };
   }
 
   addNewElement = () => {
@@ -21,7 +20,7 @@ class App extends React.Component {
     });
   };
 
-  removeOneElement = () => {
+  removeLastElement = () => {
     this.setState({
       array: this.state.array.slice(0, this.state.array.length - 1)
     });
@@ -29,18 +28,30 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <button type="button" onClick={this.removeOneElement} className="actionButton">-</button>
-          <button type="button" onClick={this.addNewElement} className="actionButton">+</button>
+      <div className="page">
+        <div className="controlPanel">
+          <button
+            type="button"
+            onClick={this.removeLastElement}
+            className="actionButton"
+          >
+            -
+          </button>
+          <button
+            type="button"
+            onClick={this.addNewElement}
+            className="actionButton"
+          >
+            +
+          </button>
         </div>
         <div className="container">
-          {
-            this.state.array.map(value => <CounterBlock key={value}/>)
-          }
+          {this.state.array.map(value => (
+            <CounterBlock key={value} />
+          ))}
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -49,12 +60,12 @@ class CounterBlock extends React.Component {
     super(props);
     this.state = {
       value: 0
-    }
+    };
   }
 
   componentDidMount() {
     this.timer = setInterval(() => {
-      this.setState({value: this.state.value + 1});
+      this.setState({ value: this.state.value + 1 });
     }, 1000);
   }
 
@@ -63,13 +74,8 @@ class CounterBlock extends React.Component {
   }
 
   render() {
-    return (
-      <div className="block">{this.state.value}</div>
-    );
+    return <div className="block">{this.state.value}</div>;
   }
 }
 
-ReactDom.render(
-  <App />,
-  document.getElementById('app')
-);
+ReactDom.render(<App />, document.getElementById("app"));
