@@ -47,5 +47,5 @@ ReactDom.render(
            return (
              <span>Надпись</span>
            );
-     - Используй автоформатирование кода. Например, в Visual Studio Code оно вызывается сочетанием Control+Shift+F
+     - Используй автоформатирование кода. Например, в Visual Studio Code оно вызывается сочетанием Shift+Alt+F
  */
