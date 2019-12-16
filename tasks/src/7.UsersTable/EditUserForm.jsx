@@ -65,7 +65,7 @@ export default class EditUserForm extends React.Component {
             <div className="label">Вегетарианец</div>
             <input
               type="checkbox"
-              checked={user.isVegetarian}
+              checked={user.isVegetarian || false}
               onChange={e =>
                 this.handleUserChange({ isVegetarian: e.target.checked })
               }
