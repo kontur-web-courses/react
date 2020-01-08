@@ -1093,25 +1093,6 @@ function MyFunctionalComponent({value}) {
 
 ***
 
-### useCallback
-
-```js
-function MyFunctionalComponent({initialValue}) {
-  const [value, setValue] = useState(initialValue);
-
-  const handleChange = useCallback(event => {
-    setValue(event.target.value);
-  }, []);
-
-  return <input type="text" value={value} onChange={handleChange} />;
-
-}
-```
-
-`useCallback` — чтобы функция-обработчик не создавалась без необходимости, а значит и ссылка на нее не менялась
-
-***
-
 ### Помните?
 
 ```js
@@ -1201,7 +1182,7 @@ function Form() {
 Первый вызов:
 ```js
 useState('Mary')        // 1. Создается состояние со значением 'Mary'
-useEffect(persistForm)  // 2. Значение сохраняется в форму
+useEffect(persistForm)  // 2. Регистрируется эффект сохранения в форму
 useState('Poppins')     // 3. Создается состояние со значением 'Poppins'
 ```
 
@@ -1553,13 +1534,43 @@ class Parent extends React.Component {
 
 ***
 
-#### PureComponent из функции-компонента
+#### PureComponent и shouldComponentUpdate для функции-компонента
 
 ```js
-const Button = React.memo((props) => {
+const Button = props => {
   // ваш компонент
+};
+
+const areEqual = (prevProps, nextProps) => {
+  // Возвращаем true если при изменении пропсов нет необходимости вызывать рендер 
+};
+
+export default React.memo(Button, areEqual);
+```
+
+Второй параметр в *React.memo*, опциональный. По умолчанию компонент будет работать как *PureComponent*
+
+***
+
+#### Мемоизация значений в Hooks
+
+```js
+const MyFunctionalComponent = ({ value }) => {
+  const expensiveValue = useMemo(() => computeExpensiveValue(value), [value]);
+
+  const onSave = useCallback(() => {
+    executeSomethingOnSave();
+  }, []);
+
+  return (
+    <PureOrMemoizedComponent onSave={onSave} value={expensiveValue} />
+  );
 });
 ```
+
+*useCallback* и *useMemo* нужно использовать для передаваемых в компонент значений, только в том случае если это *PureComponent*, 
+класс-компонент с реализованным *shouldComponentUpdate* или функциональный компонент обернутый в *React.memo*.
+
 
 ***
 
