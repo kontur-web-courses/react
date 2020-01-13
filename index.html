@@ -1034,7 +1034,7 @@ function MyFunctionalComponent({value}) {
   return (
     <div>
       <input type="text" ref={inputRef} />
-      <button type="button" onClick={() => inputRef.current.focus()}>
+      <button onClick={() => inputRef.current.focus()}>
         Установить фокус
       </button>
     </div>
@@ -1068,28 +1068,6 @@ function MyFunctionalComponent({value}) {
 - Если `[]`, то один раз при `componentDidMount`
 - Если `undefined`, то после каждого рендера:
 `componentDidMount` и `componentDidUpdate`
-
-***
-
-### useMemo
-
-```js
-function MyFunctionalComponent({value}) {
-    const [square, cube] = useMemo(() => {
-        return [Math.pow(value, 2), Math.pow(value, 3)];
-    }, [value])
-
-    return (
-        <div>
-            <div>Значение {value}</div>
-            <div>В квадрате {square}</div>
-            <div>В кубе {cube}</div>
-        </div>
-    );
-}
-```
-
-`useMemo` — для кэширования результата тяжеловесных вычислений
 
 ***
 
@@ -1143,7 +1121,7 @@ function TimeDisplay() {
 
 ### Почему хуки появились?
 
-- Никто не понимает, как работает this в js
+- Никто не понимает, как работает ***this*** в js
 - Переиспользовать невизуальную логику при помощи создания своих хуков
 
 ***
@@ -1196,6 +1174,55 @@ useState('Poppins')       // 🔴 2 (но был 3). Не получается �
 ***
 
 ### Задача 6. Hooks
+
+***
+
+### Еще немного редких хуков, для продвинутых пользователей 😉
+
+***
+
+### useMemo
+
+```js
+function MyFunctionalComponent({value}) {
+    const [square, cube] = useMemo(() => {
+        return [Math.pow(value, 2), Math.pow(value, 3)];
+    }, [value])
+
+    return (
+        <div>
+            <div>Значение {value}</div>
+            <div>В квадрате {square}</div>
+            <div>В кубе {cube}</div>
+        </div>
+    );
+}
+```
+
+`useMemo` — для кэширования результата тяжеловесных вычислений или ссылки на объект
+
+***
+
+### useCallback
+
+```js
+function MyFunctionalComponent() {
+    const logClick = useCallback(() => {
+      console.log('Click');
+    }, []);
+    // Функция будет создаваться при каждом рендере, но переменная не изменится
+
+    return (
+        <>
+            [1, 2, 3, 4, 5].map(value => 
+              (<button onClick={logClick}>Кнопка №{value}</button>)
+            )
+        </>
+    );
+}
+```
+
+`useCallback` — *useMemo* для функций. Позволяет закэшировать ссылку на функцию
 
 ***
 
@@ -1556,21 +1583,24 @@ export default React.memo(Button, areEqual);
 
 ```js
 const MyFunctionalComponent = ({ value }) => {
-  const expensiveValue = useMemo(() => computeExpensiveValue(value), [value]);
+  const cachedObject = useMemo(() => ({
+    value: 5,
+    doSomething: () => {...},
+    doSomethingElse: () => {...}
+  })), []);
 
   const onSave = useCallback(() => {
     executeSomethingOnSave();
   }, []);
 
   return (
-    <PureOrMemoizedComponent onSave={onSave} value={expensiveValue} />
+    <PureOrMemoizedComponent onSave={onSave} value={cachedObject} />
   );
 });
 ```
 
-*useCallback* и *useMemo* нужно использовать для передаваемых в компонент значений, только в том случае если это *PureComponent*, 
-класс-компонент с реализованным *shouldComponentUpdate* или функциональный компонент обернутый в *React.memo*.
-
+`useCallback` и `useMemo` обычно используется в том случае если целевой компонент это *PureComponent*, класс-компонент с реализованным *shouldComponentUpdate* или функциональный компонент обернутый в *React.memo*.
+В остальных случаях мемоизация может быть избыточной.
 
 ***
 

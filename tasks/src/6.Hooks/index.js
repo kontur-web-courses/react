@@ -8,7 +8,7 @@ import "./styles.css";
     Импортировать нужные хуки можно так:
         import React, { useState } from "react";
 
-    Список хуков, которые могут пригодиться: useState, useRef, useEffect, useCallback
+    Список хуков, которые могут пригодиться: useState, useRef, useEffect
  */
 
 class App extends React.Component {
