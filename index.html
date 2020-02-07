@@ -1034,7 +1034,7 @@ function MyFunctionalComponent({value}) {
   return (
     <div>
       <input type="text" ref={inputRef} />
-      <button type="button" onClick={() => inputRef.current.focus()}>
+      <button onClick={() => inputRef.current.focus()}>
         Установить фокус
       </button>
     </div>
@@ -1068,47 +1068,6 @@ function MyFunctionalComponent({value}) {
 - Если `[]`, то один раз при `componentDidMount`
 - Если `undefined`, то после каждого рендера:
 `componentDidMount` и `componentDidUpdate`
-
-***
-
-### useMemo
-
-```js
-function MyFunctionalComponent({value}) {
-    const [square, cube] = useMemo(() => {
-        return [Math.pow(value, 2), Math.pow(value, 3)];
-    }, [value])
-
-    return (
-        <div>
-            <div>Значение {value}</div>
-            <div>В квадрате {square}</div>
-            <div>В кубе {cube}</div>
-        </div>
-    );
-}
-```
-
-`useMemo` — для кэширования результата тяжеловесных вычислений
-
-***
-
-### useCallback
-
-```js
-function MyFunctionalComponent({initialValue}) {
-  const [value, setValue] = useState(initialValue);
-
-  const handleChange = useCallback(event => {
-    setValue(event.target.value);
-  }, []);
-
-  return <input type="text" value={value} onChange={handleChange} />;
-
-}
-```
-
-`useCallback` — чтобы функция-обработчик не создавалась без необходимости, а значит и ссылка на нее не менялась
 
 ***
 
@@ -1162,7 +1121,7 @@ function TimeDisplay() {
 
 ### Почему хуки появились?
 
-- Никто не понимает, как работает this в js
+- Никто не понимает, как работает ***this*** в js
 - Переиспользовать невизуальную логику при помощи создания своих хуков
 
 ***
@@ -1201,7 +1160,7 @@ function Form() {
 Первый вызов:
 ```js
 useState('Mary')        // 1. Создается состояние со значением 'Mary'
-useEffect(persistForm)  // 2. Значение сохраняется в форму
+useEffect(persistForm)  // 2. Регистрируется эффект сохранения в форму
 useState('Poppins')     // 3. Создается состояние со значением 'Poppins'
 ```
 
@@ -1215,6 +1174,55 @@ useState('Poppins')       // 🔴 2 (но был 3). Не получается �
 ***
 
 ### Задача 6. Hooks
+
+***
+
+### Еще немного редких хуков, для продвинутых пользователей 😉
+
+***
+
+### useMemo
+
+```js
+function MyFunctionalComponent({value}) {
+    const [square, cube] = useMemo(() => {
+        return [Math.pow(value, 2), Math.pow(value, 3)];
+    }, [value])
+
+    return (
+        <div>
+            <div>Значение {value}</div>
+            <div>В квадрате {square}</div>
+            <div>В кубе {cube}</div>
+        </div>
+    );
+}
+```
+
+`useMemo` — для кэширования результата тяжеловесных вычислений или ссылки на объект
+
+***
+
+### useCallback
+
+```js
+function MyFunctionalComponent() {
+    const logClick = useCallback(() => {
+      console.log('Click');
+    }, []);
+    // Функция будет создаваться при каждом рендере, но переменная не изменится
+
+    return (
+        <>
+            [1, 2, 3, 4, 5].map(value => 
+              (<button onClick={logClick}>Кнопка №{value}</button>)
+            )
+        </>
+    );
+}
+```
+
+`useCallback` — *useMemo* для функций. Позволяет закэшировать ссылку на функцию
 
 ***
 
@@ -1553,13 +1561,46 @@ class Parent extends React.Component {
 
 ***
 
-#### PureComponent из функции-компонента
+#### PureComponent и shouldComponentUpdate для функции-компонента
 
 ```js
-const Button = React.memo((props) => {
+const Button = props => {
   // ваш компонент
+};
+
+const areEqual = (prevProps, nextProps) => {
+  // Возвращаем true если при изменении пропсов нет необходимости вызывать рендер 
+};
+
+export default React.memo(Button, areEqual);
+```
+
+Второй параметр в *React.memo*, опциональный. По умолчанию компонент будет работать как *PureComponent*
+
+***
+
+#### Мемоизация значений в Hooks
+
+```js
+const MyFunctionalComponent = ({ value }) => {
+  const cachedObject = useMemo(() => ({
+    value: 5,
+    doSomething: () => {...},
+    doSomethingElse: () => {...}
+  })), []);
+
+  const onSave = useCallback(() => {
+    executeSomethingOnSave();
+  }, []);
+
+  return (
+    <PureOrMemoizedComponent onSave={onSave} value={cachedObject} />
+  );
 });
 ```
+
+`useCallback` и `useMemo` обычно используется в том случае если целевой компонент это *PureComponent*, класс-компонент с реализованным *shouldComponentUpdate* или функциональный компонент обернутый в *React.memo*.
+В остальных случаях мемоизация может быть избыточной.
 
 ***
 
