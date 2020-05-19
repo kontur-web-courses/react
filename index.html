@@ -220,7 +220,7 @@ React-обертки для встроенного в HTML
 <pre><code class="lang-html hljs">&lt;input type="text" tabindex="0" onclick="alert()"&gt;</code></pre>
 
 **JSX**
-<pre><code class="lang-html hljs">&lt;input type="text" tabIndex="0" onClick="alert()" /&gt;</code></pre>
+<pre><code class="lang-html hljs">&lt;input type="text" tabIndex="0" onClick="alert" /&gt;</code></pre>
 
 ***
 
@@ -232,7 +232,7 @@ React-обертки для встроенного в HTML
 
 Через `{}` с возможностью вставки произвольного JS
 
-<pre><code class="lang-html hljs">&lt;input type={"text"} tabIndex={a + 5} onClick={alert()} /&gt;</code></pre>
+<pre><code class="lang-html hljs">&lt;input type={"text"} tabIndex={a + 5} onClick={() => alert()} /&gt;</code></pre>
 
 В этом случае в IDE работает подсветка и рефакторинги
 
